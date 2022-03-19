@@ -24,6 +24,7 @@ import {
 } from "../../../styles/emotion";
 import { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -37,6 +38,8 @@ const CREATE_BOARD = gql`
 `;
 
 export default function BoardsNewPage() {
+  const router = useRouter();
+
   const [createBoard] = useMutation(CREATE_BOARD);
   const [data, setData] = useState("");
 
@@ -80,7 +83,9 @@ export default function BoardsNewPage() {
     }
   };
 
-  const onClickSubmit = async (event) => {
+  const onClickSubmit = async () => {
+
+    try {
     const result = await createBoard({
       variables: {
         createBoardInput: {
@@ -112,7 +117,13 @@ export default function BoardsNewPage() {
     console.log(result);
     console.log(result.data.createBoard.message);
     setData(result.data.createBoard.message);
-  };
+    router.push(
+      `/boards/${result.data.createBoard._id}`
+    )
+  } catch (error) {
+    alert(error.message)
+  }
+};
 
   return (
     <Wrapper>
