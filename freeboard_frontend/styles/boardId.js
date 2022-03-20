@@ -33,7 +33,10 @@ export const Info = styled.div`
 `;
 
 export const InfoRectangle = styled.div`
-  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 376px;
   height: 64px;
   background-color: gray;
   color: white;
