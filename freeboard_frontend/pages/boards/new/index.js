@@ -41,7 +41,6 @@ export default function BoardsNewPage() {
   const router = useRouter();
 
   const [createBoard] = useMutation(CREATE_BOARD);
-  const [data, setData] = useState("");
 
   const [writer, setWriter] = useState("");
   const [writerError, setWriterError] = useState("");
@@ -111,15 +110,15 @@ export default function BoardsNewPage() {
       setContentsError("내용을 입력해주세요!");
     }
     if (writer !== "" && password !== "" && title !== "" && contents !== "") {
-      alert("게시물 등록에 성공하였습니다!");
+      alert("게시물 등록에 성공하였습니다!");  
     }
 
     console.log(result);
     console.log(result.data.createBoard.message);
-    setData(result.data.createBoard.message);
     router.push(
       `/boards/${result.data.createBoard._id}`
     )
+
   } catch (error) {
     alert(error.message)
   }

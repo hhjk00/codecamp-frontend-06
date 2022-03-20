@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
   align-items: center;
   border: none;
   box-shadow: 0px 0px 10px gray;
+  font-family: 'Noto Sans CJK KR';
 `;
 
 export const Title = styled.div`
@@ -143,17 +144,6 @@ export const ButtonWrapper = styled.div`
   padding-top: 80px;
 `;
 
-export const CancelButton = styled.button`
-  width: 179px;
-  height: 52px;
-  background-color: #bdbdbd;
-  border: none;
-  font-size: 16px;
-  font-weight: 500;
-  margin-left: 12px;
-  margin-right: 12px;
-  cursor: pointer;
-`;
 
 export const SubmitButton = styled.button`
   width: 179px;

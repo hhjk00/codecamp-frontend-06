@@ -1,10 +1,10 @@
-import { Wrapper, Info, InfoRectangle,
-  InfoPolygon, HeaderWrapper, Header, Profile,  WriterDateWrapper, Writer,
+import { DetailPage, Wrapper, Info, InfoRectangle,
+  InfoPolygon, HeaderWrapper, Profile,  WriterDateWrapper, Writer, WriteDate,
   InfoWrapper, Url, Locate, ContentsWrapper, Title,
-  Contents, LikeWrapper,  Like, LikePic, LikeNum, DisLike,
-  DislikePic, DislikeNum  } from "../../../styles/boardId";
+  Contents, LikeWrapper, LikeDislike, Like, LikePic, LikeNum, DisLike,
+  DislikePic, DislikeNum, MoveWrapper, ListEdit, List, Edit, Delete  } from "../../../styles/boardId";
 import { useQuery, gql } from "@apollo/client";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -29,11 +29,12 @@ export default function BoardsDetailPage() {
   console.log(data);
 
   return (
+    <DetailPage>
     <Wrapper>
       <Info>
         <InfoRectangle>
-          서울특별시 영등포구 양산로 200 (영등포동5가, 영등포시장역) 영등포
-          타임스퀘어 2층
+          <div>서울특별시 영등포구 양산로 200 </div>
+          <div>(영등포동5가, 영등포시장역) 영등포 타임스퀘어 2층</div>
         </InfoRectangle>
         <InfoPolygon></InfoPolygon>
       </Info>
@@ -42,11 +43,11 @@ export default function BoardsDetailPage() {
           <Profile><img src="/pic/profile.png"/></Profile>
           <WriterDateWrapper>
             <Writer>{data?.fetchBoard.writer}</Writer>
-            <Date></Date>
+            <WriteDate>Date : </WriteDate>
           </WriterDateWrapper>
           <InfoWrapper>
             <Url><img src="/pic/url.png"/></Url>
-            <Locate><img src="/pic/locate.png"/></Locate>
+            <Locate><img src="/pic/location.png"/></Locate>
           </InfoWrapper>
       </HeaderWrapper>
 
@@ -56,16 +57,29 @@ export default function BoardsDetailPage() {
       </ContentsWrapper>
 
       <LikeWrapper>
+        <LikeDislike>
         <Like>
-          <LikePic></LikePic>
+          <LikePic><img src="/pic/like.png"/></LikePic>
           <LikeNum>1920</LikeNum>
         </Like>
         <DisLike>
-          <DislikePic></DislikePic>
-          <DislikeNum></DislikeNum>
+          <DislikePic><img src="/pic/dislike.png"/></DislikePic>
+          <DislikeNum>1920</DislikeNum>
         </DisLike>
+        </LikeDislike>
       </LikeWrapper>
 
     </Wrapper>
+    
+    <MoveWrapper>
+    <ListEdit>
+    <List>목록으로</List>
+    <Edit>수정하기</Edit>
+    <Delete>삭제하기</Delete>
+    </ListEdit>
+  </MoveWrapper>
+
+    
+  </DetailPage>
   );
 }
