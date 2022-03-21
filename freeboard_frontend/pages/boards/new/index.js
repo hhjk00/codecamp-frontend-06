@@ -1,4 +1,5 @@
 import {
+  NewPage,
   Wrapper,
   Title,
   WriterWrapper,
@@ -125,6 +126,7 @@ export default function BoardsNewPage() {
 };
 
   return (
+    <NewPage>
     <Wrapper>
       <Title>게시판 등록</Title>
       <WriterWrapper>
@@ -195,5 +197,6 @@ export default function BoardsNewPage() {
         <SubmitButton onClick={onClickSubmit}>등록하기</SubmitButton>
       </ButtonWrapper>
     </Wrapper>
+    </NewPage>
   );
 }

@@ -4,7 +4,6 @@ export const DetailPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Noto Sans CJK KR";
 `;
 
 export const Wrapper = styled.div`
@@ -161,6 +160,7 @@ export const MoveWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  padding-bottom: 100px;
 
 `;
 

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 const CREATE_BOARD = gql`
-  mutation mymutaion($writer: String, $title: String, $contents: String) {
+  mutation createBoard($writer: String, $title: String, $contents: String) {
     createBoard(writer: $writer, title: $title, contents: $contents) {
       _id
       number
@@ -32,7 +32,7 @@ export default function GraphqlMutationPage() {
       }); // graphql-api방식
       console.log(result);
       console.log(result.data.createBoard.message);
-      alert("게시글 등록에 성공했어요");
+      alert("게시글 등록에 성공했어요!");
       alert("상세 페이지로 이동해 볼까요?");
       router.push(
         `/05-08-dynamic-routed-input/${result.data.createBoard.number}`
