@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import BoardsNewUI from './BoardsNew.presenter'
-import { CREATE_BOARD } from "./BoardsNew.queries"
+import BoardsNewUI from './BoardWrite.presenter'
+import { CREATE_BOARD } from "./BoardWrite.queries"
 
 
-export default function BoardsNew() {
+export default function BoardWrite() {
   const [isActive, setIsActive] = useState(false);
 
   const router = useRouter();

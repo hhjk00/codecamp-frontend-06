@@ -1,7 +1,6 @@
 // 1주차 금요일
 //조건문: 점수에 따른 등급
 
-/*
 function grade(score) {
     if(score <= 100 && score >= 90){
       return ("A")
@@ -18,12 +17,11 @@ function grade(score) {
     }
   }
   
-  */
-
+  
 
   //반복문: 마이페이지
 
-  /*
+  
   const myShopping = [
 		{ category: "과일", price: 12000　},
 		{ category: "의류", price:10000　 },
@@ -59,8 +57,8 @@ function myPage(){
     } else {
       grade = "Bronze"
     }
+  
   // return ("의류를 구매한 횟수는 총 " + count + "회 금액은 " + amount + "원이며 등급은 " + grade + "입니다.")
   
-  return `의류를 구매한 횟수는 총 ${count}회 금액은 ${amount} 등급은 ${grade}입니다.`
+  // return (`의류를 구매한 횟수는 총 ${count}회 금액은 ${amount} 등급은 ${grade}입니다.`)
 
-*/

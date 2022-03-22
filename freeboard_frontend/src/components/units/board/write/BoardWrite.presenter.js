@@ -20,9 +20,9 @@ import {NewPage,
     RadioLabel,
     ButtonWrapper,
     SubmitButton,
-    Error } from './BoardsNew.styles'
+    Error } from './BoardWrite.styles'
 
-export default function BoardsNewUI(props) {
+export default function BoardWriteUI(props) {
 
     return (
         <NewPage>

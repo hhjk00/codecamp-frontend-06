@@ -2,9 +2,9 @@ import { DetailPage, Wrapper, Info, InfoRectangle,
     InfoPolygon, HeaderWrapper, Profile,  WriterDateWrapper, Writer, WriteDate,
     InfoWrapper, Url, Locate, ContentsWrapper, Title,
     Contents, LikeWrapper, LikeDislike, Like, LikePic, LikeNum, DisLike,
-    DislikePic, DislikeNum, MoveWrapper, ListEdit, List, Edit, Delete  } from "./BoardsDetail.styles"
+    DislikePic, DislikeNum, MoveWrapper, ListEdit, List, Edit, Delete  } from "./BoardDetail.styles"
 
-    export default function BoardsDetailUI (props) {
+    export default function BoardDetailUI (props) {
 
 
     return (
@@ -54,7 +54,7 @@ import { DetailPage, Wrapper, Info, InfoRectangle,
         <ListEdit>
         <List>목록으로</List>
         <Edit>수정하기</Edit>
-        <Delete>삭제하기</Delete>
+        <Delete onClick={props.onClickDelete} >삭제하기</Delete>
         </ListEdit>
       </MoveWrapper>
     
