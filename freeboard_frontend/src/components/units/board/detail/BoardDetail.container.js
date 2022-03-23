@@ -6,21 +6,30 @@ import { FETCH_BOARD, DELETE_BOARD } from "./BoardDetail.queries";
 export default function BoardDetail() {
   const [ deleteBoard ] = useMutation(DELETE_BOARD)
 
+
     const router = useRouter();
     console.log(router);
 
 
     const { data } = useQuery(FETCH_BOARD, {
-      //요청이 날아감(비어있는 상태 undefined)
-      variables: { boardId: router.query.boardId }, // 83013
+      variables: { boardId: router.query.boardId }, 
     });
+
+    const onClickMoveEdit = () => {
+      router.push(`/boards/${router.query.boardId}/edit`)
+  }
+
+    const onClickMoveList = () => {
+      router.push("/boards")
+
+    }
+
 
     const onClickDelete = async () => {
     try{
       await deleteBoard({
         variables: { boardId: router.query.boardId },
       }) 
-
     router.push("/boards")
 
     } catch (error) {
@@ -32,6 +41,9 @@ export default function BoardDetail() {
       <BoardsDetailUI
       data={data}
       onClickDelete={onClickDelete}
+      onClickMoveEdit={onClickMoveEdit}
+      onClickMoveList={onClickMoveList}
+
 
       />
     )

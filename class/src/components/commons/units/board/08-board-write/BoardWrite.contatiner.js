@@ -22,7 +22,8 @@ export default function BoardWrite(props) {
 
   const conClickUpdate = async() => { //수정하기 함수
     await updateBoard({
-        variables : { number: Number(router.query.mynumber) , writer: myWriter, title: myTitle, contents: myContents } //어떤 게시글을 수정할것인가
+        variables : { number: Number(router.query.mynumber) , 
+            writer: myWriter, title: myTitle, contents: myContents } //어떤 게시글을 수정할것인가
     })
     alert("게시글 수정에 성공하였습니다!")
     router.push(`/08-05-boards/${router.query.mynumber}`)

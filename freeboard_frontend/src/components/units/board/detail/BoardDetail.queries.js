@@ -8,6 +8,7 @@ export const FETCH_BOARD = gql`
       writer
       title
       contents
+      createdAt
     }
   }
 `;
@@ -17,3 +18,4 @@ export const DELETE_BOARD = gql`
         deleteBoard(boardId: $boardId)
     }
     `
+

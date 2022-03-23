@@ -2,15 +2,17 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardsNewUI from './BoardWrite.presenter'
-import { CREATE_BOARD } from "./BoardWrite.queries"
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries"
 
 
-export default function BoardWrite() {
+export default function BoardWrite(props) {
   const [isActive, setIsActive] = useState(false);
 
   const router = useRouter();
 
-  const [createBoard] = useMutation(CREATE_BOARD);
+  const [ createBoard ] = useMutation(CREATE_BOARD);
+  const [ updateBoard ] = useMutation(UPDATE_BOARD);
+
 
   const [writer, setWriter] = useState("");
   const [writerError, setWriterError] = useState("");
@@ -81,8 +83,22 @@ export default function BoardWrite() {
     
   };
 
-  const onClickSubmit = async () => {
+  const onClickEdit = async () => {
+    await updateBoard(
+      { variables: { updateBoardInput: {
+          title: title,
+          contents: contents },
+          password: password,
+          boardId: (router.query.boardId)
+        }
+      }
+    )
+    alert("수정이 완료되었습니다.")
+    router.push(`/boards/${router.query.boardId}`)
+  }
 
+
+  const onClickSubmit = async () => {
 
     if (writer === "") {
       setWriterError("작성자를 입력해주세요!");
@@ -97,7 +113,7 @@ export default function BoardWrite() {
       setContentsError("내용을 입력해주세요!");
     }
     if (writer !== "" && password !== "" && title !== "" && contents !== "") {
-      alert("게시물 등록에 성공하였습니다!"); 
+      alert("게시물이 등록되었습니다."); 
       
     try {
       const result = await createBoard({
@@ -130,11 +146,15 @@ export default function BoardWrite() {
      onChangeTitle={onChangeTitle}
      onChangeContents={onChangeContents}
      onClickSubmit={onClickSubmit}
+     onClickEdit={onClickEdit}
+
+
      writerError={writerError}
      passwordError={passwordError}
      titleError={titleError}
      contentsError={contentsError}
      isActive={isActive}
+     isEdit={props.isEdit}
 
      />
   )

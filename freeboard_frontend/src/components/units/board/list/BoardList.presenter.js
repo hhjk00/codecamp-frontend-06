@@ -1,19 +1,31 @@
+import { getDate } from '../../../../commons/libraries/utils';
 import * as S from './BoardList.styles'
 
 export default function BoardListUI(props) {
 
   return (
+    <S.Wrapper>
+    <S.TableWrapper>
+      <S.TableTop>
+      <S.ColumnNumber>번호</S.ColumnNumber>
+      <S.ColumnTitle>제목</S.ColumnTitle>
+      <S.ColumnWriter>작성자</S.ColumnWriter>
+      <S.ColumnDate>날짜</S.ColumnDate>
+      </S.TableTop>
 
-    <div>
-      {props.data?.fetchBoards.map((el) => (
+      {props.data?.fetchBoards.map((el, index) => ( 
         <S.Row key={el._id}>
-          <S.Column>{el.writer}</S.Column>
-          <S.Column>{el.title}</S.Column>
-          <S.Column>{el.contents}</S.Column>
-          <S.Column>{el.createdAt}</S.Column>          
-          
+          <S.ColumnNumber>{index + 1}</S.ColumnNumber>
+          <S.ColumnTitle>{el.title}</S.ColumnTitle>
+          <S.ColumnWriter>{el.writer}</S.ColumnWriter>
+          <S.ColumnDate>{getDate(el.createdAt)}</S.ColumnDate>          
         </S.Row>
-      ))}
-    </div>
+      )
+      )}
+      </S.TableWrapper>
+
+      <button onClick={props.onClickMoveWrite}>게시물 등록하기</button>
+
+      </S.Wrapper>
   );
 }

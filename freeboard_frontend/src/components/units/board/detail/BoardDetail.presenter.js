@@ -1,3 +1,4 @@
+import { getDate } from "../../../../commons/libraries/utils"
 import { DetailPage, Wrapper, Info, InfoRectangle,
     InfoPolygon, HeaderWrapper, Profile,  WriterDateWrapper, Writer, WriteDate,
     InfoWrapper, Url, Locate, ContentsWrapper, Title,
@@ -22,7 +23,7 @@ import { DetailPage, Wrapper, Info, InfoRectangle,
               <Profile><img src="/pic/profile.png"/></Profile>
               <WriterDateWrapper>
                 <Writer>{props.data?.fetchBoard.writer}</Writer>
-                <WriteDate>Date : </WriteDate>
+                <WriteDate>Date : {getDate(props.data?.fetchBoard.createdAt)}</WriteDate>
               </WriterDateWrapper>
               <InfoWrapper>
                 <Url><img src="/pic/url.png"/></Url>
@@ -52,8 +53,8 @@ import { DetailPage, Wrapper, Info, InfoRectangle,
         
         <MoveWrapper>
         <ListEdit>
-        <List>목록으로</List>
-        <Edit>수정하기</Edit>
+        <List onClick={props.onClickMoveList}>목록으로</List>
+        <Edit onClick={props.onClickMoveEdit}>수정하기</Edit>
         <Delete onClick={props.onClickDelete} >삭제하기</Delete>
         </ListEdit>
       </MoveWrapper>
