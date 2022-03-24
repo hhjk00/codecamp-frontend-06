@@ -13,25 +13,24 @@ export default function BoardDetail() {
 
     const { data } = useQuery(FETCH_BOARD, {
       variables: { boardId: router.query.boardId }, 
-    });
+    })
+
 
     const onClickMoveEdit = () => {
       router.push(`/boards/${router.query.boardId}/edit`)
-  }
+    }
 
     const onClickMoveList = () => {
       router.push("/boards")
-
     }
-
 
     const onClickDelete = async () => {
     try{
       await deleteBoard({
         variables: { boardId: router.query.boardId },
-      }) 
+      })
     router.push("/boards")
-
+M
     } catch (error) {
       alert(error.message)
     }

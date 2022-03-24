@@ -55,7 +55,7 @@ import { DetailPage, Wrapper, Info, InfoRectangle,
         <ListEdit>
         <List onClick={props.onClickMoveList}>목록으로</List>
         <Edit onClick={props.onClickMoveEdit}>수정하기</Edit>
-        <Delete onClick={props.onClickDelete} >삭제하기</Delete>
+        <Delete onClick={props.onClickDelete}>삭제하기</Delete>
         </ListEdit>
       </MoveWrapper>
     

@@ -5,6 +5,7 @@ import BoardsNewUI from './BoardWrite.presenter'
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries"
 
 
+
 export default function BoardWrite(props) {
   const [isActive, setIsActive] = useState(false);
 
@@ -155,6 +156,7 @@ export default function BoardWrite(props) {
      contentsError={contentsError}
      isActive={isActive}
      isEdit={props.isEdit}
+     data={props.data}
 
      />
   )
