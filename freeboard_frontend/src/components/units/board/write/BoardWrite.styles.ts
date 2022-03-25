@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import { ISubmitButton } from "./BoardWrite.types"; 
+import { ISubmitButtonProps } from "./BoardWrite.types";
 
 export const NewPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
   align-items: center;
   border: none;
   box-shadow: 0px 0px 10px gray;
-  font-family: 'Noto Sans CJK KR';
+  font-family: "Noto Sans CJK KR";
 `;
 
 export const Title = styled.div`
@@ -151,7 +151,6 @@ export const ButtonWrapper = styled.div`
   padding-top: 80px;
 `;
 
-
 export const SubmitButton = styled.button`
   width: 179px;
   height: 52px;
@@ -161,8 +160,8 @@ export const SubmitButton = styled.button`
   margin-left: 12px;
   margin-right: 12px;
   cursor: pointer;
-  background-color: ${(props) => props.isActive ? "yellow" : "none"};
-
+  background-color: ${(props: ISubmitButtonProps) =>
+    props.isActive ? "yellow" : "none"};
 `;
 
 export const Error = styled.div`

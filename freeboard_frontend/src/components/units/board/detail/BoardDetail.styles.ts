@@ -61,7 +61,7 @@ export const HeaderWrapper = styled.div`
   border-bottom: 1px solid gray;
 `;
 
-export const Profile = styled.div`
+export const Profile = styled.img`
   display: flex;
   width: 46px;
   height: 46px;
@@ -89,9 +89,9 @@ export const InfoWrapper = styled.div`
   align-items: center;
 `;
 
-export const Url = styled.div``;
+export const Url = styled.img``;
 
-export const Locate = styled.div``;
+export const Locate = styled.img``;
 
 export const ContentsWrapper = styled.div`
   width: 100%;
@@ -129,7 +129,7 @@ export const Like = styled.div`
   align-items: center;
 `;
 
-export const LikePic = styled.div`
+export const LikePic = styled.img`
   width: 20px;
   height: 18px;
   cursor: pointer;
@@ -147,7 +147,7 @@ export const DisLike = styled.div`
   align-items: center;
 `;
 
-export const DislikePic = styled.div`
+export const DislikePic = styled.img`
   width: 20px;
   height: 18px;
   cursor: pointer;
@@ -161,17 +161,16 @@ export const MoveWrapper = styled.div`
   justify-content: center;
   width: 100%;
   padding-bottom: 100px;
-
 `;
 
-export const ListEdit = styled.div`
+export const Move = styled.div`
   display: flex;
   flex-direction: row;
   width: 580px;
   justify-content: space-between;
 `;
 
-export const List = styled.button`
+export const MoveButton = styled.button`
   width: 179px;
   height: 52px;
   background-color: white;
@@ -181,24 +180,3 @@ export const List = styled.button`
   font-family: "Noto Sans CJK KR";
   cursor: pointer;
 `;
-export const Edit = styled.button`
-  width: 179px;
-  height: 52px;
-  background-color: white;
-  border: 1px solid #bdbdbd;
-  font-weight: 500;
-  font-size: 16px;
-  font-family: "Noto Sans CJK KR";
-  cursor: pointer;
-`;
-
-export const Delete = styled.button`
-  width: 179px;
-  height: 52px;
-  background-color: white;
-  border: 1px solid #bdbdbd;
-  font-weight: 500;
-  font-size: 16px;
-  font-family: "Noto Sans CJK KR";
-  cursor: pointer;
-`

@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries"
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { IBoardWriteProps, IEditBoardInput } from "./BoardWrite.types";
 import BoardWriteUI from "./BoardWrite.presenter";
 
@@ -10,9 +10,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   const router = useRouter();
 
-  const [ createBoard ] = useMutation(CREATE_BOARD);
-  const [ updateBoard ] = useMutation(UPDATE_BOARD);
-
+  const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const [writer, setWriter] = useState("");
   const [writerError, setWriterError] = useState("");
@@ -33,10 +32,15 @@ export default function BoardWrite(props: IBoardWriteProps) {
       setWriterError("");
     }
 
-    if(event.target.value !== "" && password !== "" && title !== "" && contents !== ""){
-      setIsActive(true)
+    if (
+      event.target.value !== "" &&
+      password !== "" &&
+      title !== "" &&
+      contents !== ""
+    ) {
+      setIsActive(true);
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
   };
 
@@ -46,10 +50,15 @@ export default function BoardWrite(props: IBoardWriteProps) {
       setPasswordError("");
     }
 
-    if(writer !== "" && event.target.value !== "" && title !== "" && contents !== ""){
-      setIsActive(true)
+    if (
+      writer !== "" &&
+      event.target.value !== "" &&
+      title !== "" &&
+      contents !== ""
+    ) {
+      setIsActive(true);
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
   };
 
@@ -59,10 +68,15 @@ export default function BoardWrite(props: IBoardWriteProps) {
       setTitleError("");
     }
 
-    if(writer !== "" && password !== "" && event.target.value !== "" && contents !== ""){
-      setIsActive(true)
+    if (
+      writer !== "" &&
+      password !== "" &&
+      event.target.value !== "" &&
+      contents !== ""
+    ) {
+      setIsActive(true);
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
   };
 
@@ -71,35 +85,40 @@ export default function BoardWrite(props: IBoardWriteProps) {
     if (event.target.value !== "") {
       setContentsError("");
     }
-    if(writer !== "" && password !== "" && title !== "" && event.target.value !== ""){
-      setIsActive(true)
+    if (
+      writer !== "" &&
+      password !== "" &&
+      title !== "" &&
+      event.target.value !== ""
+    ) {
+      setIsActive(true);
     } else {
-      setIsActive(false)
+      setIsActive(false);
     }
   };
 
+  // 수정하기
   const onClickEdit = async () => {
-    const updateBoardInput: IEditBoardInput = {}
-    if(title) updateBoardInput.title = title
-    if(contents) updateBoardInput.contents = contents
+    const updateBoardInput: IEditBoardInput = {};
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
 
-
-    await updateBoard(
-      { variables: { updateBoardInput: {
+    await updateBoard({
+      variables: {
+        updateBoardInput: {
           title: title,
-          contents: contents },
-          password: password,
-          boardId: (router.query.boardId)
-        }
-      }
-    )
-    alert("수정이 완료되었습니다.")
-    router.push(`/boards/${router.query.boardId}`)
-  }
+          contents: contents,
+        },
+        password: password,
+        boardId: router.query.boardId,
+      },
+    });
+    alert("수정이 완료되었습니다.");
+    router.push(`/boards/${router.query.boardId}`);
+  };
 
-
+  // 등록하기
   const onClickSubmit = async () => {
-
     if (writer === "") {
       setWriterError("작성자를 입력해주세요!");
     }
@@ -113,52 +132,44 @@ export default function BoardWrite(props: IBoardWriteProps) {
       setContentsError("내용을 입력해주세요!");
     }
     if (writer !== "" && password !== "" && title !== "" && contents !== "") {
-      alert("게시물이 등록되었습니다."); 
+      alert("게시물이 등록되었습니다.");
 
-    try {
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer: writer,
-            password: password,
-            title: title,
-            contents: contents,
+      try {
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer: writer,
+              password: password,
+              title: title,
+              contents: contents,
+            },
           },
-        },
-      });
+        });
 
-    console.log(result);
-    console.log(result.data.createBoard.message);
-    router.push(
-      `/boards/${result.data.createBoard._id}`
-    )
-
-  } catch (error) {
-    alert(error.message)
-  }
-}
-  }
+        console.log(result);
+        console.log(result.data.createBoard.message);
+        router.push(`/boards/${result.data.createBoard._id}`);
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  };
 
   return (
-     <BoardWriteUI
-     onChangeWriter={onChangeWriter}
-     onChangePassword={onChangePassword}
-     onChangeTitle={onChangeTitle}
-     onChangeContents={onChangeContents}
-     onClickSubmit={onClickSubmit}
-     onClickEdit={onClickEdit}
-
-
-     writerError={writerError}
-     passwordError={passwordError}
-     titleError={titleError}
-     contentsError={contentsError}
-     isActive={isActive}
-     isEdit={props.isEdit}
-     data={props.data}
-
-     />
-  )
-;
-
+    <BoardWriteUI
+      onChangeWriter={onChangeWriter}
+      onChangePassword={onChangePassword}
+      onChangeTitle={onChangeTitle}
+      onChangeContents={onChangeContents}
+      onClickSubmit={onClickSubmit}
+      onClickEdit={onClickEdit}
+      writerError={writerError}
+      passwordError={passwordError}
+      titleError={titleError}
+      contentsError={contentsError}
+      isActive={isActive}
+      isEdit={props.isEdit}
+      data={props.data}
+    />
+  );
 }
