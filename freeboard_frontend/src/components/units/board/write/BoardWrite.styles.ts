@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ISubmitButton } from "./BoardWrite.types"; 
 
 export const NewPage = styled.div`
   display: flex;

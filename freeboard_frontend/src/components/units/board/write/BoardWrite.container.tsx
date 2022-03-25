@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import BoardsNewUI from './BoardWrite.presenter'
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries"
+import { IBoardWriteProps, IEditBoardInput } from "./BoardWrite.types";
+import BoardWriteUI from "./BoardWrite.presenter";
 
-
-
-export default function BoardWrite(props) {
+export default function BoardWrite(props: IBoardWriteProps) {
   const [isActive, setIsActive] = useState(false);
 
   const router = useRouter();
@@ -27,7 +26,7 @@ export default function BoardWrite(props) {
   const [contents, setContents] = useState("");
   const [contentsError, setContentsError] = useState("");
 
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
 
     if (event.target.value !== "") {
@@ -39,10 +38,9 @@ export default function BoardWrite(props) {
     } else {
       setIsActive(false)
     }
-
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
     if (event.target.value !== "") {
       setPasswordError("");
@@ -53,10 +51,9 @@ export default function BoardWrite(props) {
     } else {
       setIsActive(false)
     }
-
   };
 
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
     if (event.target.value !== "") {
       setTitleError("");
@@ -67,10 +64,9 @@ export default function BoardWrite(props) {
     } else {
       setIsActive(false)
     }
-    
   };
 
-  const onChangeContents = (event) => {
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
     if (event.target.value !== "") {
       setContentsError("");
@@ -80,11 +76,14 @@ export default function BoardWrite(props) {
     } else {
       setIsActive(false)
     }
-
-    
   };
 
   const onClickEdit = async () => {
+    const updateBoardInput: IEditBoardInput = {}
+    if(title) updateBoardInput.title = title
+    if(contents) updateBoardInput.contents = contents
+
+
     await updateBoard(
       { variables: { updateBoardInput: {
           title: title,
@@ -115,7 +114,7 @@ export default function BoardWrite(props) {
     }
     if (writer !== "" && password !== "" && title !== "" && contents !== "") {
       alert("게시물이 등록되었습니다."); 
-      
+
     try {
       const result = await createBoard({
         variables: {
@@ -141,7 +140,7 @@ export default function BoardWrite(props) {
   }
 
   return (
-     <BoardsNewUI
+     <BoardWriteUI
      onChangeWriter={onChangeWriter}
      onChangePassword={onChangePassword}
      onChangeTitle={onChangeTitle}

@@ -21,8 +21,9 @@ import {NewPage,
     ButtonWrapper,
     SubmitButton,
     Error } from './BoardWrite.styles'
+    import { IBoardWriteUIProps } from './BoardWrite.types';
 
-export default function BoardWriteUI(props) {
+export default function BoardWriteUI(props: IBoardWriteUIProps) {
 
     return (
         <NewPage>
@@ -36,6 +37,8 @@ export default function BoardWriteUI(props) {
                 placeholder="이름을 적어주세요."
                 onChange={props.onChangeWriter}
                 defaultValue={props.data?.fetchBoard.writer}
+                readOnly={props.data?.fetchBoard.writer}
+                        // !! , Boolean 붙여서 사용가능
               />
               <Error>{props.writerError}</Error>
             </InputWrapper>

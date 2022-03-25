@@ -4,6 +4,7 @@ import * as S from './BoardList.styles'
 export default function BoardListUI(props) {
 
   return (
+    <S.ListPage>
     <S.Wrapper>
     <S.TableWrapper>
       <S.TableTop>
@@ -27,5 +28,7 @@ export default function BoardListUI(props) {
       <button onClick={props.onClickMoveWrite}>게시물 등록하기</button>
 
       </S.Wrapper>
+    </S.ListPage>
+
   );
 }
