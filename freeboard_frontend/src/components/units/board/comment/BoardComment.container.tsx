@@ -25,6 +25,7 @@ export default function BoardComment() {
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState(0);
+  const [boardCommentId, setBoardCommentId] = useState("");
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -58,13 +59,13 @@ export default function BoardComment() {
   // 등록하기
   const onClickSubmit = async () => {
     if (writer === "") {
-      setWriterError("작성자를 입력해주세요.");
+      alert("작성자를 입력해주세요.");
     }
     if (password === "") {
-      setPasswordError("비밀번호를 입력해주세요.");
+      alert("비밀번호를 입력해주세요.");
     }
     if (contents === "") {
-      setContentsError("내용을 입력해주세요.");
+      alert("내용을 입력해주세요.");
     }
 
     if (writer !== "" && password !== "" && contents !== "") {
