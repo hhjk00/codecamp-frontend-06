@@ -1,17 +1,29 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import {
+  IMutation,
+  IMutationDeleteBoardArgs,
+  IQuery,
+  IQueryFetchBoardArgs,
+} from "../../../../commons/types/generated/types";
 import BoardsDetailUI from "./BoardDetail.presenter";
 import { FETCH_BOARD, DELETE_BOARD } from "./BoardDetail.queries";
 
 export default function BoardDetail() {
-  const [deleteBoard] = useMutation(DELETE_BOARD);
+  const [deleteBoard] = useMutation<
+    Pick<IMutation, "deleteBoard">,
+    IMutationDeleteBoardArgs
+  >(DELETE_BOARD);
 
   const router = useRouter();
   console.log(router);
 
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: router.query.boardId },
-  });
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: { boardId: String(router.query.boardId) },
+    }
+  );
 
   const onClickMoveEdit = () => {
     router.push(`/boards/${router.query.boardId}/edit`);
@@ -24,7 +36,7 @@ export default function BoardDetail() {
   const onClickDelete = async () => {
     try {
       await deleteBoard({
-        variables: { boardId: router.query.boardId },
+        variables: { boardId: String(router.query.boardId) },
       });
       router.push("/boards");
     } catch (error) {

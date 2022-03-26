@@ -4,14 +4,16 @@ import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { IBoardWriteProps, IEditBoardInput } from "./BoardWrite.types";
 import BoardWriteUI from "./BoardWrite.presenter";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const [isActive, setIsActive] = useState(false);
 
   const router = useRouter();
-
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const [writer, setWriter] = useState("");
   const [writerError, setWriterError] = useState("");
@@ -97,8 +99,23 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   };
 
+  const [updateBoard] = useMutation<
+    Pick<IMutation, "updateBoard">,
+    IMutationUpdateBoardArgs
+  >(UPDATE_BOARD);
+
   // 수정하기
   const onClickEdit = async () => {
+    if (!title && !contents) {
+      alert("수정한 내용이 없습니다.");
+      return;
+    }
+
+    if (!password) {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+
     const updateBoardInput: IEditBoardInput = {};
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
@@ -110,7 +127,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
           contents: contents,
         },
         password: password,
-        boardId: router.query.boardId,
+        boardId: String(router.query.boardId),
       },
     });
     alert("수정이 완료되었습니다.");
@@ -118,6 +135,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
   };
 
   // 등록하기
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
+
   const onClickSubmit = async () => {
     if (writer === "") {
       setWriterError("작성자를 입력해주세요!");
@@ -147,8 +169,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
         });
 
         console.log(result);
-        console.log(result.data.createBoard.message);
-        router.push(`/boards/${result.data.createBoard._id}`);
+        router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error) {
         alert(error.message);
       }

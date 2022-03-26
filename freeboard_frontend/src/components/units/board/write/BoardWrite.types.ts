@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { ChangeEvent } from "react";
 
 export interface IBoardWriteProps {

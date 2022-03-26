@@ -3,11 +3,17 @@ import BoardListUI from "./BoardList.presenter";
 import { FETCH_BOARDS } from "./BoardList.queries";
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";
+import {
+  IQuery,
+  IQueryFetchBoardArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function BoardList() {
   const router = useRouter();
 
-  const { data } = useQuery(FETCH_BOARDS);
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARDS
+  );
 
   const onClickMoveWrite = () => {
     router.push("/boards/new");
