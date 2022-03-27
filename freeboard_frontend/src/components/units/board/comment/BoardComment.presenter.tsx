@@ -47,15 +47,23 @@ export default function BoardCommentUI(props: IBoardCommentUIProps) {
                 <S.CommentProfile src="/images/profile.png" />
                 <S.CommentInputWrapper>
                   <S.WriterRating>
-                    <S.CommentWriter>{el.writer}</S.CommentWriter>
+                    <S.CommentWriter>
+                      {props.isEdit ? (
+                        <S.Writer
+                          type="text"
+                          onChange={props.onChangeWriter}
+                          placeholder="작성자"
+                        />
+                      ) : (
+                        el.writer
+                      )}
+                    </S.CommentWriter>
                     <S.Rating>★★★★★</S.Rating>
                   </S.WriterRating>
                   <S.CommentContents>{el.contents}</S.CommentContents>
                   <S.CommentDate>{getDate(el.createdAt)}</S.CommentDate>
                 </S.CommentInputWrapper>
-                <S.UpdateButton onClick={props.onClickUpdate}>
-                  수정하기
-                </S.UpdateButton>
+                <S.UpdateButton>수정하기</S.UpdateButton>
                 <S.DeleteButton>삭제하기</S.DeleteButton>
               </S.CommentTop>
               <S.CommentBottom></S.CommentBottom>

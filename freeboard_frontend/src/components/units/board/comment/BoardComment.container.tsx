@@ -21,6 +21,8 @@ export default function BoardComment() {
     variables: { boardId: router.query.boardId },
   });
 
+  const [isEdit, setIsEdit] = useState(false);
+
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
@@ -132,6 +134,7 @@ export default function BoardComment() {
   return (
     <BoardCommentUI
       data={data}
+      isEdit={isEdit}
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeContents={onChangeContents}
