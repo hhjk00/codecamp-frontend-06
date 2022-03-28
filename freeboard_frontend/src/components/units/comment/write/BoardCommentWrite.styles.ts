@@ -24,7 +24,8 @@ export const WriterPasswordInput = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 480px;
+  align-items: center;
+  width: 520px;
   padding-bottom: 20px;
 `;
 
@@ -42,6 +43,11 @@ export const Password = styled.input`
   padding: 15px;
 `;
 
+export const Rate = styled.input`
+  padding-left: 15px;
+  width: 100px;
+`;
+
 export const ContentsInput = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,6 +60,7 @@ export const Contents = styled.textarea`
   height: 108px;
   padding: 15px;
   border: none;
+  resize: none;
 `;
 
 export const SubmitButton = styled.div`
@@ -76,58 +83,3 @@ export const Text = styled.div`
   padding: 10px;
   color: #bdbdbd;
 `;
-
-export const CommentWrapper = styled.div`
-  border-bottom: 1px solid #bdbdbd;
-  padding-top: 30px;
-`;
-
-export const CommentTop = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px;
-`;
-
-export const CommentProfile = styled.img`
-  width: 40px;
-  height: 40px;
-`;
-
-export const CommentInputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-`;
-
-export const WriterRating = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const Rating = styled.div`
-  padding-left: 10px;
-`;
-
-export const CommentWriter = styled.div`
-  font-weight: bold;
-  padding-bottom: 5px;
-  cursor: pointer;
-`;
-
-export const CommentContents = styled.div``;
-
-export const CommentDate = styled.div`
-  color: #bdbdbd;
-  padding-top: 15px;
-  padding-bottom: 10px;
-`;
-
-export const UpdateButton = styled.div`
-  cursor: pointer;
-`;
-export const DeleteButton = styled.div`
-  cursor: pointer;
-`;
-
-export const CommentBottom = styled.div``;

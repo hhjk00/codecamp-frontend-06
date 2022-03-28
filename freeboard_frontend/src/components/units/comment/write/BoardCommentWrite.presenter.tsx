@@ -1,15 +1,12 @@
-import { kMaxLength } from "buffer";
-import { Fragment } from "react";
-import { getDate } from "../../../../commons/libraries/utils";
 import * as S from "./BoardCommentWrite.styles";
 import { IBoardCommentUIProps } from "./BoardCommentWrite.types";
+import { Rate } from "antd";
 
-export default function BoardCommentUI(props: any) {
+export default function BoardCommentWriteUI(props: IBoardCommentUIProps) {
   return (
     <S.CommentPage>
       <S.Wrapper>
         <S.Title>댓글</S.Title>
-
         <S.WriterPasswordInput>
           <S.Writer
             type="text"
@@ -23,7 +20,8 @@ export default function BoardCommentUI(props: any) {
             placeholder="비밀번호"
             value={props.password}
           />
-          <S.Rating>★★★★★</S.Rating>
+
+          <Rate onChange={props.handleChange} value={props.value} />
         </S.WriterPasswordInput>
 
         <S.ContentsInput>
@@ -35,33 +33,12 @@ export default function BoardCommentUI(props: any) {
           />
 
           <S.ContentsBottom>
-            <S.Text> 0/100 </S.Text>
+            <S.Text> {props.contents.length}/100 </S.Text>
             <S.SubmitButton onClick={props.onClickSubmit}>
               등록하기
             </S.SubmitButton>
           </S.ContentsBottom>
         </S.ContentsInput>
-
-        {props.data?.fetchBoardComments.map((el: any) => (
-          <Fragment key={el._id}>
-            <S.CommentWrapper id={el.writer} onClick={props.onClickWriter}>
-              <S.CommentTop>
-                <S.CommentProfile src="/images/profile.png" />
-                <S.CommentInputWrapper>
-                  <S.WriterRating>
-                    <S.CommentWriter>{el.writer}</S.CommentWriter>
-                    <S.Rating>★★★★★</S.Rating>
-                  </S.WriterRating>
-                  <S.CommentContents>{el.contents}</S.CommentContents>
-                  <S.CommentDate>{getDate(el.createdAt)}</S.CommentDate>
-                </S.CommentInputWrapper>
-                <S.UpdateButton>수정하기</S.UpdateButton>
-                <S.DeleteButton>삭제하기</S.DeleteButton>
-              </S.CommentTop>
-              <S.CommentBottom></S.CommentBottom>
-            </S.CommentWrapper>
-          </Fragment>
-        ))}
       </S.Wrapper>
     </S.CommentPage>
   );
