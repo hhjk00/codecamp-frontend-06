@@ -1,12 +1,11 @@
+import { PasswordProps } from "antd/lib/input";
 import { ChangeEvent } from "react";
-import { MouseEvent } from "react";
 
 export interface IBoardCommentUIProps {
   data?: any;
-  writerError: string;
-  passwordError: string;
-  contentsError: string;
-  isEdit: boolean;
+  writer: string;
+  Password: string;
+  contents: string;
   onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;

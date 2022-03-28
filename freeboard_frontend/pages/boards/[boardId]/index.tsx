@@ -1,6 +1,6 @@
 //상세보기 페이지
-import BoardComment from "../../../src/components/units/board/comment/BoardComment.container";
 import BoardDetail from "../../../src/components/units/board/detail/BoardDetail.container";
+import BoardComment from "../../../src/components/units/comment/write/BoardCommentWrite.container";
 
 export default function BoardsDetailPage() {
   return (

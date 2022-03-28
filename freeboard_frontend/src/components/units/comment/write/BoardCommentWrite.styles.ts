@@ -53,6 +53,7 @@ export const Contents = styled.textarea`
   width: 100%;
   height: 108px;
   padding: 15px;
+  border: none;
 `;
 
 export const SubmitButton = styled.div`
@@ -65,12 +66,11 @@ export const SubmitButton = styled.div`
   cursor: pointer;
 `;
 
-export const Error = styled.div``;
-
 export const ContentsBottom = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border-top: 1px solid #bdbdbd;
 `;
 export const Text = styled.div`
   padding: 10px;
@@ -112,6 +112,7 @@ export const Rating = styled.div`
 export const CommentWriter = styled.div`
   font-weight: bold;
   padding-bottom: 5px;
+  cursor: pointer;
 `;
 
 export const CommentContents = styled.div``;

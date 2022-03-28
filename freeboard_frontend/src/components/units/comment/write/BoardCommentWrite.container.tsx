@@ -5,15 +5,15 @@ import {
   CREATE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
   UPDATE_BOARD_COMMENT,
-} from "./BoardComment.queries";
-import { ChangeEvent } from "react";
-import BoardCommentUI from "./BoardComment.presenter";
+} from "./BoardCommentWrite.queries";
+import { ChangeEvent, MouseEvent } from "react";
+import BoardCommentUI from "./BoardCommentWrite.presenter";
 import {
   IMutation,
   IMutationCreateBoardCommentArgs,
   IMutationUpdateBoardCommentArgs,
 } from "../../../../commons/types/generated/types";
-import { IUpdateBoardCommentInput } from "./BoardComment.types";
+import { IUpdateBoardCommentInput } from "./BoardCommentWrite.types";
 
 export default function BoardComment() {
   const router = useRouter();
@@ -21,36 +21,25 @@ export default function BoardComment() {
     variables: { boardId: router.query.boardId },
   });
 
-  const [isEdit, setIsEdit] = useState(false);
-
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState(0);
   const [boardCommentId, setBoardCommentId] = useState("");
 
-  const [writerError, setWriterError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [contentsError, setContentsError] = useState("");
-
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
-    if (event.target.value !== "") {
-      setWriterError("");
-    }
   };
 
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-    if (event.target.value !== "") {
-      setPasswordError("");
-    }
   };
   const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
-    if (event.target.value !== "") {
-      setContentsError("");
-    }
+  };
+
+  const onClickWriter = (event: MouseEvent<HTMLDivElement>) => {
+    alert(event.currentTarget.id + "님이 작성한 댓글입니다.");
   };
 
   const [createBoardComment] = useMutation<
@@ -82,11 +71,18 @@ export default function BoardComment() {
             },
             boardId: String(router.query.boardId),
           },
-          // refetchQueries: [{ query: FETCH_BOARD_COMMENTS }],
+          refetchQueries: [
+            {
+              query: FETCH_BOARD_COMMENTS,
+              variables: { boardId: router.query.boardId },
+            },
+          ],
         });
 
         alert("댓글이 등록되었습니다.");
-        router.push(`/boards/${router.query.boardId}`);
+        setWriter("");
+        setPassword("");
+        setContents("");
       } catch (error) {
         console.log(error.message);
       }
@@ -134,15 +130,15 @@ export default function BoardComment() {
   return (
     <BoardCommentUI
       data={data}
-      isEdit={isEdit}
+      writer={writer}
+      password={password}
+      contents={contents}
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeContents={onChangeContents}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
-      writerError={writerError}
-      passwordError={passwordError}
-      contentsError={contentsError}
+      onClickWriter={onClickWriter}
     />
   );
 }
