@@ -46,11 +46,11 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
-    },
-    "lint-staged": {
-      "**/*.{ts,tsx}": [
-        "npx eslint '**/*.{ts,tsx}' "
-      ]
     }
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "npx eslint '**/*.{ts,tsx}' "
+    ]
   }
 }
