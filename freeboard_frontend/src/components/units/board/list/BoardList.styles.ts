@@ -60,6 +60,9 @@ export const ColumnNumber = styled.span`
 export const ColumnTitle = styled.span`
   width: 60%;
   cursor: pointer;
+  :hover {
+    color: blue;
+  }
 `;
 
 export const ColumnWriter = styled.span`

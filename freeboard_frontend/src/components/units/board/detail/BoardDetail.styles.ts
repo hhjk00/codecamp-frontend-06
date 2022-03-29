@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import ReactPlayer from "react-player";
 
 export const DetailPage = styled.div`
   display: flex;
@@ -105,6 +106,11 @@ export const Title = styled.div`
 
 export const Contents = styled.div`
   padding-top: 50px;
+  padding-bottom: 50px;
+`;
+
+export const Youtube = styled(ReactPlayer)`
+  margin: auto;
 `;
 
 export const LikeWrapper = styled.div`

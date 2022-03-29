@@ -12,7 +12,6 @@ export const CREATE_BOARD = gql`
       likeCount
       dislikeCount
       images
-      boardAddress
     }
   }
 `;
@@ -37,7 +36,6 @@ export const UPDATE_BOARD = gql`
       likeCount
       dislikeCount
       images
-      boardAddress
     }
   }
 `;

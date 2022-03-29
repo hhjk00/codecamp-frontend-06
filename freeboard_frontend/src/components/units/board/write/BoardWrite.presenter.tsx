@@ -24,8 +24,11 @@ import {
   Error,
 } from "./BoardWrite.styles";
 import { IBoardWriteUIProps } from "./BoardWrite.types";
+import { Modal } from "antd";
+import DaumPostcode from "react-daum-postcode";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
+  console.log(props.data);
   return (
     <NewPage>
       <Wrapper>
@@ -83,7 +86,12 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
         </InputWrapper>
         <InputWrapper>
           <Label>유튜브</Label>
-          <Youtube type="text" placeholder="링크를 복사해주세요." />
+          <Youtube
+            type="text"
+            placeholder="링크를 복사해주세요."
+            onChange={props.onChangeYoutubeUrl}
+            defaultValue={props.data?.fetchBoard.youtubeUrl || ""}
+          />
         </InputWrapper>
         <ImageWrapper>
           <Label>사진첨부</Label>

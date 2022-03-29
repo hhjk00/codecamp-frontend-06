@@ -8,6 +8,8 @@ export interface IBoardWriteProps {
 export interface IEditBoardInput {
   title?: string;
   contents?: string;
+  youtubeUrl?: string;
+  boardAddress?: string;
 }
 
 export interface ISubmitButtonProps {
@@ -19,6 +21,7 @@ export interface IBoardWriteUIProps {
   onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeYoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickSubmit: () => void;
   onClickEdit: () => void;
 

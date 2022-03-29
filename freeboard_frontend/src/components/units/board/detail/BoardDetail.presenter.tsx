@@ -1,4 +1,5 @@
 import { getDate } from "../../../../commons/libraries/utils";
+import ReactPlayer from "react-player";
 import {
   DetailPage,
   Wrapper,
@@ -27,6 +28,7 @@ import {
   MoveWrapper,
   Move,
   MoveButton,
+  Youtube,
 } from "./BoardDetail.styles";
 import { IBoardDetailUIProps } from "./BoardDetail.types";
 
@@ -60,17 +62,27 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
         <ContentsWrapper>
           <Title>{props.data?.fetchBoard.title}</Title>
           <Contents>{props.data?.fetchBoard.contents}</Contents>
+          {props.data?.fetchBoard.youtubeUrl && (
+            <Youtube
+              url={props.data?.fetchBoard.youtubeUrl}
+              width={600}
+              height={450}
+            />
+          )}
         </ContentsWrapper>
 
         <LikeWrapper>
           <LikeDislike>
             <Like>
-              <LikePic src="/images/like.png" />
-              <LikeNum>1920</LikeNum>
+              <LikePic src="/images/like.png" onClick={props.onClickLike} />
+              <LikeNum>{props.data?.fetchBoard.likeCount}</LikeNum>
             </Like>
             <DisLike>
-              <DislikePic src="/images/dislike.png" />
-              <DislikeNum>1920</DislikeNum>
+              <DislikePic
+                src="/images/dislike.png"
+                onClick={props.onClickDislike}
+              />
+              <DislikeNum>{props.data?.fetchBoard.dislikeCount}</DislikeNum>
             </DisLike>
           </LikeDislike>
         </LikeWrapper>

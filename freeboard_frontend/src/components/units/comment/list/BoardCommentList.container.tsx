@@ -7,6 +7,7 @@ import {
   IQueryFetchBoardCommentsArgs,
 } from "../../../../commons/types/generated/types";
 import { MouseEvent } from "react";
+import { Modal } from "antd";
 
 export default function BoardCommentList() {
   const router = useRouter();
@@ -19,7 +20,10 @@ export default function BoardCommentList() {
   });
 
   const onClickWriter = (event: MouseEvent<HTMLDivElement>) => {
-    alert(event.currentTarget.id + "님이 작성한 댓글입니다.");
+    Modal.info({
+      content: event.currentTarget.id + "님이 작성한 댓글입니다.",
+      onOk() {},
+    });
   };
 
   return <BoardCommentListUI data={data} onClickWriter={onClickWriter} />;

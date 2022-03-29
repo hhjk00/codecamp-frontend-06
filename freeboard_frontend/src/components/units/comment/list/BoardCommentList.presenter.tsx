@@ -2,7 +2,6 @@ import { getDate } from "../../../../commons/libraries/utils";
 import { Fragment } from "react";
 import * as S from "./BoardCommentList.styles";
 import { IBoardCommentListUIProps } from "./BoardCommentList.types";
-import { Rate } from "antd";
 
 export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
   return (
@@ -16,7 +15,7 @@ export default function BoardCommentListUI(props: IBoardCommentListUIProps) {
                 <S.CommentInputWrapper>
                   <S.WriterRating>
                     <S.CommentWriter>{el.writer}</S.CommentWriter>
-                    <Rate value={el.rating}></Rate>
+                    <S.Rating value={el.rating} disabled />
                   </S.WriterRating>
                   <S.CommentContents>{el.contents}</S.CommentContents>
                   <S.CommentDate>{getDate(el.createdAt)}</S.CommentDate>

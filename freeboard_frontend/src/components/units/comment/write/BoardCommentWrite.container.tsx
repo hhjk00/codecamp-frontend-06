@@ -10,6 +10,7 @@ import {
   IMutation,
   IMutationCreateBoardCommentArgs,
 } from "../../../../commons/types/generated/types";
+import { Modal } from "antd";
 
 export default function BoardCommentWrite() {
   const router = useRouter();
@@ -17,38 +18,49 @@ export default function BoardCommentWrite() {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [contents, setContents] = useState("");
-  const [value, setValue] = useState(3);
+  const [rating, setRating] = useState(0);
 
   const [createBoardComment] = useMutation<
     Pick<IMutation, "createBoardComment">,
     IMutationCreateBoardCommentArgs
   >(CREATE_BOARD_COMMENT);
 
+  // 작성자 입력
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
   };
 
+  // 패스워드 입력
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
+
+  // 내용 입력
   const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
   };
 
-  const handleChange = (value: number) => {
-    setValue(value);
+  // 평점 입력
+  const onChangeRating = (value: number) => {
+    setRating(value);
   };
 
   // 등록하기
   const onClickSubmit = async () => {
     if (writer === "") {
-      alert("작성자를 입력해주세요.");
+      Modal.warning({
+        content: "작성자를 입력해주세요.",
+      });
     }
     if (password === "") {
-      alert("비밀번호를 입력해주세요.");
+      Modal.warning({
+        content: "비밀번호를 입력해주세요.",
+      });
     }
     if (contents === "") {
-      alert("내용을 입력해주세요.");
+      Modal.warning({
+        content: "내용을 입력해주세요.",
+      });
     }
 
     if (writer !== "" && password !== "" && contents !== "") {
@@ -59,7 +71,7 @@ export default function BoardCommentWrite() {
               writer,
               password,
               contents,
-              rating: value,
+              rating,
             },
             boardId: String(router.query.boardId),
           },
@@ -71,12 +83,16 @@ export default function BoardCommentWrite() {
           ],
         });
 
-        alert("댓글이 등록되었습니다.");
+        Modal.success({
+          content: "댓글이 등록되었습니다.",
+        });
         setWriter("");
         setPassword("");
         setContents("");
       } catch (error) {
-        console.log(error.message);
+        Modal.error({
+          content: "댓글 등록에 실패했습니다.",
+        });
       }
     }
   };
@@ -86,12 +102,12 @@ export default function BoardCommentWrite() {
       writer={writer}
       password={password}
       contents={contents}
-      value={value}
+      rating={rating}
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeContents={onChangeContents}
       onClickSubmit={onClickSubmit}
-      handleChange={handleChange}
+      onChangeRating={onChangeRating}
     />
   );
 }

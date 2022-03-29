@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Rate } from "antd";
 
 export const CommentListPage = styled.div`
   display: flex;
@@ -45,13 +46,12 @@ export const WriterRating = styled.div`
 
 export const CommentWriter = styled.div`
   font-weight: bold;
-  padding-right: 20px;
-  padding-bottom: 5px;
   cursor: pointer;
+  line-height: 36px;
 `;
 
-export const Rate = styled.div`
-  padding-left: 10px;
+export const Rating = styled(Rate)`
+  padding-left: 15px;
 `;
 
 export const CommentContents = styled.div``;

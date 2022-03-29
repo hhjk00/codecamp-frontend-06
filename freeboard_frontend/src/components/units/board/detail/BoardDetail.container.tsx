@@ -7,16 +7,23 @@ import {
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
 import BoardsDetailUI from "./BoardDetail.presenter";
-import { FETCH_BOARD, DELETE_BOARD } from "./BoardDetail.queries";
+import {
+  FETCH_BOARD,
+  DELETE_BOARD,
+  LIKE_BOARD,
+  DISLIKE_BOARD,
+} from "./BoardDetail.queries";
+import { Modal } from "antd";
 
 export default function BoardDetail() {
+  const router = useRouter();
+  console.log(router);
+
+  // 삭제하기
   const [deleteBoard] = useMutation<
     Pick<IMutation, "deleteBoard">,
     IMutationDeleteBoardArgs
   >(DELETE_BOARD);
-
-  const router = useRouter();
-  console.log(router);
 
   const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
     FETCH_BOARD,
@@ -25,14 +32,41 @@ export default function BoardDetail() {
     }
   );
 
+  // 좋아요
+  const [likeBoard] = useMutation(LIKE_BOARD);
+
+  const onClickLike = () => {
+    likeBoard({
+      variables: { boardId: String(router.query.boardId) },
+      refetchQueries: [
+        { query: FETCH_BOARD, variables: { boardId: router.query.boardId } },
+      ],
+    });
+  };
+
+  // 싫어요
+  const [dislikeBoard] = useMutation(DISLIKE_BOARD);
+
+  const onClickDislike = () => {
+    dislikeBoard({
+      variables: { boardId: String(router.query.boardId) },
+      refetchQueries: [
+        { query: FETCH_BOARD, variables: { boardId: router.query.boardId } },
+      ],
+    });
+  };
+
+  // 수정하기
   const onClickMoveEdit = () => {
     router.push(`/boards/${router.query.boardId}/edit`);
   };
 
+  // 목록으로
   const onClickMoveList = () => {
     router.push("/boards");
   };
 
+  // 삭제하기
   const onClickDelete = async () => {
     try {
       await deleteBoard({
@@ -40,7 +74,9 @@ export default function BoardDetail() {
       });
       router.push("/boards");
     } catch (error) {
-      alert(error.message);
+      Modal.error({
+        content: "게시글 삭제에 실패했습니다.",
+      });
     }
   };
 
@@ -50,6 +86,8 @@ export default function BoardDetail() {
       onClickDelete={onClickDelete}
       onClickMoveEdit={onClickMoveEdit}
       onClickMoveList={onClickMoveList}
+      onClickLike={onClickLike}
+      onClickDislike={onClickDislike}
     />
   );
 }

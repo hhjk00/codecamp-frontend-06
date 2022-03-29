@@ -21,7 +21,7 @@ export default function BoardCommentWriteUI(props: IBoardCommentUIProps) {
             value={props.password}
           />
 
-          <Rate onChange={props.handleChange} value={props.value} />
+          <Rate onChange={props.onChangeRating} />
         </S.WriterPasswordInput>
 
         <S.ContentsInput>
