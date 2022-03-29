@@ -48,7 +48,7 @@
       "pre-commit": "lint-staged"
     },
     "lint-staged": {
-      "**/*,{ts,tsx}": [
+      "**/*.{ts,tsx}": [
         "npx eslint '**/*,{ts,tsx}' "
       ]
     }
