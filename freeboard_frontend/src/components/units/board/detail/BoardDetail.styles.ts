@@ -24,34 +24,6 @@ export const Wrapper = styled.div`
   font-family: "Noto Sans CJK KR";
 `;
 
-export const Info = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-right: 15px;
-`;
-
-export const InfoRectangle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 376px;
-  height: 64px;
-  background-color: gray;
-  color: white;
-  padding: 10px;
-`;
-
-export const InfoPolygon = styled.div`
-  width: 0px;
-  height: 0px;
-  border-bottom: 10px solid gray;
-  border-left: 0px solid transparent;
-  border-right: 10px solid transparent;
-  transform: rotate(-180deg);
-`;
-
 export const HeaderWrapper = styled.div`
   width: 100%;
   display: flex;

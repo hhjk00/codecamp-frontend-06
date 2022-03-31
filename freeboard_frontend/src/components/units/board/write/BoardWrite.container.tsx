@@ -13,6 +13,7 @@ import { Modal } from "antd";
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
 
@@ -29,7 +30,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [contentsError, setContentsError] = useState("");
 
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [boardAddress, setBoardAddress] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
 
   // 작성자 입력
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -113,6 +116,19 @@ export default function BoardWrite(props: IBoardWriteProps) {
   };
 
   // 주소 입력
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddressDetail(event.target.value);
+  };
+
+  const onClickAddressSearch = () => {
+    setIsOpen(true);
+  };
+
+  const onCompleteAddressSearch = (data: any) => {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
+  };
 
   // 등록하기
   const [createBoard] = useMutation<
@@ -146,7 +162,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
               title: title,
               contents: contents,
               youtubeUrl,
-              boardAddress,
+              boardAddress: {
+                zipcode,
+                address,
+                addressDetail,
+              },
             },
           },
         });
@@ -155,7 +175,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
         router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error) {
         Modal.error({
-          content: "게시글 등록에 실패했습니다.",
+          content: error.message,
         });
       }
     }
@@ -168,7 +188,14 @@ export default function BoardWrite(props: IBoardWriteProps) {
   >(UPDATE_BOARD);
 
   const onClickEdit = async () => {
-    if (!title && !contents && !youtubeUrl) {
+    if (
+      !title &&
+      !contents &&
+      !youtubeUrl &&
+      !address &&
+      !addressDetail &&
+      !zipcode
+    ) {
       Modal.warning({
         content: "수정한 내용이 없습니다.",
       });
@@ -186,16 +213,17 @@ export default function BoardWrite(props: IBoardWriteProps) {
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
     if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;
-    if (boardAddress) updateBoardInput.boardAddress = boardAddress;
+    if (zipcode || address || addressDetail) {
+      updateBoardInput.boardAddress = {};
+      if (zipcode) updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address) updateBoardInput.boardAddress.address = address;
+      if (addressDetail)
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
 
     await updateBoard({
       variables: {
-        updateBoardInput: {
-          title,
-          contents,
-          youtubeUrl,
-          boardAddress,
-        },
+        updateBoardInput,
         password: password,
         boardId: String(router.query.boardId),
       },
@@ -208,6 +236,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   return (
     <BoardWriteUI
+      writerError={writerError}
+      passwordError={passwordError}
+      titleError={titleError}
+      contentsError={contentsError}
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeTitle={onChangeTitle}
@@ -215,13 +247,16 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangeYoutubeUrl={onChangeYoutubeUrl}
       onClickSubmit={onClickSubmit}
       onClickEdit={onClickEdit}
-      writerError={writerError}
-      passwordError={passwordError}
-      titleError={titleError}
-      contentsError={contentsError}
+      onChangeAddressDetail={onChangeAddressDetail}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
+      isOpen={isOpen}
+      zipcode={zipcode}
+      address={address}
+      addressDetail={addressDetail}
     />
   );
 }

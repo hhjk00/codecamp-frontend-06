@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { useState, ChangeEvent, MouseEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { useRouter } from "next/router";
 import {
   CREATE_BOARD_COMMENT,

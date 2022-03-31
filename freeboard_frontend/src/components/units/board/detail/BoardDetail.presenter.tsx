@@ -1,11 +1,7 @@
 import { getDate } from "../../../../commons/libraries/utils";
-import ReactPlayer from "react-player";
 import {
   DetailPage,
   Wrapper,
-  Info,
-  InfoRectangle,
-  InfoPolygon,
   HeaderWrapper,
   Profile,
   WriterDateWrapper,
@@ -31,19 +27,12 @@ import {
   Youtube,
 } from "./BoardDetail.styles";
 import { IBoardDetailUIProps } from "./BoardDetail.types";
+import { Tooltip } from "antd";
 
 export default function BoardDetailUI(props: IBoardDetailUIProps) {
   return (
     <DetailPage>
       <Wrapper>
-        <Info>
-          <InfoRectangle>
-            <div>서울특별시 영등포구 양산로 200 </div>
-            <div>(영등포동5가, 영등포시장역) 영등포 타임스퀘어 2층</div>
-          </InfoRectangle>
-          <InfoPolygon></InfoPolygon>
-        </Info>
-
         <HeaderWrapper>
           <Profile src="/images/profile.png" />
           <WriterDateWrapper>
@@ -55,7 +44,12 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
 
           <InfoWrapper>
             <Url src="/images/url.png" />
-            <Locate src="/images/location.png" />
+            <Tooltip
+              placement="topRight"
+              title={`${props.data?.fetchBoard.boardAddress?.address} ${props.data?.fetchBoard.boardAddress?.addressDetail}`}
+            >
+              <Locate src="/images/location.png" />
+            </Tooltip>
           </InfoWrapper>
         </HeaderWrapper>
 

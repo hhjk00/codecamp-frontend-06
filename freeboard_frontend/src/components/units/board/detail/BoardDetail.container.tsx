@@ -19,19 +19,6 @@ export default function BoardDetail() {
   const router = useRouter();
   console.log(router);
 
-  // 삭제하기
-  const [deleteBoard] = useMutation<
-    Pick<IMutation, "deleteBoard">,
-    IMutationDeleteBoardArgs
-  >(DELETE_BOARD);
-
-  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
-    FETCH_BOARD,
-    {
-      variables: { boardId: String(router.query.boardId) },
-    }
-  );
-
   // 좋아요
   const [likeBoard] = useMutation(LIKE_BOARD);
 
@@ -67,6 +54,18 @@ export default function BoardDetail() {
   };
 
   // 삭제하기
+  const [deleteBoard] = useMutation<
+    Pick<IMutation, "deleteBoard">,
+    IMutationDeleteBoardArgs
+  >(DELETE_BOARD);
+
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: { boardId: String(router.query.boardId) },
+    }
+  );
+
   const onClickDelete = async () => {
     try {
       await deleteBoard({
@@ -75,7 +74,7 @@ export default function BoardDetail() {
       router.push("/boards");
     } catch (error) {
       Modal.error({
-        content: "게시글 삭제에 실패했습니다.",
+        content: error.message,
       });
     }
   };
