@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 
-const Color = styled.span`
+const Page = styled.span`
   color: ${(props) => (props.current == props.id ? "orange" : "black")};
   cursor: pointer;
 `;
@@ -40,17 +40,17 @@ export default function Pagination(props) {
       {new Array(10).fill(1).map(
         (_, index) =>
           index + startPage <= lastPage && (
-            <Color
+            <Page
               key={index + startPage}
               onClick={onClickPage}
               id={String(index + startPage)}
               current={current}
             >
               {` `} {index + startPage}
-            </Color>
+            </Page>
           )
       )}
-      <button onClick={onClickNextPage} disabled={startPage + 10 >= lastPage}>
+      <button onClick={onClickNextPage} disabled={startPage + 10 > lastPage}>
         ＞
       </button>
     </div>

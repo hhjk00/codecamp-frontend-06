@@ -21,12 +21,36 @@ export default function BoardCommentList() {
 
   const router = useRouter();
 
-  const { data } = useQuery<
+  // 댓글 불러오기
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENTS, {
     variables: { boardId: String(router.query.boardId) },
   });
+
+  // 댓글 무한 스크롤
+  const onLoadMore = () => {
+    if (!data) return;
+
+    fetchMore({
+      variables: {
+        page: Math.ceil(data.fetchBoardComments.length / 10) + 1,
+        boardId: String(router.query.boardId),
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchBoardComments)
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
+
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
 
   // 댓글 삭제하기
   const [deleteBoardComment] = useMutation<
@@ -66,7 +90,7 @@ export default function BoardCommentList() {
     setMyPassword(event.target.value);
   }
 
-  // 작성자 정보 모달
+  // 작성자 정보 모달창
   const onClickWriter = (event: MouseEvent<HTMLDivElement>) => {
     Modal.info({
       content: event.currentTarget.id + "님이 작성한 댓글입니다.",
@@ -82,6 +106,7 @@ export default function BoardCommentList() {
       onClickDelete={onClickDelete}
       onClickOpenDeleteModal={onClickOpenDeleteModal}
       onChangeDeletePassword={onChangeDeletePassword}
+      onLoadMore={onLoadMore}
     />
   );
 }
