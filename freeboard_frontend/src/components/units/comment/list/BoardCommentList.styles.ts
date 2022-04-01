@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Noto Sans CJK KR";
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 `;
 
 export const CommentWrapper = styled.div`
