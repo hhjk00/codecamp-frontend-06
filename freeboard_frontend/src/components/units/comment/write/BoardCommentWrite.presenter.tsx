@@ -1,8 +1,8 @@
 import * as S from "./BoardCommentWrite.styles";
-import { IBoardCommentUIProps } from "./BoardCommentWrite.types";
+import { IBoardCommentWriteUIProps } from "./BoardCommentWrite.types";
 import { Rate } from "antd";
 
-export default function BoardCommentWriteUI(props: IBoardCommentUIProps) {
+export default function BoardCommentWriteUI(props: IBoardCommentWriteUIProps) {
   return (
     <S.CommentPage>
       <S.Wrapper>
@@ -34,8 +34,10 @@ export default function BoardCommentWriteUI(props: IBoardCommentUIProps) {
 
           <S.ContentsBottom>
             <S.Text> {props.contents.length}/100 </S.Text>
-            <S.SubmitButton onClick={props.onClickSubmit}>
-              등록하기
+            <S.SubmitButton
+              onClick={props.isEdit ? props.onClickUpdate : props.onClickSubmit}
+            >
+              {props.isEdit ? "수정하기" : "등록하기"}
             </S.SubmitButton>
           </S.ContentsBottom>
         </S.ContentsInput>

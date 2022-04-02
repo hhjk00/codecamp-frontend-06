@@ -174,9 +174,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
         console.log(result);
         router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error) {
-        Modal.error({
-          content: error.message,
-        });
+        if (error instanceof Error)
+          Modal.error({
+            content: error.message,
+          });
       }
     }
   };

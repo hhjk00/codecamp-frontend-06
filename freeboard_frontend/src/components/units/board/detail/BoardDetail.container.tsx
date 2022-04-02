@@ -73,9 +73,10 @@ export default function BoardDetail() {
       });
       router.push("/boards");
     } catch (error) {
-      Modal.error({
-        content: error.message,
-      });
+      if (error instanceof Error)
+        Modal.error({
+          content: error.message,
+        });
     }
   };
 

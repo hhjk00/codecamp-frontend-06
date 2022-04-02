@@ -1,94 +1,68 @@
 import { getDate } from "../../../../commons/libraries/utils";
-import {
-  DetailPage,
-  Wrapper,
-  HeaderWrapper,
-  Profile,
-  WriterDateWrapper,
-  Writer,
-  WriteDate,
-  InfoWrapper,
-  Url,
-  Locate,
-  ContentsWrapper,
-  Title,
-  Contents,
-  LikeWrapper,
-  LikeDislike,
-  Like,
-  LikePic,
-  LikeNum,
-  DisLike,
-  DislikePic,
-  DislikeNum,
-  MoveWrapper,
-  Move,
-  MoveButton,
-  Youtube,
-} from "./BoardDetail.styles";
+import * as S from "./BoardDetail.styles";
 import { IBoardDetailUIProps } from "./BoardDetail.types";
 import { Tooltip } from "antd";
 
 export default function BoardDetailUI(props: IBoardDetailUIProps) {
   return (
-    <DetailPage>
-      <Wrapper>
-        <HeaderWrapper>
-          <Profile src="/images/profile.png" />
-          <WriterDateWrapper>
-            <Writer>{props.data?.fetchBoard.writer}</Writer>
-            <WriteDate>
+    <S.DetailPage>
+      <S.Wrapper>
+        <S.HeaderWrapper>
+          <S.Profile src="/images/profile.png" />
+          <S.WriterDateWrapper>
+            <S.Writer>{props.data?.fetchBoard.writer}</S.Writer>
+            <S.WriteDate>
               Date : {getDate(props.data?.fetchBoard.createdAt)}
-            </WriteDate>
-          </WriterDateWrapper>
+            </S.WriteDate>
+          </S.WriterDateWrapper>
 
-          <InfoWrapper>
-            <Url src="/images/url.png" />
+          <S.InfoWrapper>
+            <S.Url src="/images/url.png" />
             <Tooltip
               placement="topRight"
               title={`${props.data?.fetchBoard.boardAddress?.address} ${props.data?.fetchBoard.boardAddress?.addressDetail}`}
             >
-              <Locate src="/images/location.png" />
+              <S.Locate src="/images/location.png" />
             </Tooltip>
-          </InfoWrapper>
-        </HeaderWrapper>
+          </S.InfoWrapper>
+        </S.HeaderWrapper>
 
-        <ContentsWrapper>
-          <Title>{props.data?.fetchBoard.title}</Title>
-          <Contents>{props.data?.fetchBoard.contents}</Contents>
+        <S.ContentsWrapper>
+          <S.Title>{props.data?.fetchBoard.title}</S.Title>
+          <S.Contents>{props.data?.fetchBoard.contents}</S.Contents>
           {props.data?.fetchBoard.youtubeUrl && (
-            <Youtube
+            <S.Youtube
               url={props.data?.fetchBoard.youtubeUrl}
               width={600}
               height={450}
             />
           )}
-        </ContentsWrapper>
+        </S.ContentsWrapper>
 
-        <LikeWrapper>
-          <LikeDislike>
-            <Like>
-              <LikePic src="/images/like.png" onClick={props.onClickLike} />
-              <LikeNum>{props.data?.fetchBoard.likeCount}</LikeNum>
-            </Like>
-            <DisLike>
-              <DislikePic
+        <S.LikeWrapper>
+          <S.LikeDislike>
+            <S.Like>
+              <S.LikePic src="/images/like.png" onClick={props.onClickLike} />
+              <S.LikeNum>{props.data?.fetchBoard.likeCount}</S.LikeNum>
+            </S.Like>
+            <S.DisLike>
+              <S.DislikePic
                 src="/images/dislike.png"
                 onClick={props.onClickDislike}
               />
-              <DislikeNum>{props.data?.fetchBoard.dislikeCount}</DislikeNum>
-            </DisLike>
-          </LikeDislike>
-        </LikeWrapper>
-      </Wrapper>
+              <S.DislikeNum>{props.data?.fetchBoard.dislikeCount}</S.DislikeNum>
+            </S.DisLike>
+          </S.LikeDislike>
+        </S.LikeWrapper>
+      </S.Wrapper>
 
-      <MoveWrapper>
-        <Move>
-          <MoveButton onClick={props.onClickMoveList}>목록으로</MoveButton>
-          <MoveButton onClick={props.onClickMoveEdit}>수정하기</MoveButton>
-          <MoveButton onClick={props.onClickDelete}>삭제하기</MoveButton>
-        </Move>
-      </MoveWrapper>
-    </DetailPage>
+      <S.MoveWrapper>
+        <S.Move>
+          <S.MoveButton onClick={props.onClickMoveList}>목록으로</S.MoveButton>
+          <S.MoveButton onClick={props.onClickMoveEdit}>수정하기</S.MoveButton>
+          <S.MoveButton onClick={props.onClickDelete}>삭제하기</S.MoveButton>
+        </S.Move>
+      </S.MoveWrapper>
+    </S.DetailPage>
   );
 }

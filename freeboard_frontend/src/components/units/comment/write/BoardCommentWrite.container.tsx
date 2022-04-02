@@ -4,15 +4,18 @@ import { useRouter } from "next/router";
 import {
   CREATE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
+  UPDATE_BOARD_COMMENT,
 } from "./BoardCommentWrite.queries";
-import BoardCommentUI from "./BoardCommentWrite.presenter";
 import {
   IMutation,
   IMutationCreateBoardCommentArgs,
+  IMutationUpdateBoardCommentArgs,
 } from "../../../../commons/types/generated/types";
 import { Modal } from "antd";
+import BoardCommentWriteUI from "./BoardCommentWrite.presenter";
+import { IBoardCommentWriteProps } from "./BoardCommentWrite.types";
 
-export default function BoardCommentWrite() {
+export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
   const router = useRouter();
 
   const [writer, setWriter] = useState("");
@@ -51,16 +54,19 @@ export default function BoardCommentWrite() {
       Modal.warning({
         content: "작성자를 입력해주세요.",
       });
+      return;
     }
     if (password === "") {
       Modal.warning({
         content: "비밀번호를 입력해주세요.",
       });
+      return;
     }
     if (contents === "") {
       Modal.warning({
         content: "내용을 입력해주세요.",
       });
+      return;
     }
 
     if (writer !== "" && password !== "" && contents !== "") {
@@ -90,15 +96,66 @@ export default function BoardCommentWrite() {
         setPassword("");
         setContents("");
       } catch (error) {
-        Modal.error({
-          content: "댓글 등록에 실패했습니다.",
-        });
+        if (error instanceof Error)
+          Modal.error({
+            content: error.message,
+          });
       }
     }
   };
 
+  // 댓글 수정하기
+  const [updateBoardComment] = useMutation<
+    Pick<IMutation, "updateBoardComment">,
+    IMutationUpdateBoardCommentArgs
+  >(UPDATE_BOARD_COMMENT);
+
+  const onClickUpdate = async () => {
+    if (!contents) {
+      Modal.warning({
+        content: "수정된 내용이 없습니다.",
+      });
+      return;
+    }
+    if (!password) {
+      Modal.warning({
+        content: "비밀번호를 입력해주세요.",
+      });
+      return;
+    }
+
+    try {
+      if (!props.el?._id) return;
+      await updateBoardComment({
+        variables: {
+          updateBoardCommentInput: {
+            contents,
+            rating,
+          },
+          password,
+          boardCommentId: props.el?._id,
+        },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: { boardId: router.query.boardId },
+          },
+        ],
+      });
+      props.setIsEdit?.(false);
+      Modal.success({
+        content: "댓글이 수정되었습니다.",
+      });
+    } catch (error) {
+      if (error instanceof Error)
+        Modal.error({
+          content: error.message,
+        });
+    }
+  };
+
   return (
-    <BoardCommentUI
+    <BoardCommentWriteUI
       writer={writer}
       password={password}
       contents={contents}
@@ -108,6 +165,8 @@ export default function BoardCommentWrite() {
       onChangeContents={onChangeContents}
       onClickSubmit={onClickSubmit}
       onChangeRating={onChangeRating}
+      onClickUpdate={onClickUpdate}
+      isEdit={props.isEdit}
     />
   );
 }
