@@ -1,11 +1,6 @@
 import { MouseEvent, useState } from "react";
-import styled from "@emotion/styled";
+import * as S from "./Pagination.styles";
 import { PaginationProps } from "./Pagination.types";
-
-const Page = styled.span`
-  color: ${(props) => (props.isActive ? "orange" : "black")};
-  cursor: pointer;
-`;
 
 export default function Pagination(props: PaginationProps) {
   const [startPage, setStartPage] = useState(1);
@@ -34,26 +29,25 @@ export default function Pagination(props: PaginationProps) {
   };
 
   return (
-    <div>
-      <button onClick={onClickPrevPage} disabled={startPage === 1}>
-        ＜
-      </button>
+    <S.Wrapper>
+      <S.PrevButton onClick={onClickPrevPage} disabled={startPage === 1} />
       {new Array(10).fill(1).map(
         (_, index) =>
           index + startPage <= lastPage && (
-            <Page
+            <S.Page
               key={index + startPage}
               onClick={onClickPage}
               id={String(index + startPage)}
               isActive={currentPage === index + startPage}
             >
-              {` `} {index + startPage}
-            </Page>
+              {index + startPage}
+            </S.Page>
           )
       )}
-      <button onClick={onClickNextPage} disabled={startPage + 10 > lastPage}>
-        ＞
-      </button>
-    </div>
+      <S.NextButton
+        onClick={onClickNextPage}
+        disabled={startPage + 10 > lastPage}
+      ></S.NextButton>
+    </S.Wrapper>
   );
 }

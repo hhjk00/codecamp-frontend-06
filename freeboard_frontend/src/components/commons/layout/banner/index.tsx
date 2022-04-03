@@ -3,16 +3,19 @@ import { Carousel } from "antd";
 
 export default function LayoutBanner() {
   const Wrapper = styled.div`
-    height: 300px;
-    background-color: pink;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 600px;
+    font-family: "Noto Sans CJK KR";
   `;
 
   const contentStyle = {
-    height: "300px",
+    height: "600px",
     color: "#fff",
-    lineHeight: "300px",
+    lineHeight: "700px",
     textAlign: "center",
-    background: "#364d79",
+    background: "pink",
   };
 
   return (

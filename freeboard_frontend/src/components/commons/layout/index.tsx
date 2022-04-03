@@ -22,9 +22,9 @@ export default function Layout(props: ILayoutProps) {
 
   return (
     <>
-      <LayoutHeader />
       <LayoutBanner />
-      <LayoutNavigation />
+      <LayoutHeader />
+      <LayoutNavigation></LayoutNavigation>
       <BodyWrapper>{props.children}</BodyWrapper>
       <LayoutFooter />
     </>

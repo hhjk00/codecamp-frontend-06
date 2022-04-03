@@ -26,11 +26,14 @@ export default function BoardListUI(props: IBoardListUIProps) {
             </S.TableBottom>
           ))}
         </S.TableWrapper>
-        <Pagination
-          refetch={props.refetch}
-          dataBoardsCount={props.dataBoardsCount}
-        />
-        <button onClick={props.onClickMoveWrite}>게시물 등록하기</button>
+
+        <S.BottomWrapper>
+          <Pagination
+            refetch={props.refetch}
+            dataBoardsCount={props.dataBoardsCount}
+          />
+          <S.BoardNew onClick={props.onClickMoveWrite}>글쓰기</S.BoardNew>
+        </S.BottomWrapper>
       </S.Wrapper>
     </S.ListPage>
   );
