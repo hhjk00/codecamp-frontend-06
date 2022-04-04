@@ -5,7 +5,7 @@ export interface IBoardWriteProps {
   data?: any;
 }
 
-export interface IEditBoardInput {
+export interface IUpdateBoardInput {
   title?: string;
   contents?: string;
   youtubeUrl?: string;

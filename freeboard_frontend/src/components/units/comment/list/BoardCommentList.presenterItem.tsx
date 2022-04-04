@@ -51,7 +51,7 @@ export default function BoardCommentItem(props: IBoardCommentItemProps) {
       setIsOpenDeleteModal(false);
       setDeleteId("");
     } catch (error) {
-      Modal.error({ content: error.message });
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 
@@ -67,7 +67,7 @@ export default function BoardCommentItem(props: IBoardCommentItemProps) {
   };
 
   // 작성자 정보 모달창
-  const onClickWriter = (event: MouseEvent<HTMLDivElement>) => {
+  const onClickComment = (event: MouseEvent<HTMLDivElement>) => {
     Modal.info({
       content: event.currentTarget.id + "님이 작성한 댓글입니다.",
       onOk() {},
@@ -93,7 +93,7 @@ export default function BoardCommentItem(props: IBoardCommentItemProps) {
               <S.CommentProfile src="/images/profile.png" />
               <S.CommentInputWrapper
                 id={props.el.writer}
-                onClick={onClickWriter}
+                onClick={onClickComment}
               >
                 <S.WriterRating>
                   <S.CommentWriter>{props.el.writer}</S.CommentWriter>

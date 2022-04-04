@@ -11,12 +11,10 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Noto Sans CJK KR";
-  border-top: 1px solid #bdbdbd;
   margin-bottom: 100px;
 `;
 
 export const Title = styled.div`
-  padding-top: 40px;
   padding-bottom: 40px;
 `;
 

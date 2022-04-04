@@ -53,11 +53,10 @@ export const CommentWriter = styled.div`
   font-weight: bold;
   cursor: pointer;
   line-height: 36px;
+  padding-right: 15px;
 `;
 
-export const Rating = styled(Rate)`
-  padding-left: 15px;
-`;
+export const Rating = styled(Rate)``;
 
 export const CommentContents = styled.div``;
 

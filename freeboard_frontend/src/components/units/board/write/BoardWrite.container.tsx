@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { IBoardWriteProps, IEditBoardInput } from "./BoardWrite.types";
+import { IBoardWriteProps, IUpdateBoardInput } from "./BoardWrite.types";
 import BoardWriteUI from "./BoardWrite.presenter";
 import {
   IMutation,
@@ -171,7 +171,6 @@ export default function BoardWrite(props: IBoardWriteProps) {
           },
         });
 
-        console.log(result);
         router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error) {
         if (error instanceof Error)
@@ -210,7 +209,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       return;
     }
 
-    const updateBoardInput: IEditBoardInput = {};
+    const updateBoardInput: IUpdateBoardInput = {};
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
     if (youtubeUrl) updateBoardInput.youtubeUrl = youtubeUrl;

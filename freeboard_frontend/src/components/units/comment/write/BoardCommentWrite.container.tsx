@@ -124,8 +124,15 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
       return;
     }
 
+    // 수정된 값이 없으면 그대로 입력하게 해줌
+    const updateBoardCommentInput: IUpdateBoardCommentInput = {};
+    if (contents) updateBoardCommentInput.contents = contents;
+    if (rating !== props.el?.rating) updateBoardCommentInput.rating = rating;
+
     try {
+      // 아이디가 없으면 실행하지 않음
       if (!props.el?._id) return;
+
       await updateBoardComment({
         variables: {
           updateBoardCommentInput: {
@@ -167,6 +174,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
       onChangeRating={onChangeRating}
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
+      el={props.el}
     />
   );
 }

@@ -72,6 +72,9 @@ export default function BoardDetail() {
         variables: { boardId: String(router.query.boardId) },
       });
       router.push("/boards");
+      Modal.success({
+        content: "게시물이 삭제되었습니다.",
+      });
     } catch (error) {
       if (error instanceof Error)
         Modal.error({
