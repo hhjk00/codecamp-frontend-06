@@ -6,16 +6,17 @@ export default function LayoutBanner() {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 600px;
+    height: 532px;
     font-family: "Noto Sans CJK KR";
+    border-bottom: 5px solid gray;
   `;
 
   const contentStyle = {
-    height: "600px",
+    height: "540px",
     color: "#fff",
     lineHeight: "700px",
     textAlign: "center",
-    background: "pink",
+    background: "lightgray",
   };
 
   return (

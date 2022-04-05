@@ -6,6 +6,7 @@ const NAVIGATION_MENUS = [
   { name: "게시판", page: "/boards" },
   { name: "마켓", page: "/markets" },
   { name: "마이페이지", page: "/mypages" },
+  { name: "오늘의 메뉴", page: "/foodish" },
 ];
 
 export default function LayoutNavigation() {

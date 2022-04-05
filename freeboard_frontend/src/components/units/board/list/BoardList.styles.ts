@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import SmsOutlinedIcon from "@mui/icons-material/SmsOutlined";
 
 export const ListPage = styled.div`
   display: flex;
@@ -9,15 +10,31 @@ export const ListPage = styled.div`
 
 export const Wrapper = styled.div`
   width: 1200px;
-  margin: 50px;
+`;
+
+export const PageTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 80px;
+  padding-top: 100px;
+`;
+
+export const PageIcon = styled(SmsOutlinedIcon)`
+  font-size: 35px;
+`;
+
+export const PageText = styled.div`
+  font-size: 40px;
+  font-weight: 500;
 `;
 
 export const TableWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-bottom: 1px solid;
-  border-top: 1px solid;
+  border-bottom: 3px solid;
+  border-top: 3px solid;
 `;
 
 export const TableTop = styled.div`
@@ -26,9 +43,9 @@ export const TableTop = styled.div`
   justify-content: space-between;
   width: 100%;
   text-align: center;
-  padding: 10px;
+  padding: 15px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
 `;
 
 export const TableBottom = styled.div`
@@ -37,8 +54,9 @@ export const TableBottom = styled.div`
   flex-direction: row;
   justify-content: space-between;
   text-align: center;
-  padding: 10px;
+  padding: 13px;
   border-top: 1px solid #bdbdbd;
+  font-size: 16px;
 `;
 
 export const ColumnHeaderNumber = styled.div`
@@ -65,7 +83,7 @@ export const ColumnTitle = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   :hover {
-    color: blue;
+    color: orange;
   }
 `;
 
@@ -78,22 +96,25 @@ export const ColumnDate = styled.span`
 `;
 
 export const BottomWrapper = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 15px;
+  margin: 50px;
+  width: 95%;
 `;
 
 export const BoardNew = styled.div`
-  width: 80px;
-  height: 30px;
-  border: 1px solid black;
+  width: 100px;
+  height: 40px;
+  border: 2px solid black;
   border-radius: 10px;
   text-align: center;
-  line-height: 28px;
+  line-height: 35px;
+  font-size: 17px;
+  font-weight: 500;
   cursor: pointer;
   :hover {
-    color: blue;
+    background-color: black;
+    color: white;
   }
 `;

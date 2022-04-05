@@ -7,6 +7,10 @@ export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <S.ListPage>
       <S.Wrapper>
+        <S.PageTitle>
+          <S.PageIcon></S.PageIcon>
+          <S.PageText>자유게시판</S.PageText>
+        </S.PageTitle>
         <S.TableWrapper>
           <S.TableTop>
             <S.ColumnHeaderNumber>번호</S.ColumnHeaderNumber>
@@ -26,7 +30,6 @@ export default function BoardListUI(props: IBoardListUIProps) {
             </S.TableBottom>
           ))}
         </S.TableWrapper>
-
         <S.BottomWrapper>
           <Pagination
             refetch={props.refetch}

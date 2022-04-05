@@ -11,8 +11,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Page = styled.span`
-  margin: 0px 10px;
-  font-size: 18px;
+  margin: 0px 20px;
+  font-size: 20px;
   color: ${(props) => (props.isActive ? "orange" : "black")};
   font-weight: ${(props) => (props.isActive ? "bold" : "normal")};
   border-bottom: ${(props) => (props.isActive ? "1px solid orange" : "none")};
