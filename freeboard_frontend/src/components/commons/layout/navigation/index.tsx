@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import { Fragment, MouseEvent } from "react";
 
 const NAVIGATION_MENUS = [
-  { name: "게시판", page: "/boards" },
+  { name: "자유게시판", page: "/boards" },
   { name: "마켓", page: "/markets" },
   { name: "마이페이지", page: "/mypages" },
   { name: "오늘의 메뉴", page: "/foodish" },
+  { name: "비회원 게시판", page: "/boardsNon" },
 ];
 
 export default function LayoutNavigation() {
