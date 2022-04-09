@@ -18,21 +18,21 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const router = useRouter();
 
   const [writer, setWriter] = useState("");
-  const [writerError, setWriterError] = useState("");
-
   const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
   const [title, setTitle] = useState("");
-  const [titleError, setTitleError] = useState("");
-
   const [contents, setContents] = useState("");
+
+  const [writerError, setWriterError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [titleError, setTitleError] = useState("");
   const [contentsError, setContentsError] = useState("");
 
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
+
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   // 작성자 입력
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -130,6 +130,13 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setIsOpen(false);
   };
 
+  // 이미지 입력
+  const onChangeFileUrls = (fileUrl: string, index: number) => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
+  };
+
   // 등록하기
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -167,6 +174,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
                 address,
                 addressDetail,
               },
+              images: fileUrls,
             },
           },
         });
@@ -245,6 +253,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}
       onChangeYoutubeUrl={onChangeYoutubeUrl}
+      onChangeFileUrls={onChangeFileUrls}
       onClickSubmit={onClickSubmit}
       onClickEdit={onClickEdit}
       onChangeAddressDetail={onChangeAddressDetail}
@@ -257,6 +266,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       zipcode={zipcode}
       address={address}
       addressDetail={addressDetail}
+      fileUrls={fileUrls}
     />
   );
 }

@@ -1,25 +1,10 @@
-import {
-  collection,
-  getFirestore,
-  getDocs,
-  DocumentData,
-} from "firebase/firestore/lite";
-import { useEffect, useState } from "react";
-import { firebaseApp } from "../../../../../pages/_app";
+import { useEffect } from "react";
 import BoardNonListUI from "./BoardNonList.presenter";
 
-export default function BoardNonList() {
-  const [dataBoards, setDataBoards] = useState<DocumentData[]>([]);
-
+export default function BoardNonList(props) {
   useEffect(() => {
-    async function fetchBoards() {
-      const board = collection(getFirestore(firebaseApp), "board");
-      const result = await getDocs(board);
-      const boards = result.docs.map((el) => el.data());
-      setDataBoards(boards);
-    }
-    fetchBoards();
-  }, [dataBoards]);
+    props.fetchBoards();
+  }, []);
 
-  return <BoardNonListUI dataBoards={dataBoards} />;
+  return <BoardNonListUI dataBoards={props.dataBoards} />;
 }

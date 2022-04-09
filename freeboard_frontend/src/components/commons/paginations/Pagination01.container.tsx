@@ -1,8 +1,8 @@
 import { MouseEvent, useState } from "react";
-import * as S from "./Pagination.styles";
-import { PaginationProps } from "./Pagination.types";
+import * as S from "./Pagination01.styles";
+import { Pagination01Props } from "./Pagination01.types";
 
-export default function Pagination(props: PaginationProps) {
+export default function Pagination01(props: Pagination01Props) {
   const [startPage, setStartPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const lastPage = props.dataBoardsCount

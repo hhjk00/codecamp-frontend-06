@@ -1,5 +1,5 @@
 import { getDate } from "../../../../commons/libraries/utils";
-import Pagination from "../../../commons/paginations/Pagination.container";
+import Pagination01 from "../../../commons/paginations/Pagination01.container";
 import * as S from "./BoardList.styles";
 import { IBoardListUIProps } from "./BoardList.types";
 
@@ -31,7 +31,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
           ))}
         </S.TableWrapper>
         <S.BottomWrapper>
-          <Pagination
+          <Pagination01
             refetch={props.refetch}
             dataBoardsCount={props.dataBoardsCount}
           />

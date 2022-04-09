@@ -3,7 +3,7 @@ import { useState } from "react";
 import { firebaseApp } from "../../../../../pages/_app";
 import BoardNonUI from "./BoardNonWrite.presenter";
 
-export default function BoardNon() {
+export default function BoardNon(props) {
   const [writer, setWriter] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
@@ -27,6 +27,7 @@ export default function BoardNon() {
       title,
       contents,
     });
+    props.fetchBoards();
   };
 
   return (

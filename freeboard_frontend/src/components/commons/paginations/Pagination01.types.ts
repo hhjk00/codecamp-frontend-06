@@ -4,7 +4,7 @@ import {
   IQueryFetchBoardArgs,
 } from "../../../commons/types/generated/types";
 
-export interface PaginationProps {
+export interface Pagination01Props {
   refetch: (
     variables?: Partial<IQueryFetchBoardArgs>
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoard">>>;
