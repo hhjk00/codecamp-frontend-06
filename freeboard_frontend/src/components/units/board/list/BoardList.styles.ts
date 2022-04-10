@@ -118,3 +118,7 @@ export const BoardNew = styled.div`
     color: white;
   }
 `;
+
+export const Word = styled.span`
+  color: ${(props) => (props.isMatched ? "red" : "black")};
+`;

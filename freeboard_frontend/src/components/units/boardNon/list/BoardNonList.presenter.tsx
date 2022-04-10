@@ -1,6 +1,7 @@
 import * as S from "./BoardNonList.styles";
+import { v4 as uuidv4 } from "uuid";
 
-export default function BoardNonListUI(props: any) {
+export default function BoardNonListUI(props) {
   return (
     <S.Wrapper>
       <S.Row>
@@ -10,7 +11,7 @@ export default function BoardNonListUI(props: any) {
         <S.ColumnHeaderBasic>작성자</S.ColumnHeaderBasic>
       </S.Row>
       {props.dataBoards?.map((el: any, index: number) => (
-        <S.Row key={index}>
+        <S.Row key={uuidv4()}>
           <S.ColumnBasic>{index + 1}</S.ColumnBasic>
           <S.ColumnBasic>{el.title}</S.ColumnBasic>
           <S.ColumnTitle>{el.contents}</S.ColumnTitle>

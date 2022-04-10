@@ -17,7 +17,6 @@ import { Modal } from "antd";
 
 export default function BoardDetail() {
   const router = useRouter();
-  console.log(router);
 
   // 좋아요
   const [likeBoard] = useMutation(LIKE_BOARD);

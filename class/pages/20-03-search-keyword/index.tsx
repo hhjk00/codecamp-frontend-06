@@ -7,7 +7,6 @@ import {
 } from "../../src/commons/types/generated/types";
 import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
-import { PropertySafetyFilled } from "@ant-design/icons";
 
 const FETCH_BOARDS = gql`
   query fetchBoards($search: String, $page: Int) {

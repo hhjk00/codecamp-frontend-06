@@ -81,8 +81,19 @@ export const Contents = styled.div`
   padding-bottom: 50px;
 `;
 
+export const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Image = styled.img`
+  max-width: 1000px;
+  max-height: auto;
+`;
+
 export const Youtube = styled(ReactPlayer)`
-  margin: auto;
+  margin: 10px auto auto auto;
 `;
 
 export const LikeWrapper = styled.div`

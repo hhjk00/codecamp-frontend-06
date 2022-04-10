@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
@@ -196,13 +196,18 @@ export default function BoardWrite(props: IBoardWriteProps) {
   >(UPDATE_BOARD);
 
   const onClickEdit = async () => {
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(props.data.fetchBoard.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+
     if (
       !title &&
       !contents &&
       !youtubeUrl &&
       !address &&
       !addressDetail &&
-      !zipcode
+      !zipcode &&
+      !isChangedFiles
     ) {
       Modal.warning({
         content: "수정한 내용이 없습니다.",
@@ -228,6 +233,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       if (addressDetail)
         updateBoardInput.boardAddress.addressDetail = addressDetail;
     }
+    if (isChangedFiles) updateBoardInput.images = fileUrls;
 
     await updateBoard({
       variables: {
@@ -241,6 +247,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
     });
     router.push(`/boards/${router.query.boardId}`);
   };
+
+  useEffect(() => {
+    if (props.data?.fetchBoard.images?.length) {
+      setFileUrls([...props.data?.fetchBoard.images]);
+    }
+  }, [props.data]);
 
   return (
     <BoardWriteUI

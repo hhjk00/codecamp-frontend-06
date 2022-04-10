@@ -2,6 +2,7 @@ import { getDate } from "../../../../commons/libraries/utils";
 import Pagination01 from "../../../commons/paginations/Pagination01.container";
 import * as S from "./BoardList.styles";
 import { IBoardListUIProps } from "./BoardList.types";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListUI(props: IBoardListUIProps) {
   return (
@@ -11,6 +12,11 @@ export default function BoardListUI(props: IBoardListUIProps) {
           <S.PageIcon></S.PageIcon>
           <S.PageText>자유게시판</S.PageText>
         </S.PageTitle>
+
+        <div>
+          제목 검색: <input type="text" onChange={props.onChangeSearch} />
+        </div>
+
         <S.TableWrapper>
           <S.TableTop>
             <S.ColumnHeaderNumber>번호</S.ColumnHeaderNumber>
@@ -23,7 +29,14 @@ export default function BoardListUI(props: IBoardListUIProps) {
             <S.TableBottom key={el._id}>
               <S.ColumnNumber>{10 - index}</S.ColumnNumber>
               <S.ColumnTitle id={el._id} onClick={props.onClickMoveBoardDetail}>
-                {el.title}
+                {el.title
+                  .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
+                  .split("#$%")
+                  .map((el) => (
+                    <S.Word key={uuidv4()} isMatched={props.keyword === el}>
+                      {el}
+                    </S.Word>
+                  ))}
               </S.ColumnTitle>
               <S.ColumnWriter>{el.writer}</S.ColumnWriter>
               <S.ColumnDate>{getDate(el.createdAt)}</S.ColumnDate>
@@ -35,6 +48,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
             refetch={props.refetch}
             dataBoardsCount={props.dataBoardsCount}
           />
+
           <S.BoardNew onClick={props.onClickMoveWrite}>글쓰기</S.BoardNew>
         </S.BottomWrapper>
       </S.Wrapper>
