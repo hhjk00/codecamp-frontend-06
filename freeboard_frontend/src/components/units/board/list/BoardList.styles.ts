@@ -120,5 +120,5 @@ export const BoardNew = styled.div`
 `;
 
 export const Word = styled.span`
-  color: ${(props) => (props.isMatched ? "red" : "black")};
+  color: ${(props) => (props.isMatched ? "red" : "")};
 `;

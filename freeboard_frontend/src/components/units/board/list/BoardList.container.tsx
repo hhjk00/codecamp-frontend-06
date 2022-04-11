@@ -27,7 +27,7 @@ export default function BoardList() {
 
   const onClickMoveBoardDetail = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target instanceof Element)
-      router.push(`/boards/${event.target.id}`);
+      router.push(`/boards/${event.currentTarget.id}`);
   };
 
   // 검색
