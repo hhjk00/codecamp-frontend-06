@@ -12,6 +12,7 @@ import Layout from "../src/components/commons/layout";
 import { AppProps } from "next/app";
 import { initializeApp } from "firebase/app";
 import { createUploadLink } from "apollo-upload-client";
+import { RecoilRoot } from "recoil";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -29,6 +30,7 @@ export const firebaseApp = initializeApp(firebaseConfig);
 function MyApp({ Component, pageProps }: AppProps) {
   const uploadLink = createUploadLink({
     uri: "http://backend06.codebootcamp.co.kr/graphql",
+    // headers: { authorization: `Bearer ${AccessToken}` },
   });
 
   const client = new ApolloClient({
@@ -38,10 +40,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={client}>
-      <Global styles={globalStyles} />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <RecoilRoot>
+        <Global styles={globalStyles} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </RecoilRoot>
     </ApolloProvider>
   );
 }
