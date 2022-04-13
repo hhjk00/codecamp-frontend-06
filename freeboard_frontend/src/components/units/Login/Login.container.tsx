@@ -1,15 +1,18 @@
 // import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { Modal } from "antd";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../commons/store";
 import LoginUI from "./Login.presenter";
-// import { LOGIN_USER } from "./Login.queries";
+import { LOGIN_USER } from "./Login.queries";
 
 export default function Login() {
-  //   const [loginUser] = useMutation(LOGIN_USER);
+  const router = useRouter();
 
-  const emailCheck = /^\w+@\w+\.\w+$/;
-  const passwordCheck =
-    /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
-  // : 숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력
+  const [loginUser] = useMutation(LOGIN_USER);
+  const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,16 +25,21 @@ export default function Login() {
     setPassword(event.target.value);
   };
 
-  const onClickLogin = () => {
-    if (!emailCheck.test(email)) {
-      alert("이메일 형식에 맞지 않습니다.");
-    } else {
-      alert("이메일 형식에 적합합니다.");
-    }
-    if (!passwordCheck.test(password)) {
-      alert("비밀번호 형식에 맞지 않습니다.");
-    } else {
-      alert("비밀번호 형식에 적합합니다.");
+  const onClickLogin = async () => {
+    try {
+      const result = await loginUser({
+        variables: {
+          email: email,
+          password: password,
+        },
+      });
+      const accessToken = result.data.loginUser.accessToken;
+      setAccessToken(accessToken);
+      localStorage.setItem("accessToken", accessToken);
+      Modal.success({ content: "로그인 되었습니다." });
+      router.push("/boards");
+    } catch (error) {
+      Modal.error({ content: error.message });
     }
   };
 
