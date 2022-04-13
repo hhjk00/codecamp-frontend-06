@@ -1,20 +1,19 @@
 import "antd/dist/antd.css";
-import "../styles/globals.css";
-import {
-  ApolloClient,
-  ApolloLink,
-  ApolloProvider,
-  InMemoryCache,
-} from "@apollo/client";
+// import "../styles/globals.css";
+import Layout from "../src/components/commons/layout";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
-import Layout from "../src/components/commons/layout";
-import { AppProps } from "next/app";
-import { initializeApp } from "firebase/app";
-import { createUploadLink } from "apollo-upload-client";
 import { RecoilRoot } from "recoil";
+import { AppProps } from "next/app";
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import ApolloSetting from "../src/components/commons/apollo";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+// Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCo1F40JNok7v30ack-Nvw4fsVa6ZqW18Q",
   authDomain: "mysite00-abc.firebaseapp.com",
@@ -24,29 +23,18 @@ const firebaseConfig = {
   appId: "1:314724595602:web:ece755ba5ec1355fa5734b",
 };
 
-// Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const uploadLink = createUploadLink({
-    uri: "http://backend06.codebootcamp.co.kr/graphql",
-    // headers: { authorization: `Bearer ${AccessToken}` },
-  });
-
-  const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink]), // 배열인 이유는 이후 나올 여러가지 다 연결시켜줘야하기 때문에
-    cache: new InMemoryCache(),
-  });
-
   return (
-    <ApolloProvider client={client}>
-      <RecoilRoot>
+    <RecoilRoot>
+      <ApolloSetting>
         <Global styles={globalStyles} />
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </RecoilRoot>
-    </ApolloProvider>
+      </ApolloSetting>
+    </RecoilRoot>
   );
 }
 
