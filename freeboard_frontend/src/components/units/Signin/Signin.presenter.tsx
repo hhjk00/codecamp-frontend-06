@@ -3,6 +3,13 @@ export default function SignInUI(props) {
     <div>
       <input
         type="text"
+        placeholder="닉네임을 입력해주세요."
+        onChange={props.onChangeName}
+      />
+      {props.nameError}
+      <br />
+      <input
+        type="text"
         placeholder="이메일을 입력해주세요."
         onChange={props.onChangeEmail}
       />

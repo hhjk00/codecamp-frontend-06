@@ -6,11 +6,12 @@ import {
 } from "@apollo/client";
 import { useRecoilState } from "recoil";
 import { createUploadLink } from "apollo-upload-client";
-import { accessTokenState } from "../../../commons/store";
+import { accessTokenState, userInfoState } from "../../../commons/store";
 import { useEffect } from "react";
 
 export default function ApolloSetting(props) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
   // 1. 더이상 지원되지 않음
   // if(process.browser){
@@ -30,9 +31,11 @@ export default function ApolloSetting(props) {
 
   // 3. 세번째 방법
   useEffect(() => {
-    const mylocalstorageAccessToken = localStorage.getItem("accessToken");
-    setAccessToken(mylocalstorageAccessToken || "");
-  });
+    const accessToken = localStorage.getItem("accessToken");
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
+    setAccessToken(accessToken || "");
+    setUserInfo(userInfo);
+  }, []);
 
   // 여기가 프리렌더링 시 문제되는 코드
   // const mylocalstorageAccessToken = localStorage.getItem("accessToken");

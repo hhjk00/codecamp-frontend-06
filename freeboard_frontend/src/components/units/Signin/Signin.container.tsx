@@ -1,7 +1,14 @@
 // import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import {
+  IMutation,
+  IMutationCreateUserArgs,
+} from "../../../commons/types/generated/types";
 import SignInUI from "./SignIn.presenter";
+import { CREATE_USER } from "./SignIn.queries";
 
 export default function SignIn() {
   //   const [loginUser] = useMutation(LOGIN_USER);
@@ -14,35 +21,52 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordMore, setPasswordMore] = useState("");
+  const [name, setName] = useState("");
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordMoreError, setPasswordMoreError] = useState("");
+  const [nameError, setNameError] = useState("");
 
   const router = useRouter();
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
-    if (event.target.value !== "") {
+    if (event.target.value) {
       setEmailError("");
     }
   };
 
   const onChangePassword = (event) => {
     setPassword(event.target.value);
-    if (event.target.value !== "") {
+    if (event.target.value) {
       setPasswordError("");
     }
   };
 
   const onChangePasswordMore = (event) => {
     setPasswordMore(event.target.value);
-    if (event.target.value !== "") {
+    if (event.target.value) {
       setPasswordMoreError("");
     }
   };
 
-  const onClickLogin = () => {
+  const onChangeName = (event) => {
+    setName(event.target.value);
+    if (event.target.value) {
+      setNameError("");
+    }
+  };
+
+  const [createUser] = useMutation<
+    Pick<IMutation, "createUser">,
+    IMutationCreateUserArgs
+  >(CREATE_USER);
+
+  const onClickLogin = async () => {
+    if (name === "") {
+      setNameError("이름을 입력해주세요.");
+    }
     if (email === "") {
       setEmailError("이메일을 입력해주세요.");
     }
@@ -70,6 +94,24 @@ export default function SignIn() {
       passwordCheck.test(password) &&
       password === passwordMore
     ) {
+      try {
+        await createUser({
+          variables: {
+            createUserInput: {
+              email,
+              password,
+              name,
+            },
+          },
+        });
+      } catch (error) {
+        if (error instanceof Error) {
+          Modal.error({
+            content: error.message,
+          });
+        }
+      }
+
       alert("회원가입을 축하합니다!");
       router.push("/login");
     }
@@ -83,6 +125,7 @@ export default function SignIn() {
       onChangeEmail={onChangeEmail}
       onChangePassword={onChangePassword}
       onChangePasswordMore={onChangePasswordMore}
+      onChangeName={onChangeName}
       onClickLogin={onClickLogin}
     />
   );

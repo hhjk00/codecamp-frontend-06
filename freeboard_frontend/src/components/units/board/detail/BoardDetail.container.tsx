@@ -75,10 +75,11 @@ export default function BoardDetail() {
         content: "게시물이 삭제되었습니다.",
       });
     } catch (error) {
-      if (error instanceof Error)
+      if (error instanceof Error) {
         Modal.error({
           content: error.message,
         });
+      }
     }
   };
 
