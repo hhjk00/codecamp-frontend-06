@@ -1,17 +1,41 @@
+import Head from "next/head";
+import * as S from "./Login.styles";
+
 export default function LoginUI(props) {
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="이메일을 입력해주세요."
-        onChange={props.onChangeEmail}
-      />
-      <input
-        type="password"
-        placeholder="비밀번호를 입력해주세요"
-        onChange={props.onChangePassword}
-      />
-      <button onClick={props.onClickLogin}>로그인</button>
-    </div>
+    <>
+      <Head>
+        <title>로그인</title>
+      </Head>
+      <S.Container>
+        <S.Wrapper>
+          <S.TitleWrapper>
+            <S.Icon />
+            <S.TiTle>SIGN IN</S.TiTle>
+          </S.TitleWrapper>
+
+          <S.LoginWrapper>
+            <S.Input
+              type="text"
+              placeholder="Email"
+              onChange={props.onChangeEmail}
+            />
+            <S.Input
+              type="password"
+              placeholder="Password"
+              onChange={props.onChangePassword}
+            />
+            <S.Button onClick={props.onClickLogin}>Login</S.Button>
+          </S.LoginWrapper>
+
+          <S.BottomWrapper>
+            <S.TextWrapper>
+              <S.Text>회원이 아니신가요?</S.Text>
+              <S.SignUp onClick={props.onClickJoin}>SIGN UP</S.SignUp>
+            </S.TextWrapper>
+          </S.BottomWrapper>
+        </S.Wrapper>
+      </S.Container>
+    </>
   );
 }

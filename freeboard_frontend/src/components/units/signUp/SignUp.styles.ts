@@ -1,4 +1,4 @@
-import { UserOutlined } from "@ant-design/icons";
+import { UserAddOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
@@ -11,7 +11,6 @@ export const Container = styled.div`
     #7303c0 50.52%,
     #ec38bc 102.52%
   );
-
   font-family: "myFont";
   height: 100vh;
 `;
@@ -29,7 +28,7 @@ export const TitleWrapper = styled.div`
   color: white;
 `;
 
-export const Icon = styled(UserOutlined)`
+export const Icon = styled(UserAddOutlined)`
   font-size: 30px;
 `;
 
@@ -43,7 +42,7 @@ export const LoginWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 190px;
+  height: 350px;
   padding-top: 20px;
   padding-bottom: 20px;
   border-top: 1px solid white;
@@ -88,10 +87,14 @@ export const TextWrapper = styled.div`
 export const Text = styled.div`
   color: white;
 `;
-export const SignUp = styled.button`
+export const Join = styled.button`
   color: #f2a405;
   border: none;
   background-color: transparent;
   cursor: pointer;
   line-height: 1;
+`;
+
+export const Error = styled.div`
+  color: white;
 `;

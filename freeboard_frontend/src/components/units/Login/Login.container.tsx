@@ -43,11 +43,16 @@ export default function Login() {
     }
   };
 
+  const onClickJoin = () => {
+    router.push("/signUp");
+  };
+
   return (
     <LoginUI
       onChangeEmail={onChangeEmail}
       onChangePassword={onChangePassword}
       onClickLogin={onClickLogin}
+      onClickJoin={onClickJoin}
     />
   );
 }

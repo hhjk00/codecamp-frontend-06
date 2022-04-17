@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   width: 1200px;
   display: flex;
   flex-direction: column;
-  font-family: "Noto Sans CJK KR";
+  font-family: "myFont";
   margin-bottom: 100px;
 `;
 

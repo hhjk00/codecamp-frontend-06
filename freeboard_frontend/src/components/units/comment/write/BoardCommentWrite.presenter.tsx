@@ -21,8 +21,14 @@ export default function BoardCommentWriteUI(props: IBoardCommentWriteUIProps) {
             placeholder="비밀번호"
             value={props.password}
           />
-
-          <Rate onChange={props.onChangeRating} />
+          {!props.isEdit ? (
+            <Rate onChange={props.onChangeRating} value={props.rating} />
+          ) : (
+            <Rate
+              onChange={props.onChangeRating}
+              defaultValue={props.el?.rating}
+            />
+          )}
         </S.WriterPasswordInput>
 
         <S.ContentsInput>

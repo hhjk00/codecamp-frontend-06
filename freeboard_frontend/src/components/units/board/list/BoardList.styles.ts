@@ -5,7 +5,7 @@ export const ListPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Noto Sans CJK KR";
+  font-family: "myFont";
 `;
 
 export const Wrapper = styled.div`
@@ -112,6 +112,7 @@ export const BoardNew = styled.div`
   line-height: 35px;
   font-size: 17px;
   font-weight: 500;
+
   cursor: pointer;
   :hover {
     background-color: black;
@@ -120,5 +121,5 @@ export const BoardNew = styled.div`
 `;
 
 export const Word = styled.span`
-  color: ${(props) => (props.isMatched ? "red" : "")};
+  color: ${(props) => (props.isMatched ? "#f2a405" : "")};
 `;

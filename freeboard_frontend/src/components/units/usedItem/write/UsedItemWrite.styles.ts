@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { ISubmitButtonProps } from "./BoardWrite.types";
 
 export const NewPage = styled.div`
   display: flex;
@@ -38,14 +37,7 @@ export const WriterWrapper = styled.div`
 `;
 
 export const Writer = styled.input`
-  width: 486px;
-  height: 52px;
-  padding-left: 16px;
-  border: 1px solid #bdbdbd;
-`;
-
-export const Password = styled.input`
-  width: 486px;
+  width: 996px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
@@ -70,44 +62,74 @@ export const Subject = styled.input`
 
 export const Contents = styled.textarea`
   width: 996px;
-  height: 480px;
+  height: 320px;
   padding-left: 16px;
   padding: 14px;
   border: 1px solid #bdbdbd;
 `;
 
-export const ZipcodeWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const Zipcode = styled.input`
-  width: 77px;
+export const Price = styled.input`
+  width: 996px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;
 
-export const SearchButton = styled.button`
-  width: 124px;
+export const Tag = styled.input`
+  width: 996px;
   height: 52px;
-  margin-left: 16px;
-  background-color: black;
+  padding-left: 16px;
+  border: 1px solid #bdbdbd;
+`;
+
+export const AddressWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const AddressInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 558px;
+`;
+
+export const Map = styled.div`
+  width: 384px;
+  height: 252px;
+  border: 1px solid #bdbdbd;
+`;
+
+export const LatButton = styled.button`
+  width: 108px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+  background-color: white;
+  font-size: 16px;
+
   cursor: pointer;
-  color: white;
+`;
+
+export const GpsIcon = styled.img`
+  padding-left: 10px;
+  padding-right: 10px;
+`;
+
+export const LngButton = styled.button`
+  width: 108px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+  background-color: white;
+  font-size: 16px;
+
+  cursor: pointer;
 `;
 
 export const Address = styled.input`
-  width: 996px;
+  width: 558px;
   height: 52px;
-  margin-top: 16px;
-  padding-left: 16px;
-  border: 1px solid #bdbdbd;
-`;
-
-export const Youtube = styled.input`
-  width: 996px;
-  height: 52px;
+  margin-bottom: 16px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;

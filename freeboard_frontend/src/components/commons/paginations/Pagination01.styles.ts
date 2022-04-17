@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   width: 100%;
   align-items: center;
+  font-family: "myFont";
 `;
 
 export const Page = styled.span`

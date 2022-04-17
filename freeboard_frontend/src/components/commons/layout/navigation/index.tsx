@@ -5,7 +5,7 @@ import { Fragment, MouseEvent } from "react";
 const NAVIGATION_MENUS = [
   { name: "자유게시판", page: "/boards" },
   { name: "마켓", page: "/markets" },
-  { name: "마이페이지", page: "/mypages" },
+  { name: "마이페이지", page: "/mypage" },
   { name: "오늘의 메뉴", page: "/foodish" },
   { name: "비회원 게시판", page: "/boardsNon" },
 ];
@@ -16,7 +16,7 @@ export default function LayoutNavigation() {
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    font-family: "Noto Sans CJK KR";
+    font-family: "myFont";
   `;
 
   const MenuWrapper = styled.div`
@@ -25,20 +25,21 @@ export default function LayoutNavigation() {
     justify-content: center;
     align-items: center;
     top: 105px;
-    height: 58px;
+    height: 63px;
     width: 1200px;
     background-color: white;
     position: absolute;
+    border-radius: 10px;
   `;
 
   const MenuItem = styled.div`
     margin: 0px 60px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     cursor: pointer;
 
     :hover {
-      color: orange;
+      color: #f2a405;
     }
   `;
 

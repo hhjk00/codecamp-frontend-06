@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
   align-items: center;
   border: none;
   box-shadow: 0px 0px 10px gray;
-  font-family: "Noto Sans CJK KR";
+  font-family: "myFont";
 `;
 
 export const HeaderWrapper = styled.div`
@@ -74,11 +74,16 @@ export const ContentsWrapper = styled.div`
 export const Title = styled.div`
   font-weight: 700;
   font-size: 36px;
+  overflow: hidden;
+  word-wrap: break-word;
 `;
 
 export const Contents = styled.div`
   padding-top: 50px;
   padding-bottom: 50px;
+  font-size: 20px;
+  overflow: hidden;
+  word-wrap: break-word;
 `;
 
 export const ImageWrapper = styled.div`

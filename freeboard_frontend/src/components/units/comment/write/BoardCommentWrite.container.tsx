@@ -95,6 +95,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
         setWriter("");
         setPassword("");
         setContents("");
+        setRating(0);
       } catch (error) {
         if (error instanceof Error)
           Modal.error({
@@ -127,18 +128,21 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
     // 수정된 값이 없으면 그대로 입력하게 해줌
     const updateBoardCommentInput: IUpdateBoardCommentInput = {};
     if (contents) updateBoardCommentInput.contents = contents;
-    if (rating !== props.el?.rating) updateBoardCommentInput.rating = rating;
+    if (rating) updateBoardCommentInput.rating = rating;
+    /*
+     const updateBoardCommentInput = {
+       contents: "",
+       rating :
+     }
 
+    */
     try {
       // 아이디가 없으면 실행하지 않음
       if (!props.el?._id) return;
 
       await updateBoardComment({
         variables: {
-          updateBoardCommentInput: {
-            contents,
-            rating,
-          },
+          updateBoardCommentInput,
           password,
           boardCommentId: props.el?._id,
         },
@@ -166,7 +170,6 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
       writer={writer}
       password={password}
       contents={contents}
-      rating={rating}
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeContents={onChangeContents}
@@ -175,6 +178,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
       el={props.el}
+      rating={rating}
     />
   );
 }

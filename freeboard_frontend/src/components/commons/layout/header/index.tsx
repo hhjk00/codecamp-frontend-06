@@ -17,7 +17,7 @@ export default function LayoutHeader() {
 
   return (
     <Wrapper>
-      <TitleWrapper>헤더</TitleWrapper>
+      <TitleWrapper></TitleWrapper>
     </Wrapper>
   );
 }

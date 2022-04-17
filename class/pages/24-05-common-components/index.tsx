@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input01 from "../../src/components/commons/inputs/01";
-import { Button } from "antd";
 import Button01 from "../../src/components/commons/buttons/01";
 import styled from "@emotion/styled";
 
@@ -50,7 +49,7 @@ export default function ReactHookFormPage() {
       {/* 비밀번호: <input type="text" {...register("password]")} /> */}
       비밀번호 : <Input01 type="password" register={register("password")} />
       <br />
-      <Error>{formState.errors.password?.message}</Error>
+      <Error>{formState.errors.password?.message} </Error>
       {/*       내용: <input type="text" {...register("boardAddress.addressDetail")} />
        */}
       <br />

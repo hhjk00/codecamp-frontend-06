@@ -7,32 +7,30 @@ export default function LayoutBanner() {
     flex-direction: column;
     justify-content: center;
     height: 532px;
-    font-family: "Noto Sans CJK KR";
-    border-bottom: 5px solid gray;
+    font-family: "myFont";
+    border-bottom: 5px solid lightgray;
   `;
 
   const contentStyle = {
-    height: "540px",
-    color: "#fff",
+    width: "100%",
+    height: "528px",
     lineHeight: "700px",
     textAlign: "center",
-    background: "lightgray",
   };
+
+  const Img = styled.img``;
 
   return (
     <Wrapper>
       <Carousel autoplay>
         <div>
-          <h3 style={contentStyle}>1</h3>
+          <Img src="/images/banner01.jpg" style={contentStyle} />
         </div>
         <div>
-          <h3 style={contentStyle}>2</h3>
+          <Img src="/images/banner02.jpg" style={contentStyle} />
         </div>
         <div>
-          <h3 style={contentStyle}>3</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>4</h3>
+          <Img src="/images/banner03.jpg" style={contentStyle} />
         </div>
       </Carousel>
     </Wrapper>
