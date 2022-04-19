@@ -42,7 +42,7 @@ export const LoginWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 350px;
+  height: 390px;
   padding-top: 20px;
   padding-bottom: 20px;
   border-top: 1px solid white;
@@ -97,4 +97,5 @@ export const Join = styled.button`
 
 export const Error = styled.div`
   color: white;
+  margin-bottom: 10px;
 `;

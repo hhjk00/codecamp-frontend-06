@@ -1,3 +1,4 @@
+import { Input02 } from "../../commons/inputs/02";
 import * as S from "./SignUp.styles";
 
 export default function SignUpUI(props) {
@@ -10,31 +11,33 @@ export default function SignUpUI(props) {
         </S.TitleWrapper>
 
         <S.LoginWrapper>
-          <S.Input
-            type="text"
-            placeholder="UserName"
-            onChange={props.onChangeName}
-          />
-          <S.Error>{props.nameError}</S.Error>
-          <S.Input
-            type="text"
-            placeholder="Email"
-            onChange={props.onChangeEmail}
-          />
-          <S.Error>{props.emailError}</S.Error>
-          <S.Input
-            type="password"
-            placeholder="Password"
-            onChange={props.onChangePassword}
-          />
-          <S.Error>{props.passwordError}</S.Error>
-          <S.Input
-            type="password"
-            placeholder="Password Check"
-            onChange={props.onChangePasswordMore}
-          />
-          <S.Error>{props.passwordMoreError}</S.Error>
-          <S.Button onClick={props.onClickJoin}>Join</S.Button>
+          <form onSubmit={props.handleSubmit(props.onClickJoin)}>
+            <Input02
+              type="text"
+              placeholder="UserName"
+              register={{ ...props.register("name") }}
+            />
+            <S.Error>{props.formState.errors.name?.message}</S.Error>
+            <Input02
+              type="text"
+              placeholder="Email"
+              register={{ ...props.register("email") }}
+            />
+            <S.Error>{props.formState.errors.email?.message}</S.Error>
+            <Input02
+              type="password"
+              placeholder="Password"
+              register={{ ...props.register("password") }}
+            />
+            <S.Error>{props.formState.errors.password?.message}</S.Error>
+            <Input02
+              type="password"
+              placeholder="Password Check"
+              register={{ ...props.register("passwordMore") }}
+            />
+            <S.Error>{props.formState.errors.passwordMore?.message}</S.Error>
+            <S.Button onClick={props.onClickJoin}>Join</S.Button>
+          </form>
         </S.LoginWrapper>
 
         <S.BottomWrapper>

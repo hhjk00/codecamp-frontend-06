@@ -2,108 +2,53 @@
 import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import {
   IMutation,
   IMutationCreateUserArgs,
 } from "../../../commons/types/generated/types";
 import SignUpUI from "./SignUp.presenter";
 import { CREATE_USER } from "./SignUp.queries";
+import { schema } from "./SignUp.validation";
 
 export default function SignUp() {
   const emailCheck = /^\w+@\w+\.\w+$/;
   const passwordCheck =
-    /^(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
+    /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
   // : 숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordMore, setPasswordMore] = useState("");
-
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [passwordMoreError, setPasswordMoreError] = useState("");
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
 
   const router = useRouter();
 
-  const onChangeName = (event) => {
-    setName(event.target.value);
-    if (event.target.value) {
-      setNameError("");
-    }
-  };
-
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value);
-    if (event.target.value) {
-      setEmailError("");
-    }
-  };
-
-  const onChangePassword = (event) => {
-    setPassword(event.target.value);
-    if (event.target.value) {
-      setPasswordError("");
-    }
-  };
-
-  const onChangePasswordMore = (event) => {
-    setPasswordMore(event.target.value);
-    if (event.target.value) {
-      setPasswordMoreError("");
-    }
-  };
-
-  const onClickLogin = () => {
-    router.push("/login");
-  };
   const [createUser] = useMutation<
     Pick<IMutation, "createUser">,
     IMutationCreateUserArgs
   >(CREATE_USER);
 
-  const onClickJoin = async () => {
-    if (name === "") {
-      setNameError("유저 이름을 입력해주세요.");
-    }
-    if (email === "") {
-      setEmailError("이메일을 입력해주세요.");
-    }
-    if (password === "") {
-      setPasswordError("비밀번호를 입력해주세요.");
-    }
-    if (passwordMore === "") {
-      setPasswordMoreError("비밀번호를 한 번 더 입력해주세요.");
-    }
-
-    if (!emailCheck.test(email)) {
-      alert("이메일 형식에 맞지 않습니다.");
-    }
-
-    if (!passwordCheck.test(password)) {
-      alert(
-        "비밀번호 형식에 맞지 않습니다. (숫자, 특수문자 각 1자 이상, 영문은 2자 포함하여 8자 이상)"
-      );
-    }
-
-    if (password !== passwordMore) {
+  const onClickJoin = async (data) => {
+    if (data.password !== data.passwordMore) {
       alert("비밀번호가 일치하지 않습니다.");
     }
 
     if (
-      emailCheck.test(email) &&
-      passwordCheck.test(password) &&
-      password === passwordMore
+      emailCheck.test(data.email) &&
+      passwordCheck.test(data.password) &&
+      data.password === data.passwordMore
     ) {
       try {
         await createUser({
           variables: {
             createUserInput: {
-              email,
-              password,
-              name,
+              email: data.email,
+              password: data.password,
+              name: data.name,
             },
           },
         });
@@ -114,24 +59,21 @@ export default function SignUp() {
           });
         }
       }
-
-      alert("회원가입을 축하합니다!");
-      router.push("/login");
+      Modal.success({ content: "회원가입을 축하합니다!" });
     }
+  };
+
+  const onClickLogin = () => {
+    router.push("/login");
   };
 
   return (
     <SignUpUI
-      nameError={nameError}
-      emailError={emailError}
-      passwordError={passwordError}
-      passwordMoreError={passwordMoreError}
-      onChangeEmail={onChangeEmail}
-      onChangePassword={onChangePassword}
-      onChangePasswordMore={onChangePasswordMore}
-      onChangeName={onChangeName}
       onClickLogin={onClickLogin}
       onClickJoin={onClickJoin}
+      register={register}
+      handleSubmit={handleSubmit}
+      formState={formState}
     />
   );
 }

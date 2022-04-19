@@ -2,7 +2,6 @@
 import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/store";
@@ -15,17 +14,6 @@ export default function Login() {
 
   const [loginUser] = useMutation(LOGIN_USER);
   const [, setAccessToken] = useRecoilState(accessTokenState);
-
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
-  // const onChangeEmail = (event) => {
-  //   setEmail(event.target.value);
-  // };
-
-  // const onChangePassword = (event) => {
-  //   setPassword(event.target.value);
-  // };
 
   const onClickLogin = async (data) => {
     try {
@@ -41,20 +29,22 @@ export default function Login() {
       Modal.success({ content: "로그인 되었습니다." });
       router.push("/boards");
     } catch (error) {
-      Modal.error({ content: error.message });
+      if (error instanceof Error) {
+        Modal.error({
+          content: error.message,
+        });
+      }
     }
   };
 
-  const onClickJoin = () => {
+  const onClickSignUp = () => {
     router.push("/signUp");
   };
 
   return (
     <LoginUI
-      // onChangeEmail={onChangeEmail}
-      // onChangePassword={onChangePassword}
       onClickLogin={onClickLogin}
-      onClickJoin={onClickJoin}
+      onClickSignUp={onClickSignUp}
       register={register}
       handleSubmit={handleSubmit}
     />

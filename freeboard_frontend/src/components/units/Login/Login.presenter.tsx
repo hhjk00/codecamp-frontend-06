@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useForm } from "react-hook-form";
 import Input01 from "../../commons/inputs/01";
 import * as S from "./Login.styles";
 
@@ -33,24 +32,10 @@ export default function LoginUI(props) {
             </form>
           </S.LoginWrapper>
 
-          {/* <S.LoginWrapper>
-            <S.Input
-              type="text"
-              placeholder="Email"
-              onChange={props.onChangeEmail}
-            />
-            <S.Input
-              type="password"
-              placeholder="Password"
-              onChange={props.onChangePassword}
-            />
-            <S.Button onClick={props.onClickLogin}>Login</S.Button>
-          </S.LoginWrapper> */}
-
           <S.BottomWrapper>
             <S.TextWrapper>
               <S.Text>회원이 아니신가요?</S.Text>
-              <S.SignUp onClick={props.onClickJoin}>SIGN UP</S.SignUp>
+              <S.SignUp onClick={props.onClickSignUp}>SIGN UP</S.SignUp>
             </S.TextWrapper>
           </S.BottomWrapper>
         </S.Wrapper>
