@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { useForm } from "react-hook-form";
+import Input01 from "../../commons/inputs/01";
 import * as S from "./Login.styles";
 
 export default function LoginUI(props) {
@@ -7,6 +9,7 @@ export default function LoginUI(props) {
       <Head>
         <title>로그인</title>
       </Head>
+
       <S.Container>
         <S.Wrapper>
           <S.TitleWrapper>
@@ -15,6 +18,22 @@ export default function LoginUI(props) {
           </S.TitleWrapper>
 
           <S.LoginWrapper>
+            <form onSubmit={props.handleSubmit(props.onClickLogin)}>
+              <Input01
+                type="text"
+                placeholder="Email"
+                register={{ ...props.register("email") }}
+              />
+              <Input01
+                type="password"
+                placeholder="Password"
+                register={{ ...props.register("password") }}
+              />
+              <S.Button>Login</S.Button>
+            </form>
+          </S.LoginWrapper>
+
+          {/* <S.LoginWrapper>
             <S.Input
               type="text"
               placeholder="Email"
@@ -26,7 +45,7 @@ export default function LoginUI(props) {
               onChange={props.onChangePassword}
             />
             <S.Button onClick={props.onClickLogin}>Login</S.Button>
-          </S.LoginWrapper>
+          </S.LoginWrapper> */}
 
           <S.BottomWrapper>
             <S.TextWrapper>

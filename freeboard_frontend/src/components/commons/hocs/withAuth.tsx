@@ -10,7 +10,7 @@ export const withAuth = (Component) => (props) => {
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       alert("로그인을 먼저 해야합니다");
-      router.push("/23-04-login-check");
+      router.push("/login");
     }
   }, []);
 

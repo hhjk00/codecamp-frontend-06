@@ -8,6 +8,7 @@ const Input = styled.input`
   padding: 10px;
   padding-left: 10px;
   font-size: 16px;
+  margin-bottom: 10px;
 `;
 
 interface IProps {

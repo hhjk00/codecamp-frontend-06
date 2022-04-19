@@ -12,9 +12,10 @@ import {
   IQueryFetchBoardsArgs,
 } from "../../../../commons/types/generated/types";
 import _ from "lodash";
-import { withAuth } from "../../../commons/hocs/withAuth";
+import { useAuth } from "../../../commons/hooks/useAuth";
 
 function BoardList() {
+  useAuth();
   const router = useRouter();
 
   const [keyword, setKeyword] = useState("");
@@ -59,4 +60,4 @@ function BoardList() {
     />
   );
 }
-export default withAuth(BoardList);
+export default BoardList;

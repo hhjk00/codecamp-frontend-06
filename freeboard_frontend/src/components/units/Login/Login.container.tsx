@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/store";
 import LoginUI from "./Login.presenter";
@@ -10,27 +11,28 @@ import { LOGIN_USER } from "./Login.queries";
 
 export default function Login() {
   const router = useRouter();
+  const { register, handleSubmit } = useForm({ mode: "onChange" });
 
   const [loginUser] = useMutation(LOGIN_USER);
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value);
-  };
+  // const onChangeEmail = (event) => {
+  //   setEmail(event.target.value);
+  // };
 
-  const onChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
+  // const onChangePassword = (event) => {
+  //   setPassword(event.target.value);
+  // };
 
-  const onClickLogin = async () => {
+  const onClickLogin = async (data) => {
     try {
       const result = await loginUser({
         variables: {
-          email: email,
-          password: password,
+          email: data.email,
+          password: data.password,
         },
       });
       const accessToken = result.data.loginUser.accessToken;
@@ -49,10 +51,12 @@ export default function Login() {
 
   return (
     <LoginUI
-      onChangeEmail={onChangeEmail}
-      onChangePassword={onChangePassword}
+      // onChangeEmail={onChangeEmail}
+      // onChangePassword={onChangePassword}
       onClickLogin={onClickLogin}
       onClickJoin={onClickJoin}
+      register={register}
+      handleSubmit={handleSubmit}
     />
   );
 }
