@@ -38,24 +38,22 @@ export const TiTle = styled.div`
 `;
 
 export const LoginWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  height: 390px;
   padding-top: 20px;
   padding-bottom: 20px;
   border-top: 1px solid white;
+  border-bottom: 1px solid white;
 `;
 
-export const Input = styled.input`
-  border: none;
-  border-radius: 5px;
-  width: 100%;
-  padding: 10px;
-  padding-left: 10px;
-  font-size: 16px;
-`;
+// export const Input = styled.input`
+//   border: none;
+//   border-radius: 5px;
+//   width: 100%;
+//   padding: 10px;
+//   padding-left: 10px;
+//   font-size: 16px;
+// `;
+
 export const Button = styled.button`
   border: none;
   background-color: #f2a405;
@@ -69,19 +67,13 @@ export const Button = styled.button`
   }
 `;
 
-export const BottomWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-top: 1px solid white;
-`;
-
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   padding-top: 10px;
   font-size: 18px;
+  position: relative;
 `;
 
 export const Text = styled.div`
@@ -98,4 +90,5 @@ export const Join = styled.button`
 export const Error = styled.div`
   color: white;
   margin-bottom: 10px;
+  text-align: center;
 `;

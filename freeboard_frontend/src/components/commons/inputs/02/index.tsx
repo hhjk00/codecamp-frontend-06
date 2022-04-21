@@ -2,21 +2,23 @@ import styled from "@emotion/styled";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 const Input = styled.input`
-  border: none;
-  border-radius: 5px;
-  width: 100%;
-  padding: 10px;
-  padding-left: 10px;
-  font-size: 16px;
+  width: 796px;
+  height: 52px;
+  padding-left: 16px;
+  border: 1px solid #bdbdbd;
 `;
 
 interface IProps {
-  type: "text" | "password";
-  placeholder: "Email" | "Password" | "UserName" | "Password Check";
+  type: "text" | "number";
+  placeholder:
+    | "상품명을 작성해주세요."
+    | "상품을 한 줄로 표현한다면?"
+    | "판매 가격을 입력해주세요."
+    | "#태그 #태그 #태그";
   register: UseFormRegisterReturn;
 }
 
-export function Input02(props: IProps) {
+export default function Input02(props: IProps) {
   return (
     <Input
       type={props.type}

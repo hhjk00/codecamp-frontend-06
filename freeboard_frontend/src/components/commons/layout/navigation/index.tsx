@@ -7,7 +7,7 @@ const NAVIGATION_MENUS = [
   { name: "마켓", page: "/markets" },
   { name: "마이페이지", page: "/mypage" },
   { name: "오늘의 메뉴", page: "/foodish" },
-  { name: "비회원 게시판", page: "/boardsNon" },
+  // { name: "비회원 게시판", page: "/boardsNon" },
 ];
 
 export default function LayoutNavigation() {
@@ -26,7 +26,7 @@ export default function LayoutNavigation() {
     align-items: center;
     top: 105px;
     height: 63px;
-    width: 1200px;
+    width: 1000px;
     background-color: white;
     position: absolute;
     border-radius: 10px;
@@ -34,7 +34,7 @@ export default function LayoutNavigation() {
 
   const MenuItem = styled.div`
     margin: 0px 60px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     cursor: pointer;
 

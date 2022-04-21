@@ -7,7 +7,7 @@ export const NewPage = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 1000px;
   /* height: 1847px; */
   border: 1px solid black;
   margin: 100px;
@@ -37,7 +37,7 @@ export const WriterWrapper = styled.div`
 `;
 
 export const Writer = styled.input`
-  width: 996px;
+  width: 796px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
@@ -54,14 +54,14 @@ export const InputWrapper = styled.div`
 `;
 
 export const Subject = styled.input`
-  width: 996px;
+  width: 796px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;
 
 export const Contents = styled.textarea`
-  width: 996px;
+  width: 796px;
   height: 320px;
   padding-left: 16px;
   padding: 14px;
@@ -69,14 +69,14 @@ export const Contents = styled.textarea`
 `;
 
 export const Price = styled.input`
-  width: 996px;
+  width: 796px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;
 
 export const Tag = styled.input`
-  width: 996px;
+  width: 796px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
@@ -92,7 +92,7 @@ export const AddressWrapper = styled.div`
 export const AddressInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 558px;
+  width: 358px;
 `;
 
 export const Map = styled.div`
@@ -127,15 +127,22 @@ export const LngButton = styled.button`
 `;
 
 export const Address = styled.input`
-  width: 558px;
+  width: 358px;
   height: 52px;
   margin-bottom: 16px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;
 
+export const AddressDetail = styled.input`
+  width: 358px;
+  height: 52px;
+  padding-left: 16px;
+  border: 1px solid #bdbdbd;
+`;
+
 export const ImageWrapper = styled.div`
-  width: 996px;
+  width: 796px;
   padding-top: 40px;
 `;
 
@@ -150,7 +157,7 @@ export const UploadButton = styled.button`
 `;
 
 export const OptionWrapper = styled.div`
-  width: 996px;
+  width: 796px;
   padding-top: 40px;
 `;
 

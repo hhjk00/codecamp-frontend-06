@@ -9,24 +9,30 @@ export const ListPage = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 1100px;
 `;
 
 export const PageTitle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 80px;
-  padding-top: 100px;
+  padding-bottom: 50px;
+  padding-top: 80px;
 `;
 
 export const PageIcon = styled(SmsOutlinedIcon)`
-  font-size: 35px;
+  font-size: 30px;
 `;
 
 export const PageText = styled.div`
   font-size: 40px;
   font-weight: 500;
+`;
+
+export const SearchWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
 `;
 
 export const TableWrapper = styled.div`
@@ -54,7 +60,7 @@ export const TableBottom = styled.div`
   flex-direction: row;
   justify-content: space-between;
   text-align: center;
-  padding: 13px;
+  padding: 12px;
   border-top: 1px solid #bdbdbd;
   font-size: 16px;
 `;
@@ -99,7 +105,7 @@ export const BottomWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 50px;
+  margin: 30px;
   width: 95%;
 `;
 

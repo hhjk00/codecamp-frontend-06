@@ -7,7 +7,7 @@ export const CommentPage = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 1000px;
   display: flex;
   flex-direction: column;
   font-family: "myFont";

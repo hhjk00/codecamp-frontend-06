@@ -23,21 +23,21 @@ export default function LoginUI(props) {
                 placeholder="Email"
                 register={{ ...props.register("email") }}
               />
+              <div style={{ margin: "10px" }}></div>
               <Input01
                 type="password"
                 placeholder="Password"
                 register={{ ...props.register("password") }}
               />
+              <div style={{ margin: "10px" }}></div>
               <S.Button>Login</S.Button>
             </form>
           </S.LoginWrapper>
 
-          <S.BottomWrapper>
-            <S.TextWrapper>
-              <S.Text>회원이 아니신가요?</S.Text>
-              <S.SignUp onClick={props.onClickSignUp}>SIGN UP</S.SignUp>
-            </S.TextWrapper>
-          </S.BottomWrapper>
+          <S.TextWrapper>
+            <S.Text>회원이 아니신가요?</S.Text>
+            <S.SignUp onClick={props.onClickSignUp}>SIGN UP</S.SignUp>
+          </S.TextWrapper>
         </S.Wrapper>
       </S.Container>
     </>

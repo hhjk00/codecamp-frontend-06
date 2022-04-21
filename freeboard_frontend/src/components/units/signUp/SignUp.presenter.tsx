@@ -1,4 +1,4 @@
-import { Input02 } from "../../commons/inputs/02";
+import Input01 from "../../commons/inputs/01";
 import * as S from "./SignUp.styles";
 
 export default function SignUpUI(props) {
@@ -12,25 +12,25 @@ export default function SignUpUI(props) {
 
         <S.LoginWrapper>
           <form onSubmit={props.handleSubmit(props.onClickJoin)}>
-            <Input02
+            <Input01
               type="text"
               placeholder="UserName"
               register={{ ...props.register("name") }}
             />
             <S.Error>{props.formState.errors.name?.message}</S.Error>
-            <Input02
+            <Input01
               type="text"
               placeholder="Email"
               register={{ ...props.register("email") }}
             />
             <S.Error>{props.formState.errors.email?.message}</S.Error>
-            <Input02
+            <Input01
               type="password"
               placeholder="Password"
               register={{ ...props.register("password") }}
             />
             <S.Error>{props.formState.errors.password?.message}</S.Error>
-            <Input02
+            <Input01
               type="password"
               placeholder="Password Check"
               register={{ ...props.register("passwordMore") }}
@@ -40,12 +40,10 @@ export default function SignUpUI(props) {
           </form>
         </S.LoginWrapper>
 
-        <S.BottomWrapper>
-          <S.TextWrapper>
-            <S.Text>이미 회원이신가요?</S.Text>
-            <S.Join onClick={props.onClickLogin}>LOGIN</S.Join>
-          </S.TextWrapper>
-        </S.BottomWrapper>
+        <S.TextWrapper>
+          <S.Text>이미 회원이신가요?</S.Text>
+          <S.Join onClick={props.onClickLogin}>LOGIN</S.Join>
+        </S.TextWrapper>
       </S.Wrapper>
     </S.Container>
   );

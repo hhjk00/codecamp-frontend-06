@@ -3,6 +3,7 @@ import Pagination01 from "../../../commons/paginations/Pagination01.container";
 import * as S from "./BoardList.styles";
 import { IBoardListUIProps } from "./BoardList.types";
 import { v4 as uuidv4 } from "uuid";
+import Searchbars01 from "../../../commons/searchbars/01/Searchbar01.container";
 
 export default function BoardListUI(props: IBoardListUIProps) {
   return (
@@ -13,9 +14,13 @@ export default function BoardListUI(props: IBoardListUIProps) {
           <S.PageText>자유게시판</S.PageText>
         </S.PageTitle>
 
-        <div>
-          제목 검색: <input type="text" onChange={props.onChangeSearch} />
-        </div>
+        <S.SearchWrapper>
+          <Searchbars01
+            refetch={props.refetch}
+            refetchBoardsCount={props.refetchBoardsCount}
+            onChangeKeyword={props.onChangeKeyword}
+          />
+        </S.SearchWrapper>
 
         <S.TableWrapper>
           <S.TableTop>

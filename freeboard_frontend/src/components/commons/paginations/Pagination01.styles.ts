@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Page = styled.span`
-  margin: 0px 20px;
+  margin: 0px 15px;
   font-size: 20px;
   color: ${(props) => (props.isActive ? "orange" : "black")};
   font-weight: ${(props) => (props.isActive ? "bold" : "normal")};

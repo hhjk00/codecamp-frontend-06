@@ -9,7 +9,7 @@ export const DetailPage = styled.div`
 
 export const Wrapper = styled.div`
   /* height: 1847px; */
-  width: 1200px;
+  width: 1000px;
   border: 1px solid black;
   margin: 100px;
   padding-top: 80px;
@@ -45,6 +45,7 @@ export const WriterDateWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-left: 13px;
 `;
 
 export const Writer = styled.div`
@@ -55,7 +56,7 @@ export const Writer = styled.div`
 export const WriteDate = styled.div``;
 
 export const InfoWrapper = styled.div`
-  width: 80px;
+  width: 90px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

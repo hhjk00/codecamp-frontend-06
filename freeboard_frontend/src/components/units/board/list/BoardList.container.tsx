@@ -25,7 +25,8 @@ function BoardList() {
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
 
-  const { data: dataBoardsCount } = useQuery(FETCH_BOARDS_COUNT);
+  const { data: dataBoardsCount, refetch: refetchBoardsCount } =
+    useQuery(FETCH_BOARDS_COUNT);
   // const { data: dataUserLoggedIn } = useQuery(FETCH_USER_LOGGED_IN);
 
   const onClickMoveWrite = () => {
@@ -38,14 +39,9 @@ function BoardList() {
   };
 
   // 검색
-  const getDebounce = _.debounce((data) => {
-    refetch({ search: data, page: 1 });
-    setKeyword(data);
-  }, 200); // 200 = 0.2초
-
-  const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    getDebounce(event.target.value);
-  };
+  function onChangeKeyword(value: string) {
+    setKeyword(value);
+  }
 
   return (
     <BoardListUI
@@ -56,7 +52,8 @@ function BoardList() {
       onClickMoveWrite={onClickMoveWrite}
       onClickMoveBoardDetail={onClickMoveBoardDetail}
       refetch={refetch}
-      onChangeSearch={onChangeSearch}
+      refetchBoardsCount={refetchBoardsCount}
+      onChangeKeyword={onChangeKeyword}
     />
   );
 }

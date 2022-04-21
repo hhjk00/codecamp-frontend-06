@@ -39,14 +39,11 @@ export const TiTle = styled.div`
 `;
 
 export const LoginWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  height: 190px;
   padding-top: 20px;
   padding-bottom: 20px;
   border-top: 1px solid white;
+  border-bottom: 1px solid white;
 `;
 
 // export const Input = styled.input`
@@ -71,19 +68,13 @@ export const Button = styled.button`
   }
 `;
 
-export const BottomWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-top: 1px solid white;
-`;
-
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-top: 10px;
   font-size: 18px;
+  position: relative;
 `;
 
 export const Text = styled.div`
