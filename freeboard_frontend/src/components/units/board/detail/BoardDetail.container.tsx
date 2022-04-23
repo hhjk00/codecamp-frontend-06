@@ -18,6 +18,13 @@ import { Modal } from "antd";
 export default function BoardDetail() {
   const router = useRouter();
 
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: { boardId: String(router.query.boardId) },
+    }
+  );
+
   // 좋아요
   const [likeBoard] = useMutation(LIKE_BOARD);
 
@@ -57,13 +64,6 @@ export default function BoardDetail() {
     Pick<IMutation, "deleteBoard">,
     IMutationDeleteBoardArgs
   >(DELETE_BOARD);
-
-  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
-    FETCH_BOARD,
-    {
-      variables: { boardId: String(router.query.boardId) },
-    }
-  );
 
   const onClickDelete = async () => {
     try {

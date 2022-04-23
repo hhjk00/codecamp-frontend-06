@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import { useMoveToPage } from "../src/components/commons/hooks/useMoveToPage";
 
 const Wrapper = styled.div`
   display: flex;
@@ -88,8 +89,7 @@ const Text = styled.div`
 export default function Home() {
   const router = useRouter();
 
-  const onClickMember = () => router.push("/login");
-  const onClickNonMember = () => router.push("/boards");
+  const { onClickMoveToPage } = useMoveToPage();
 
   return (
     <Wrapper>
@@ -104,14 +104,14 @@ export default function Home() {
       </TitleWrapper>
 
       <IconWrapper>
-        <Member onClick={onClickMember}>
+        <Member onClick={onClickMoveToPage("/login")}>
           <Icon></Icon>
-          <Text>회원 입장</Text>
+          <Text>로그인</Text>
         </Member>
 
-        <NonMember onClick={onClickNonMember}>
+        <NonMember onClick={onClickMoveToPage("signUp")}>
           <NonIcon></NonIcon>
-          <Text>비회원 입장</Text>
+          <Text>회원가입</Text>
         </NonMember>
       </IconWrapper>
       {/* <main className={styles.main}>

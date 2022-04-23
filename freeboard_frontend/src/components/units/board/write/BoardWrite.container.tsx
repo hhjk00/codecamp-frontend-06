@@ -157,9 +157,6 @@ export default function BoardWrite(props: IBoardWriteProps) {
       setContentsError("내용을 입력해주세요!");
     }
     if (writer !== "" && password !== "" && title !== "" && contents !== "") {
-      Modal.success({
-        content: "게시글이 등록되었습니다.",
-      });
       try {
         const result = await createBoard({
           variables: {
@@ -179,6 +176,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
           },
         });
 
+        Modal.success({
+          content: "게시글이 등록되었습니다.",
+        });
         router.push(`/boards/${result.data?.createBoard._id}`);
       } catch (error) {
         if (error instanceof Error) {

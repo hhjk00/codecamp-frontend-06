@@ -1,12 +1,8 @@
 import { useQuery } from "@apollo/client";
 import BoardListUI from "./BoardList.presenter";
-import {
-  FETCH_BOARDS,
-  FETCH_BOARDS_COUNT,
-  FETCH_USER_LOGGED_IN,
-} from "./BoardList.queries";
+import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardList.queries";
 import { useRouter } from "next/router";
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { MouseEvent, useState } from "react";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -57,4 +53,5 @@ function BoardList() {
     />
   );
 }
+
 export default BoardList;

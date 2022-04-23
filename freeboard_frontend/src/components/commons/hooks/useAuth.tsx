@@ -1,19 +1,14 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export function useAuth() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
 
-  // 권한 분기 로직 추가하기
+  // 권한분기 로직 추가하기
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      alert("로그인을 먼저 해야합니다.");
+      alert("로그인 후 이용 가능합니다!!!");
       router.push("/login");
     }
   }, []);
-
-  return {
-    isLoading,
-  };
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export function useAuth() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   // 권한 분기 로직 추가하기
   useEffect(() => {
@@ -13,7 +13,7 @@ export function useAuth() {
     }
   }, []);
 
-  return {
-    isLoading,
-  };
+  // return {
+  //   isLoading,
+  // };
 }

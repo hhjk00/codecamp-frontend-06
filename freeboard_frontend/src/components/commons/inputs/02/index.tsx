@@ -12,7 +12,7 @@ interface IProps {
   type: "text" | "number";
   placeholder:
     | "상품명을 작성해주세요."
-    | "상품을 한 줄로 표현한다면?"
+    | "상품을 한 줄로 표현해주세요."
     | "판매 가격을 입력해주세요."
     | "#태그 #태그 #태그";
   register: UseFormRegisterReturn;

@@ -12,35 +12,28 @@ import {
 import SignUpUI from "./SignUp.presenter";
 import { CREATE_USER } from "./SignUp.queries";
 import { schema } from "./SignUp.validation";
+import { useMoveToPage } from "../../commons/hooks/useMoveToPage";
 
 export default function SignUp() {
-  const emailCheck = /^\w+@\w+\.\w+$/;
-  const passwordCheck =
-    /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
-  // : 숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력
+  const router = useRouter();
+  const { onClickMoveToPage } = useMoveToPage();
 
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
 
-  const router = useRouter();
-
   const [createUser] = useMutation<
     Pick<IMutation, "createUser">,
     IMutationCreateUserArgs
   >(CREATE_USER);
 
-  const onClickJoin = async (data) => {
+  const onClickJoin = async (data: any) => {
     if (data.password !== data.passwordMore) {
-      alert("비밀번호가 일치하지 않습니다.");
+      Modal.warning({ content: "비밀번호가 일치하지 않습니다." });
     }
 
-    if (
-      emailCheck.test(data.email) &&
-      passwordCheck.test(data.password) &&
-      data.password === data.passwordMore
-    ) {
+    if (data.password === data.passwordMore) {
       try {
         await createUser({
           variables: {
@@ -51,6 +44,8 @@ export default function SignUp() {
             },
           },
         });
+        Modal.success({ content: "회원가입을 축하합니다!" });
+        router.push("/login");
       } catch (error) {
         if (error instanceof Error) {
           Modal.error({
@@ -58,17 +53,12 @@ export default function SignUp() {
           });
         }
       }
-      Modal.success({ content: "회원가입을 축하합니다!" });
     }
-  };
-
-  const onClickLogin = () => {
-    router.push("/login");
   };
 
   return (
     <SignUpUI
-      onClickLogin={onClickLogin}
+      onClickMoveToPage={onClickMoveToPage}
       onClickJoin={onClickJoin}
       register={register}
       handleSubmit={handleSubmit}

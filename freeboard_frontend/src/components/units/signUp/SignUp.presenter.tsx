@@ -36,13 +36,13 @@ export default function SignUpUI(props) {
               register={{ ...props.register("passwordMore") }}
             />
             <S.Error>{props.formState.errors.passwordMore?.message}</S.Error>
-            <S.Button onClick={props.onClickJoin}>Join</S.Button>
+            <S.Button>Join</S.Button>
           </form>
         </S.LoginWrapper>
 
         <S.TextWrapper>
           <S.Text>이미 회원이신가요?</S.Text>
-          <S.Join onClick={props.onClickLogin}>LOGIN</S.Join>
+          <S.Join onClick={props.onClickMoveToPage("/login")}>LOGIN</S.Join>
         </S.TextWrapper>
       </S.Wrapper>
     </S.Container>

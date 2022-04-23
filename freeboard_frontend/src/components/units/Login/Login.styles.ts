@@ -87,3 +87,9 @@ export const SignUp = styled.button`
   cursor: pointer;
   line-height: 1;
 `;
+
+export const Error = styled.div`
+  color: white;
+  margin-bottom: 10px;
+  text-align: center;
+`;
