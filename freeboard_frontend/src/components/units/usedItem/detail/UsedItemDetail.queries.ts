@@ -18,6 +18,9 @@ export const FETCH_USED_ITEM = gql`
         lat
         lng
       }
+      seller {
+        name
+      }
       soldAt
       createdAt
     }

@@ -15,17 +15,14 @@ export default function UsedItemWrite() {
     mode: "onChange",
   });
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
-  const [contentsError, setContentsError] = useState("");
 
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
 
   // 에디터
   const onChangeContents = (value: string) => {
+    console.log(value);
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");
-    if (value !== "<p><br></p>") {
-      setContentsError("");
-    }
   };
 
   // 이미지
@@ -37,16 +34,12 @@ export default function UsedItemWrite() {
 
   // 등록
   const onClickSubmit = async (data) => {
-    if (data.contents === "<p><br></p>") {
-      setContentsError("내용을 입력해주세요!");
-    }
-
     if (
       data.name &&
       data.remarks &&
       data.contents &&
       data.price &&
-      data.images
+      data.contents
     ) {
       try {
         const result = await createUseditem({
@@ -92,7 +85,6 @@ export default function UsedItemWrite() {
       onChangeContents={onChangeContents}
       fileUrls={fileUrls}
       onChangeFileUrls={onChangeFileUrls}
-      contentsError={contentsError}
     />
   );
 }

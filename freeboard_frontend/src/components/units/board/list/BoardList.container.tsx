@@ -8,10 +8,8 @@ import {
   IQueryFetchBoardsArgs,
 } from "../../../../commons/types/generated/types";
 import _ from "lodash";
-import { useAuth } from "../../../commons/hooks/useAuth";
 
-function BoardList() {
-  useAuth();
+export default function BoardList() {
   const router = useRouter();
 
   const [keyword, setKeyword] = useState("");
@@ -23,7 +21,6 @@ function BoardList() {
 
   const { data: dataBoardsCount, refetch: refetchBoardsCount } =
     useQuery(FETCH_BOARDS_COUNT);
-  // const { data: dataUserLoggedIn } = useQuery(FETCH_USER_LOGGED_IN);
 
   const onClickMoveWrite = () => {
     router.push("/boards/new");
@@ -35,9 +32,9 @@ function BoardList() {
   };
 
   // 검색
-  function onChangeKeyword(value: string) {
+  const onChangeKeyword = (value: string) => {
     setKeyword(value);
-  }
+  };
 
   return (
     <BoardListUI
@@ -53,5 +50,3 @@ function BoardList() {
     />
   );
 }
-
-export default BoardList;

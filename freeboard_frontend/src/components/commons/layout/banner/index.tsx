@@ -12,6 +12,7 @@ export default function LayoutBanner() {
   `;
 
   const contentStyle = {
+    dots: false,
     width: "100%",
     height: "528px",
     lineHeight: "700px",

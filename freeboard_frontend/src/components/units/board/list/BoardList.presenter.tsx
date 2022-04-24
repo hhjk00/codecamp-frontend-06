@@ -37,7 +37,7 @@ export default function BoardListUI(props: IBoardListUIProps) {
                 {el.title
                   .replaceAll(props.keyword, `#$%${props.keyword}#$%`)
                   .split("#$%")
-                  .map((el) => (
+                  .map((el: any) => (
                     <S.Word key={uuidv4()} isMatched={props.keyword === el}>
                       {el}
                     </S.Word>

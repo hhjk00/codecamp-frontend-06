@@ -6,9 +6,9 @@ import Upload01 from "../../../commons/uploads/Upload01.container";
 import * as S from "./UsedItemWrite.styles";
 import { v4 as uuidv4 } from "uuid";
 
-export default function UsedItemWriteUI(props) {
-  const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
+export default function UsedItemWriteUI(props) {
   return (
     <S.NewPage>
       <S.Wrapper>
@@ -35,6 +35,7 @@ export default function UsedItemWriteUI(props) {
             />
             <S.Error>{props.formState.errors.remarks?.message}</S.Error>
           </S.InputWrapper>
+
           <S.InputWrapper>
             <S.Label>내용</S.Label>
             <ReactQuill
@@ -42,26 +43,26 @@ export default function UsedItemWriteUI(props) {
               placeholder="상품을 설명해주세요."
               style={{ height: "300px", paddingBottom: "30px" }}
             />
-            <S.Error>{props.contentsError}</S.Error>
+            <S.Error>{props.formState.errors.contents?.message}</S.Error>
+          </S.InputWrapper>
 
-            <S.InputWrapper>
-              <S.Label>판매 가격</S.Label>
-              <Input02
-                type="number"
-                placeholder="판매 가격을 입력해주세요."
-                register={{ ...props.register("price") }}
-              />
-            </S.InputWrapper>
-            <S.Error>{props.formState.errors.price?.message}</S.Error>
+          <S.InputWrapper>
+            <S.Label>판매 가격</S.Label>
+            <Input02
+              type="number"
+              placeholder="판매 가격을 입력해주세요."
+              register={{ ...props.register("price") }}
+            />
+          </S.InputWrapper>
+          <S.Error>{props.formState.errors.price?.message}</S.Error>
 
-            <S.InputWrapper>
-              <S.Label>태그 입력</S.Label>
-              <Input02
-                type="text"
-                placeholder="#태그 #태그 #태그"
-                register={{ ...props.register("tags") }}
-              />
-            </S.InputWrapper>
+          <S.InputWrapper>
+            <S.Label>태그 입력</S.Label>
+            <Input02
+              type="text"
+              placeholder="#태그 #태그 #태그"
+              register={{ ...props.register("tags") }}
+            />
           </S.InputWrapper>
 
           <S.AddressWrapper>
