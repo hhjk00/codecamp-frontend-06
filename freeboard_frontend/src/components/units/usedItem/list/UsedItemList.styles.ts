@@ -9,7 +9,7 @@ export const ListPage = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  width: 1000px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

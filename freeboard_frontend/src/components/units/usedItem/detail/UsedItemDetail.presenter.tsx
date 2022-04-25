@@ -1,8 +1,15 @@
 import * as S from "./UsedItemDetail.styles";
+import Slick from "react-slick";
 import Dompurify from "dompurify";
 import { Tooltip } from "antd";
 import { getDate } from "../../../../commons/libraries/utils";
+import styled from "styled-components";
 
+const Div = styled.div`
+  width: 100%;
+  height: 50px;
+  background: red;
+`;
 export default function UsedItemDetailUI(props) {
   return (
     <S.DetailPage>
@@ -10,7 +17,7 @@ export default function UsedItemDetailUI(props) {
         <S.HeaderWrapper>
           <S.Profile src="/images/profile.png" />
           <S.WriterDateWrapper>
-            <S.Writer>{props.data?.fetchUseditem.name}</S.Writer>
+            <S.Writer>{props.data?.fetchUseditem.seller.name}</S.Writer>
             <S.WriteDate>
               Date: {getDate(props.data?.fetchUseditem.createdAt)}
             </S.WriteDate>
@@ -32,7 +39,34 @@ export default function UsedItemDetailUI(props) {
           <S.Title>{props.data?.fetchUseditem.name}</S.Title>
           <S.Price>{props.data?.fetchUseditem.price}</S.Price>
 
-          <S.ImageWrapper></S.ImageWrapper>
+          <S.ImageWrapper>
+            <Slick
+              dots={true}
+              infinite
+              speed={500}
+              slidesToShow={1}
+              slidesToScroll={1}
+            >
+              <Div>
+                <h3>1</h3>
+              </Div>
+              <Div>
+                <h3>2</h3>
+              </Div>
+              <Div>
+                <h3>3</h3>
+              </Div>
+              <Div>
+                <h3>4</h3>
+              </Div>
+              <Div>
+                <h3>5</h3>
+              </Div>
+              <Div>
+                <h3>6</h3>
+              </Div>
+            </Slick>
+          </S.ImageWrapper>
 
           {typeof window !== "undefined" && (
             <S.Contents
