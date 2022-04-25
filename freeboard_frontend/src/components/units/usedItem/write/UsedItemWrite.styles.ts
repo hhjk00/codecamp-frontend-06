@@ -101,14 +101,13 @@ export const Map = styled.div`
   border: 1px solid #bdbdbd;
 `;
 
-export const LatButton = styled.button`
+export const Lat = styled.input`
   width: 108px;
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: white;
   font-size: 16px;
-
-  cursor: pointer;
+  padding: 15px;
 `;
 
 export const GpsIcon = styled.img`
@@ -116,14 +115,13 @@ export const GpsIcon = styled.img`
   padding-right: 10px;
 `;
 
-export const LngButton = styled.button`
+export const Lng = styled.input`
   width: 108px;
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: white;
   font-size: 16px;
-
-  cursor: pointer;
+  padding: 15px;
 `;
 
 export const Address = styled.input`

@@ -22,3 +22,10 @@ export const visitedPageState = atom({
   key: "visitedPageState",
   default: "/",
 });
+
+export const MapState = atom({
+  key: "mapState",
+  default: {
+    address: "인천광역시 서구",
+  },
+});

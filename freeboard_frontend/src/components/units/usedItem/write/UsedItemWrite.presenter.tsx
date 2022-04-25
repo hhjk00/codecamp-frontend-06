@@ -74,15 +74,16 @@ export default function UsedItemWriteUI(props) {
             <S.AddressInputWrapper>
               <S.InputWrapper>
                 <S.Label>GPS</S.Label>
-                <S.LatButton>위도(LAT)</S.LatButton>
+                <S.Lat placeholder="위도(LNG)" />
                 <S.GpsIcon src="/images/location.png" />
-                <S.LngButton>경도(LNG)</S.LngButton>
+                <S.Lng placeholder="경도(LNG)" />
               </S.InputWrapper>
 
               <S.InputWrapper>
                 <S.Label>주소</S.Label>
                 <S.Address
                   type="text"
+                  onChange={props.onChangeAddress}
                   // register={{ ...props.register("address") }}
                 />
                 <S.AddressDetail

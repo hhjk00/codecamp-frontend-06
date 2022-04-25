@@ -14,11 +14,8 @@ import {
   DISLIKE_BOARD,
 } from "./BoardDetail.queries";
 import { Modal } from "antd";
-import { useAuth } from "../../../commons/hooks/useAuth";
 
 export default function BoardDetail() {
-  useAuth();
-
   const router = useRouter();
 
   const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(

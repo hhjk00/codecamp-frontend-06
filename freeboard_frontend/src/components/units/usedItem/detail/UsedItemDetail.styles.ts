@@ -92,9 +92,10 @@ export const Price = styled.div`
 `;
 
 export const Contents = styled.div`
-  padding-top: 20px;
+  padding-top: 40px;
   padding-bottom: 20px;
   font-size: 20px;
+  color: black;
 `;
 
 export const Tag = styled.div`
@@ -135,35 +136,5 @@ export const Button = styled.button`
   border: none;
   font-weight: 500;
   font-size: 16px;
-  font-family: "Noto Sans CJK KR";
   cursor: pointer;
-`;
-
-export const StyledSlider = styled(Slider)`
-  height: 90%; //슬라이드 컨테이너 영역
-
-  .slick-list {
-    //슬라이드 스크린
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    overflow-x: hidden;
-    background: green;
-  }
-
-  .slick-slide div {
-    //슬라이더  컨텐츠
-    /* cursor: pointer; */
-  }
-
-  .slick-dots {
-    //슬라이드의 위치
-    bottom: 20px;
-    margin-top: 200px;
-  }
-
-  .slick-track {
-    //이건 잘 모르겠음
-    width: 100%;
-  }
 `;

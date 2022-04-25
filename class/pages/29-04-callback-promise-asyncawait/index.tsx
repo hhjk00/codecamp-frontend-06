@@ -13,7 +13,7 @@ export default function CallbackPromisAsyncawaitPage() {
       bbb.open("get", `http://koreanjson.com/${num}`);
       bbb.send();
       bbb.addEventListener("load", (res) => {
-        const userId = res.target.reponse.UserId;
+        const userId = res.target.response.UserId;
 
         const ccc = new XMLHttpRequest();
         ccc.open("get", `http://koreanjson.com/posts?userId=${userId}`);

@@ -4,6 +4,8 @@ import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import { MapState } from "../../../../commons/store";
 import UsedItemWriteUI from "./UsedItemWrite.presenter";
 import { CREATE_USED_ITEM } from "./UsedItemWrite.queries";
 import { schema } from "./UsedItemWrite.validation";
@@ -15,6 +17,7 @@ export default function UsedItemWrite() {
     mode: "onChange",
   });
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
+  const [mapState, setMapState] = useRecoilState(MapState);
 
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
 
@@ -30,6 +33,10 @@ export default function UsedItemWrite() {
     const newFileUrls = [...fileUrls];
     newFileUrls[index] = fileUrl;
     setFileUrls(newFileUrls);
+  };
+
+  const onChangeAddress = (event) => {
+    setMapState(event.target.value);
   };
 
   // 등록
@@ -85,6 +92,7 @@ export default function UsedItemWrite() {
       onChangeContents={onChangeContents}
       fileUrls={fileUrls}
       onChangeFileUrls={onChangeFileUrls}
+      onChangeAddress={onChangeAddress}
     />
   );
 }

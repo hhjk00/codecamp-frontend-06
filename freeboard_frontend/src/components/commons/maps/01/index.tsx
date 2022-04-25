@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
 import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { MapState } from "../../../../commons/store";
 
 declare const window: typeof globalThis & {
   kakao: any;
@@ -13,6 +15,8 @@ export const Map = styled.div`
 `;
 
 export default function KakaoMap() {
+  const [mapState, setMapState] = useRecoilState(MapState);
+
   useEffect(() => {
     const script = document.createElement("script"); // <script></script>
     script.src =
@@ -33,94 +37,39 @@ export default function KakaoMap() {
         // 주소-좌표 변환 객체를 생성합니다
         const geocoder = new window.kakao.maps.services.Geocoder();
 
-        const marker = new window.kakao.maps.Marker({
-          position: map.getCenter(),
-        });
-
-        // 지도에 마커를 표시합니다
-        marker.setMap(map);
-
-        // 클릭한 위치를 표시할 마커입니다
-        const infowindow = new window.kakao.maps.InfoWindow({ zindex: 1 }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-
-        // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
-        searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-
-        // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-        window.kakao.maps.event.addListener(
-          map,
-          "click",
-          function (mouseEvent) {
-            searchDetailAddrFromCoords(
-              mouseEvent.latLng,
-              function (result, status) {
-                if (status === window.kakao.maps.services.Status.OK) {
-                  let detailAddr = !!result[0].road_address
-                    ? "<div>도로명주소 : " +
-                      result[0].road_address.address_name +
-                      "</div>"
-                    : "";
-                  detailAddr +=
-                    "<div>지번 주소 : " +
-                    result[0].address.address_name +
-                    "</div>";
-
-                  const content =
-                    '<div class="bAddr" style="padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">' +
-                    '<span class="title" style="font-weight:bold; display:block" >주소정보</span>' +
-                    detailAddr +
-                    "</div>";
-
-                  // 마커를 클릭한 위치에 표시합니다
-                  marker.setPosition(mouseEvent.latLng);
-                  marker.setMap(map);
-
-                  // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-                  infowindow.setContent(content);
-                  infowindow.open(map, marker);
-                }
-              }
-            );
-          }
-        );
-
-        // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-        window.kakao.maps.event.addListener(map, "idle", function () {
-          searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-        });
-
-        function searchAddrFromCoords(coords, callback) {
-          // 좌표로 행정동 주소 정보를 요청합니다
-          geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
-        }
-
-        function searchDetailAddrFromCoords(coords, callback) {
-          // 좌표로 법정동 상세 주소 정보를 요청합니다
-          geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-        }
-
-        // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
-        function displayCenterInfo(result, status) {
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch(mapState, function (result, status) {
+          // 정상적으로 검색이 완료됐으면
           if (status === window.kakao.maps.services.Status.OK) {
-            const infoDiv = document.getElementById("centerAddr");
+            const coords = new window.kakao.maps.LatLng(
+              result[0].y,
+              result[0].x
+            );
 
-            for (let i = 0; i < result.length; i++) {
-              // 행정동의 region_type 값은 'H' 이므로
-              if (result[i].region_type === "H") {
-                infoDiv.innerHTML = result[i].address_name;
-                break;
-              }
-            }
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            const marker = new window.kakao.maps.Marker({
+              map: map,
+              position: coords,
+            });
+
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            const infowindow = new window.kakao.maps.InfoWindow({
+              content:
+                '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
+            });
+            infowindow.open(map, marker);
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
           }
-        }
+        });
       });
     };
-  }, []);
+  }, [mapState]);
 
   return (
     <div>
       <Map id="map"></Map>
-      <div id="centerAddr"></div>
     </div>
   );
 }

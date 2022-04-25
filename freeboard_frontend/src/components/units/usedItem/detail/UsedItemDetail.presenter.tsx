@@ -1,16 +1,58 @@
 import * as S from "./UsedItemDetail.styles";
-import Slick from "react-slick";
 import Dompurify from "dompurify";
 import { Tooltip } from "antd";
 import { getDate } from "../../../../commons/libraries/utils";
-import styled from "styled-components";
+import styled from "@emotion/styled";
+import Slider from "react-slick";
 
-const Div = styled.div`
-  width: 100%;
-  height: 50px;
-  background: red;
+const StyledSlider = styled(Slider)`
+  .slick-slide {
+    display: inline-block;
+  }
+  .slick-list {
+    width: 350px;
+    overflow-x: hidden;
+  }
+
+  .slick-dots.slick-thumb {
+    margin: auto;
+
+    li {
+      position: relative;
+      display: inline-block;
+      &.slick-active {
+        border: 1px solid #bdbdbd;
+      }
+    }
+  }
 `;
+
+const Img = styled.img`
+  width: 100px;
+  height: 100px;
+  :hover {
+    opacity: 70%;
+  }
+`;
+
 export default function UsedItemDetailUI(props) {
+  const settings = {
+    customPaging: function (i) {
+      return (
+        <a>
+          <Img
+            src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[i]}`}
+          />
+        </a>
+      );
+    },
+    arrows: false,
+    dots: true,
+    dotsClass: "slick-dots slick-thumb",
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
     <S.DetailPage>
       <S.Wrapper>
@@ -40,32 +82,13 @@ export default function UsedItemDetailUI(props) {
           <S.Price>{props.data?.fetchUseditem.price}</S.Price>
 
           <S.ImageWrapper>
-            <Slick
-              dots={true}
-              infinite
-              speed={500}
-              slidesToShow={1}
-              slidesToScroll={1}
-            >
-              <Div>
-                <h3>1</h3>
-              </Div>
-              <Div>
-                <h3>2</h3>
-              </Div>
-              <Div>
-                <h3>3</h3>
-              </Div>
-              <Div>
-                <h3>4</h3>
-              </Div>
-              <Div>
-                <h3>5</h3>
-              </Div>
-              <Div>
-                <h3>6</h3>
-              </Div>
-            </Slick>
+            <StyledSlider {...settings}>
+              {props.data?.fetchUseditem.images
+                ?.filter((el: string) => el)
+                .map((el: string) => (
+                  <img key={el} src={`https://storage.googleapis.com/${el}`} />
+                ))}
+            </StyledSlider>
           </S.ImageWrapper>
 
           {typeof window !== "undefined" && (

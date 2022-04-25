@@ -35,7 +35,6 @@ export default function Login() {
         },
       });
       const accessToken = result.data.loginUser.accessToken;
-      console.log(accessToken);
 
       // 유저 정보 받아오기
       const resultUserInfo = await client.query({
@@ -47,13 +46,10 @@ export default function Login() {
         },
       });
       const userInfo = resultUserInfo.data.fetchUserLoggedIn;
-      console.log(userInfo);
 
       // 글로벌 스테이트에 저장하기
       setAccessToken(accessToken);
       setUserInfo(userInfo);
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
       // 로그인 성공페이지로 이동하기
       Modal.success({ content: "로그인 되었습니다." });

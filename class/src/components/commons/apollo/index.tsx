@@ -77,8 +77,6 @@ export default function ApolloSetting(props) {
         }
       }
     }
-    // 2.
-    // 3.
   });
 
   const uploadLink = createUploadLink({
