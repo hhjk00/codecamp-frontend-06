@@ -62,10 +62,15 @@ export default function UsedItemWriteUI(props) {
 
           <S.InputWrapper>
             <S.Label>태그 입력</S.Label>
-            <Input02
+            <S.TagWrapper>
+              {props.tags?.map((el, idx) => (
+                <S.Tag key={idx}>{el}</S.Tag>
+              ))}
+            </S.TagWrapper>
+            <S.TagInput
               type="text"
               placeholder="#태그 #태그 #태그"
-              register={{ ...props.register("tags") }}
+              onKeyUp={props.onKeyUpTag}
             />
           </S.InputWrapper>
 
@@ -85,11 +90,7 @@ export default function UsedItemWriteUI(props) {
 
               <S.InputWrapper>
                 <S.Label>주소</S.Label>
-                <S.Address
-                  type="text"
-                  onChange={props.onChangeAddress}
-                  // register={{ ...props.register("address") }}
-                />
+                <S.Address type="text" onChange={props.onChangeAddress} />
                 <S.AddressDetail
                   type="text"
                   {...props.register("addressDetail")}

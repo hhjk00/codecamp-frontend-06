@@ -25,10 +25,10 @@ export default function ApolloSetting(props) {
   // 2. 두번째 방법
   if (typeof window !== "undefined") {
     // 브라우저라면
-    console.log("여기는 브라우저");
+    // console.log("여기는 브라우저");
   } else {
     // 프론트엔드 서버라면
-    console.log("여기는 프론트엔드 서버(yarn dev)");
+    // console.log("여기는 프론트엔드 서버(yarn dev)");
   }
 
   // 3. 세번째 방법

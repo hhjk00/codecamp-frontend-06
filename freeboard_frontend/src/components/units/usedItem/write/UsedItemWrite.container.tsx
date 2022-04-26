@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import { mapAddressState } from "../../../../commons/store";
+import { mapAddressState, mapLocationState } from "../../../../commons/store";
 import UsedItemWriteUI from "./UsedItemWrite.presenter";
 import { CREATE_USED_ITEM } from "./UsedItemWrite.queries";
 import { schema } from "./UsedItemWrite.validation";
@@ -17,15 +17,30 @@ export default function UsedItemWrite() {
     mode: "onChange",
   });
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
+  const [tags, setTags] = useState([""]);
+
   const [mapAddress, setMapAddress] = useRecoilState(mapAddressState);
+  const [mapLocation, setMapLocation] = useRecoilState(mapLocationState);
 
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
 
   // 에디터
   const onChangeContents = (value: string) => {
-    console.log(value);
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");
+  };
+
+  // 태그
+  const onKeyUpTag = (event) => {
+    if (event.target.value === " ") {
+      event.target.value = "";
+      return;
+    }
+
+    if (event.keyCode === 32) {
+      setTags([...tags, "#" + event.target.value]);
+      event.target.value = "";
+    }
   };
 
   // 이미지
@@ -57,22 +72,22 @@ export default function UsedItemWrite() {
               remarks: data.remarks,
               contents: data.contents,
               price: Number(data.price),
-              tags: data.tags,
+              tags,
               useditemAddress: {
                 //   zipcode: data.zipcode,
-                // address: data.address,
+                address: mapAddress,
                 addressDetail: data.addressDetail,
-                // lat: data.lat,
-                // lng: data.lng,
+                lat: mapLocation.La,
+                lng: mapLocation.Ma,
               },
-              images: data.images,
+              images: fileUrls,
             },
           },
         });
         Modal.success({
           content: "게시글이 등록되었습니다.",
         });
-        console.log(result);
+        console.log(result.data);
         router.push(`/markets/${result.data?.createUseditem._id}`);
       } catch (error) {
         if (error instanceof Error) {
@@ -94,6 +109,8 @@ export default function UsedItemWrite() {
       fileUrls={fileUrls}
       onChangeFileUrls={onChangeFileUrls}
       onChangeAddress={onChangeAddress}
+      onKeyUpTag={onKeyUpTag}
+      tags={tags}
     />
   );
 }

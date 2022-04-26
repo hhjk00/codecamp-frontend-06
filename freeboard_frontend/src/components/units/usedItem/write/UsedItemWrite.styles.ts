@@ -75,11 +75,21 @@ export const Price = styled.input`
   border: 1px solid #bdbdbd;
 `;
 
-export const Tag = styled.input`
+export const TagInput = styled.input`
   width: 796px;
   height: 52px;
   padding-left: 16px;
   border: 1px solid #bdbdbd;
+`;
+
+export const TagWrapper = styled.span`
+  display: inline-block;
+  flex-direction: row;
+`;
+
+export const Tag = styled.span`
+  margin: 0px 8px 6px 0px;
+  font-size: 18px;
 `;
 
 export const AddressWrapper = styled.div`
@@ -108,6 +118,7 @@ export const Lat = styled.input`
   background-color: white;
   font-size: 16px;
   padding: 15px;
+  text-align: center;
 `;
 
 export const GpsIcon = styled.img`
@@ -122,6 +133,7 @@ export const Lng = styled.input`
   background-color: white;
   font-size: 16px;
   padding: 15px;
+  text-align: center;
 `;
 
 export const Address = styled.input`
