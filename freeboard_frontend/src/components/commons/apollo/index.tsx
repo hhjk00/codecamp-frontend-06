@@ -5,7 +5,6 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-
 import { useRecoilState } from "recoil";
 import { createUploadLink } from "apollo-upload-client";
 import { accessTokenState, userInfoState } from "../../../commons/store";
@@ -14,8 +13,25 @@ import { getAccessToken } from "../../../commons/libraries/getAccessToken";
 
 export default function ApolloSetting(props) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [, setUserInfo] = useRecoilState(userInfoState);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
+  // 1. 더이상 지원되지 않음
+  // if(process.browser){
+
+  // } else {
+
+  // }
+
+  // 2. 두번째 방법
+  if (typeof window !== "undefined") {
+    // 브라우저라면
+    console.log("여기는 브라우저");
+  } else {
+    // 프론트엔드 서버라면
+    console.log("여기는 프론트엔드 서버(yarn dev)");
+  }
+
+  // 3. 세번째 방법
   useEffect(() => {
     // 옛날
     // const accessToken = localStorage.getItem("accessToken");
@@ -28,6 +44,12 @@ export default function ApolloSetting(props) {
       setAccessToken(newAccessToken);
     });
   }, []);
+
+  // 여기가 프리렌더링 시 문제되는 코드
+  // const mylocalstorageAccessToken = localStorage.getItem("accessToken");
+  // setAccessToken(mylocalstorageAccessToken || "");
+
+  // ////////////////////////////////////////////////////////////
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     // 1-1. 에러를 캐치
@@ -58,8 +80,9 @@ export default function ApolloSetting(props) {
   });
 
   const uploadLink = createUploadLink({
-    uri: "http://backend06.codebootcamp.co.kr/graphql",
+    uri: "https://backend06.codebootcamp.co.kr/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },
+    credentials: "include",
   });
   const client = new ApolloClient({
     link: ApolloLink.from([errorLink, uploadLink]),

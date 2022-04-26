@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import { MapState } from "../../../../commons/store";
+import { mapAddressState } from "../../../../commons/store";
 import UsedItemWriteUI from "./UsedItemWrite.presenter";
 import { CREATE_USED_ITEM } from "./UsedItemWrite.queries";
 import { schema } from "./UsedItemWrite.validation";
@@ -17,7 +17,7 @@ export default function UsedItemWrite() {
     mode: "onChange",
   });
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
-  const [mapState, setMapState] = useRecoilState(MapState);
+  const [mapAddress, setMapAddress] = useRecoilState(mapAddressState);
 
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
 
@@ -35,8 +35,9 @@ export default function UsedItemWrite() {
     setFileUrls(newFileUrls);
   };
 
+  // 주소 1
   const onChangeAddress = (event) => {
-    setMapState(event.target.value);
+    setMapAddress(event.target.value);
   };
 
   // 등록
@@ -57,13 +58,13 @@ export default function UsedItemWrite() {
               contents: data.contents,
               price: Number(data.price),
               tags: data.tags,
-              // useditemAddress: {
-              //   zipcode: data.zipcode,
-              //   address: data.address,
-              //   addressDetail: data.addressDetail,
-              //   lat: data.lat,
-              //   lng: data.lng,
-              // },
+              useditemAddress: {
+                //   zipcode: data.zipcode,
+                // address: data.address,
+                addressDetail: data.addressDetail,
+                // lat: data.lat,
+                // lng: data.lng,
+              },
               images: data.images,
             },
           },

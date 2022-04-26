@@ -102,7 +102,7 @@ export const Map = styled.div`
 `;
 
 export const Lat = styled.input`
-  width: 108px;
+  width: 153px;
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: white;
@@ -116,7 +116,7 @@ export const GpsIcon = styled.img`
 `;
 
 export const Lng = styled.input`
-  width: 108px;
+  width: 153px;
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: white;

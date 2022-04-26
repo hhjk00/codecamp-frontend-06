@@ -5,10 +5,14 @@ import KakaoMap from "../../../commons/maps/01";
 import Upload01 from "../../../commons/uploads/Upload01.container";
 import * as S from "./UsedItemWrite.styles";
 import { v4 as uuidv4 } from "uuid";
+import { mapLocationState } from "../../../../commons/store";
+import { useRecoilState } from "recoil";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function UsedItemWriteUI(props) {
+  const [mapState] = useRecoilState(mapLocationState);
+
   return (
     <S.NewPage>
       <S.Wrapper>
@@ -74,9 +78,9 @@ export default function UsedItemWriteUI(props) {
             <S.AddressInputWrapper>
               <S.InputWrapper>
                 <S.Label>GPS</S.Label>
-                <S.Lat placeholder="위도(LNG)" />
+                <S.Lat placeholder="위도(LAT)" value={mapState.La} />
                 <S.GpsIcon src="/images/location.png" />
-                <S.Lng placeholder="경도(LNG)" />
+                <S.Lng placeholder="경도(LNG)" value={mapState.Ma} />
               </S.InputWrapper>
 
               <S.InputWrapper>
@@ -88,7 +92,7 @@ export default function UsedItemWriteUI(props) {
                 />
                 <S.AddressDetail
                   type="text"
-                  // register={{ ...props.register("addressDetail") }}
+                  {...props.register("addressDetail")}
                 />
               </S.InputWrapper>
             </S.AddressInputWrapper>
