@@ -83,8 +83,8 @@ export const TagInput = styled.input`
 `;
 
 export const TagWrapper = styled.span`
-  display: inline-block;
-  flex-direction: row;
+  overflow: hidden;
+  word-wrap: break-word;
 `;
 
 export const Tag = styled.span`

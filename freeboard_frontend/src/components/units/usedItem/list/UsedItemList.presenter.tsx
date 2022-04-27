@@ -19,7 +19,11 @@ export default function UsedItemListUI(props) {
         >
           {props.data?.fetchUseditems.map((el: any) => (
             <S.ItemWrapper key={el._id}>
-              <S.Image src={`https://storage.googleapis.com/${el.images[0]}`} />
+              <S.Image
+                id={el._id}
+                onClick={props.onClickMoveToDetail}
+                src={`https://storage.googleapis.com/${el.images[0]}`}
+              />
 
               <S.ItemBody>
                 <S.ItemContents>

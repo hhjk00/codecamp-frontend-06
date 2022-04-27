@@ -117,7 +117,7 @@ export const Image = styled.img`
 
 export const MapWrapper = styled.div`
   width: 100%;
-  padding: 30px;
+  padding: 30px 0px 30px 0px;
   border-top: 1px solid #bdbdbd;
   border-bottom: 1px solid #bdbdbd;
 `;
@@ -125,7 +125,7 @@ export const MapWrapper = styled.div`
 export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 380px;
+  width: 580px;
   justify-content: space-between;
   padding-top: 50px;
 `;
@@ -137,4 +137,37 @@ export const Button = styled.button`
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
+  :hover {
+    background-color: #ffd600;
+  }
+`;
+
+export const StyledSlider = styled(Slider)`
+  .slick-slide {
+    display: inline-block;
+  }
+  .slick-list {
+    max-width: 400px;
+    overflow-x: hidden;
+  }
+
+  .slick-dots.slick-thumb {
+    margin: auto;
+
+    li {
+      position: relative;
+      display: inline-block;
+      &.slick-active {
+        border: 1px solid #bdbdbd;
+      }
+    }
+  }
+`;
+
+export const Img = styled.img`
+  width: 100px;
+  height: 100px;
+  :hover {
+    opacity: 70%;
+  }
 `;

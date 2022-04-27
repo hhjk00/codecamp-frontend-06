@@ -2,45 +2,18 @@ import * as S from "./UsedItemDetail.styles";
 import Dompurify from "dompurify";
 import { Tooltip } from "antd";
 import { getDate } from "../../../../commons/libraries/utils";
-import styled from "@emotion/styled";
-import Slider from "react-slick";
-
-const StyledSlider = styled(Slider)`
-  .slick-slide {
-    display: inline-block;
-  }
-  .slick-list {
-    width: 350px;
-    overflow-x: hidden;
-  }
-
-  .slick-dots.slick-thumb {
-    margin: auto;
-
-    li {
-      position: relative;
-      display: inline-block;
-      &.slick-active {
-        border: 1px solid #bdbdbd;
-      }
-    }
-  }
-`;
-
-const Img = styled.img`
-  width: 100px;
-  height: 100px;
-  :hover {
-    opacity: 70%;
-  }
-`;
+import KakaoMap02 from "../../../commons/maps/02";
+import { useRouter } from "next/router";
 
 export default function UsedItemDetailUI(props) {
+  const router = useRouter();
+  console.log(props.userInfo);
+
   const settings = {
     customPaging: function (i) {
       return (
         <a>
-          <Img
+          <S.Img
             src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[i]}`}
           />
         </a>
@@ -67,12 +40,12 @@ export default function UsedItemDetailUI(props) {
 
           <S.InfoWrapper>
             <S.Url src="/images/url.png" />
-            {/* <Tooltip
+            <Tooltip
               placement="topRight"
-              title={`${props.data?.fetchBoard.boardAddress?.address} ${props.data?.fetchBoard.boardAddress?.addressDetail}`}
-            > */}
-            <S.Locate src="/images/location.png" />
-            {/* </Tooltip> */}
+              title={`${props.data?.fetchUseditem.useditemAddress?.address} ${props.data?.fetchUseditem.useditemAddress?.addressDetail}`}
+            >
+              <S.Locate src="/images/location.png" />
+            </Tooltip>
           </S.InfoWrapper>
         </S.HeaderWrapper>
 
@@ -82,13 +55,13 @@ export default function UsedItemDetailUI(props) {
           <S.Price>{props.data?.fetchUseditem.price}</S.Price>
 
           <S.ImageWrapper>
-            <StyledSlider {...settings}>
+            <S.StyledSlider {...settings}>
               {props.data?.fetchUseditem.images
                 ?.filter((el: string) => el)
                 .map((el: string) => (
                   <img key={el} src={`https://storage.googleapis.com/${el}`} />
                 ))}
-            </StyledSlider>
+            </S.StyledSlider>
           </S.ImageWrapper>
 
           {typeof window !== "undefined" && (
@@ -101,16 +74,32 @@ export default function UsedItemDetailUI(props) {
           <S.Tag>{props.data?.fetchUseditem.tags}</S.Tag>
         </S.ContentsWrapper>
 
-        <S.MapWrapper></S.MapWrapper>
+        {props.data?.fetchUseditem.useditemAddress?.lat &&
+        props.data?.fetchUseditem.useditemAddress?.lng ? (
+          <S.MapWrapper>
+            <KakaoMap02 data={props.data} />
+          </S.MapWrapper>
+        ) : (
+          <div></div>
+        )}
 
         <S.ButtonWrapper>
-          <S.Button
-            style={{ backgroundColor: "lightgray" }}
-            onClick={props.onClickMoveToPage("/markets")}
-          >
+          <S.Button onClick={props.onClickMoveToPage("/markets")}>
             목록으로
           </S.Button>
-          <S.Button style={{ backgroundColor: "#FFD600" }}>구매하기</S.Button>
+          {props.data?.fetchUseditem.seller.email === props.userInfo.email ? (
+            <S.Button
+              onClick={props.onClickMoveToPage(
+                `/markets/${router.query.useditemId}/edit`
+              )}
+            >
+              수정하기
+            </S.Button>
+          ) : (
+            <S.Button>구매하기</S.Button>
+          )}
+
+          <S.Button>삭제하기</S.Button>
         </S.ButtonWrapper>
       </S.Wrapper>
     </S.DetailPage>

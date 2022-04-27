@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { mapAddressState, mapLocationState } from "../../../../commons/store";
@@ -10,17 +10,25 @@ import UsedItemWriteUI from "./UsedItemWrite.presenter";
 import { CREATE_USED_ITEM } from "./UsedItemWrite.queries";
 import { schema } from "./UsedItemWrite.validation";
 
-export default function UsedItemWrite() {
+export default function UsedItemWrite(props) {
   const router = useRouter();
-  const { register, handleSubmit, formState, setValue, trigger } = useForm({
-    resolver: yupResolver(schema),
+  const {
+    register,
+    handleSubmit,
+    formState,
+    setValue,
+    getValues,
+    trigger,
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema), // props.isEdit ? nonSchema : schema
     mode: "onChange",
   });
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
   const [tags, setTags] = useState([""]);
 
   const [mapAddress, setMapAddress] = useRecoilState(mapAddressState);
-  const [mapLocation, setMapLocation] = useRecoilState(mapLocationState);
+  const [mapLocation] = useRecoilState(mapLocationState);
 
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
 
@@ -29,6 +37,11 @@ export default function UsedItemWrite() {
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");
   };
+
+  // useEffect로 data가 들어오면 contents 값에 data에서 불러온 contents 값 넣어주기
+  useEffect(() => {
+    reset({ contents: props.data?.fetchUseditem.contents });
+  }, [props.data]);
 
   // 태그
   const onKeyUpTag = (event) => {
@@ -50,20 +63,25 @@ export default function UsedItemWrite() {
     setFileUrls(newFileUrls);
   };
 
+  useEffect(() => {
+    if (props.data?.fetchUseditem.images?.length) {
+      setFileUrls([...props.data?.fetchUseditem.images]);
+    }
+  }, [props.data]);
+
   // 주소 1
   const onChangeAddress = (event) => {
     setMapAddress(event.target.value);
   };
 
+  // 수정
+  const onClickUpdate = () => {
+    router.push("/markets");
+  };
+
   // 등록
   const onClickSubmit = async (data) => {
-    if (
-      data.name &&
-      data.remarks &&
-      data.contents &&
-      data.price &&
-      data.contents
-    ) {
+    if (data.name && data.remarks && data.contents && data.price) {
       try {
         const result = await createUseditem({
           variables: {
@@ -111,6 +129,10 @@ export default function UsedItemWrite() {
       onChangeAddress={onChangeAddress}
       onKeyUpTag={onKeyUpTag}
       tags={tags}
+      isEdit={props.isEdit}
+      data={props.data}
+      onClickUpdate={onClickUpdate}
+      getValues={getValues}
     />
   );
 }

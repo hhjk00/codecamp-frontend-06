@@ -54,6 +54,7 @@ export default function Login() {
       // 로그인 성공페이지로 이동하기
       Modal.success({ content: "로그인 되었습니다." });
       router.push("/boards");
+      console.log(userInfo);
     } catch (error) {
       if (error instanceof Error) {
         Modal.error({

@@ -50,6 +50,9 @@ export const ItemWrapper = styled.div`
 export const Image = styled.img`
   width: 160px;
   height: 160px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const ItemBody = styled.div`

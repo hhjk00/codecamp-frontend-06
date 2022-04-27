@@ -10,12 +10,14 @@ const Input = styled.input`
 
 interface IProps {
   type: "text" | "number";
-  placeholder:
+  placeholder?:
     | "상품명을 작성해주세요."
     | "상품을 한 줄로 표현해주세요."
     | "판매 가격을 입력해주세요."
     | "#태그 #태그 #태그";
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
+  value?: string;
+  defaultValue?: string;
 }
 
 export default function Input02(props: IProps) {
@@ -24,6 +26,7 @@ export default function Input02(props: IProps) {
       type={props.type}
       placeholder={props.placeholder}
       {...props.register}
+      defaultValue={props.defaultValue}
     />
   );
 }

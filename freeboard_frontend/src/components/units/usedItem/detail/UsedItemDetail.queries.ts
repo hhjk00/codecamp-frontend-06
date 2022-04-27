@@ -19,6 +19,8 @@ export const FETCH_USED_ITEM = gql`
         lng
       }
       seller {
+        _id
+        email
         name
       }
       soldAt
@@ -30,8 +32,10 @@ export const FETCH_USED_ITEM = gql`
 export const FETCH_USER_LOGGED_IN = gql`
   query fetchUserLoggedIn {
     fetchUserLoggedIn {
+      _id
       email
       name
+      userPoint
     }
   }
 `;
