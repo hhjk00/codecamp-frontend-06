@@ -86,7 +86,7 @@ export default function KakaoMap02(props) {
         );
       });
     };
-  }, [props.data?.fetchUseditem?.address?.lat]);
+  }, []);
 
   return (
     <div>

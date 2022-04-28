@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import SmsOutlinedIcon from "@mui/icons-material/SmsOutlined";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 
 export const ListPage = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ export const PageTitle = styled.div`
   padding-top: 80px;
 `;
 
-export const PageIcon = styled(SmsOutlinedIcon)`
+export const PageIcon = styled(StorefrontIcon)`
   font-size: 30px;
 `;
 
@@ -113,4 +113,10 @@ export const Price = styled.div`
   font-size: 24px;
   font-weight: 700;
   text-align: right;
+`;
+
+export const Scroll = styled.div`
+  height: 700px;
+  overflow: auto;
+  margin-bottom: 100px;
 `;

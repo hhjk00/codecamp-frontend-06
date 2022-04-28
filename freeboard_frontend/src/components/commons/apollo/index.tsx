@@ -5,15 +5,23 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { createUploadLink } from "apollo-upload-client";
-import { accessTokenState, userInfoState } from "../../../commons/store";
+import {
+  accessTokenState,
+  isLoadedState,
+  restoreAccessTokenLoadable,
+  userInfoState,
+} from "../../../commons/store";
 import { useEffect } from "react";
 import { getAccessToken } from "../../../commons/libraries/getAccessToken";
 
 export default function ApolloSetting(props) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [isLoaded, setIsLoaded] = useRecoilState(isLoadedState);
+  const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
+  // useRecoilValueLoadable : 읽기전용
 
   // 1. 더이상 지원되지 않음
   // if(process.browser){
@@ -33,14 +41,23 @@ export default function ApolloSetting(props) {
 
   // 3. 세번째 방법
   useEffect(() => {
-    // 옛날
+    // 1. 옛날방식
     // const accessToken = localStorage.getItem("accessToken");
     // const userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
     // setAccessToken(accessToken || "");
     // setUserInfo(userInfo);
+    // accessToken 재발급받아서 state에 넣어주기
 
-    // accessToken 재발급 받아서 state에 넣어주기
-    getAccessToken().then((newAccessToken) => {
+    // 2. 로딩방식
+    // setIsLoaded(true);
+    // getAccessToken().then((newAccessToken) => {
+    //   setAccessToken(newAccessToken);
+    //   setIsLoaded(false);
+    // });
+    // }, [isLoaded]);
+
+    // 3. 글로벌 프로미스 방식
+    restoreAccessToken.toPromise().then((newAccessToken) => {
       setAccessToken(newAccessToken);
     });
   }, []);

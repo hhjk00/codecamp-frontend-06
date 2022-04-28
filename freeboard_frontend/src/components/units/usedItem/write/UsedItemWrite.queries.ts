@@ -9,6 +9,34 @@ export const CREATE_USED_ITEM = gql`
       contents
       price
       tags
+      pickedCount
+      useditemAddress {
+        address
+        addressDetail
+        lat
+        lng
+      }
+      images
+    }
+  }
+`;
+
+export const UPDATE_USED_ITEM = gql`
+  mutation updateUseditem(
+    $updateUseditemInput: UpdateUseditemInput!
+    $useditemId: ID!
+  ) {
+    updateUseditem(
+      updateUseditemInput: $updateUseditemInput
+      useditemId: $useditemId
+    ) {
+      _id
+      name
+      remarks
+      contents
+      price
+      tags
+      pickedCount
       useditemAddress {
         address
         addressDetail

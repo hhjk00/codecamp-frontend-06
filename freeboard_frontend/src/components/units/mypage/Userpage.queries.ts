@@ -1,9 +1,10 @@
 import { gql } from "@apollo/client";
 
-export const LOGIN_USER = gql`
-  mutation loginUser($password: String!, $email: String!) {
-    loginUser(password: $password, email: $email) {
-      accessToken
+export const CREATE_POINT_TRANSACTION_OF_LOADING = gql`
+  mutation createPointTransactionOfLoading($impUid: ID!) {
+    createPointTransactionOfLoading(impUid: $impUid) {
+      impUid
+      amount
     }
   }
 `;

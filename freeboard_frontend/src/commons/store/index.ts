@@ -1,4 +1,5 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
+import { getAccessToken } from "../libraries/getAccessToken";
 
 export const isEditState = atom({
   key: "isEditState",
@@ -26,7 +27,7 @@ export const visitedPageState = atom({
 export const mapAddressState = atom({
   key: "mapState",
   default: {
-    address: "인천광역시 서구",
+    address: "",
   },
 });
 
@@ -35,5 +36,18 @@ export const mapLocationState = atom({
   default: {
     La: "",
     Ma: "",
+  },
+});
+
+export const isLoadedState = atom({
+  key: "isLoadedState",
+  default: true,
+});
+
+export const restoreAccessTokenLoadable = selector({
+  key: "restoreAccessTokenLoadable",
+  get: async () => {
+    const newAccessToken = await getAccessToken();
+    return newAccessToken;
   },
 });

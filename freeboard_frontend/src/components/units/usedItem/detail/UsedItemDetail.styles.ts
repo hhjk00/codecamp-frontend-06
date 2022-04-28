@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Slider from "react-slick";
+import { HeartFilled } from "@ant-design/icons";
 
 export const DetailPage = styled.div`
   display: flex;
@@ -145,13 +146,17 @@ export const Button = styled.button`
 export const StyledSlider = styled(Slider)`
   .slick-slide {
     display: inline-block;
+    width: 400px !important;
   }
   .slick-list {
-    max-width: 400px;
+    width: 400px;
     overflow-x: hidden;
   }
 
   .slick-dots.slick-thumb {
+    width: 400px;
+    padding: 0;
+    text-align: center;
     margin: auto;
 
     li {
@@ -170,4 +175,8 @@ export const Img = styled.img`
   :hover {
     opacity: 70%;
   }
+`;
+
+export const NonPick = styled(HeartFilled)`
+  font-size: 18px;
 `;

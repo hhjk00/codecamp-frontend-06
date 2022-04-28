@@ -7,7 +7,8 @@ import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { mapAddressState, mapLocationState } from "../../../../commons/store";
 import UsedItemWriteUI from "./UsedItemWrite.presenter";
-import { CREATE_USED_ITEM } from "./UsedItemWrite.queries";
+import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./UsedItemWrite.queries";
+import { IUpdateUseitemInput } from "./UsedItemWrite.types";
 import { schema } from "./UsedItemWrite.validation";
 
 export default function UsedItemWrite(props) {
@@ -25,12 +26,13 @@ export default function UsedItemWrite(props) {
     mode: "onChange",
   });
   const [fileUrls, setFileUrls] = useState(["", "", ""]);
-  const [tags, setTags] = useState([""]);
+  const [tags, setTags] = useState([]);
 
   const [mapAddress, setMapAddress] = useRecoilState(mapAddressState);
   const [mapLocation] = useRecoilState(mapLocationState);
 
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
+  const [updateUseditem] = useMutation(UPDATE_USED_ITEM);
 
   // 에디터
   const onChangeContents = (value: string) => {
@@ -74,11 +76,6 @@ export default function UsedItemWrite(props) {
     setMapAddress(event.target.value);
   };
 
-  // 수정
-  const onClickUpdate = () => {
-    router.push("/markets");
-  };
-
   // 등록
   const onClickSubmit = async (data) => {
     if (data.name && data.remarks && data.contents && data.price) {
@@ -115,6 +112,61 @@ export default function UsedItemWrite(props) {
         }
       }
     }
+  };
+
+  // 수정
+  const onClickUpdate = async (data) => {
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(props.data.fetchUseditem.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+
+    if (
+      !data.name &&
+      !data.remarks &&
+      !data.contents &&
+      !data.price &&
+      !data.tags &&
+      !data.address &&
+      !data.addressDetail &&
+      !isChangedFiles &&
+      !data.lat &&
+      !data.lng
+    ) {
+      Modal.warning({
+        content: "수정한 내용이 없습니다.",
+      });
+      return;
+    }
+
+    const updateUseditemInput: IUpdateUseitemInput = {};
+    if (data.name) updateUseditemInput.name = data.name;
+    if (data.remarks) updateUseditemInput.remarks = data.remarks;
+    if (data.contents) updateUseditemInput.contents = data.contents;
+    if (data.price) updateUseditemInput.price = Number(data.price);
+    if (tags) updateUseditemInput.tags = tags;
+    if (data.address || data.addressDetail || data.lat || data.lng) {
+      updateUseditemInput.useditemAddress = {};
+      if (mapAddress) updateUseditemInput.useditemAddress.address = mapAddress;
+      if (data.addressDetail)
+        updateUseditemInput.useditemAddress.addressDetail = data.addressDetail;
+      if (mapLocation.La)
+        updateUseditemInput.useditemAddress.lat = mapLocation.La;
+      if (mapLocation.Ma)
+        updateUseditemInput.useditemAddress.lng = mapLocation.Ma;
+    }
+    if (isChangedFiles) updateUseditemInput.images = fileUrls;
+
+    await updateUseditem({
+      variables: {
+        updateUseditemInput,
+        useditemId: String(router.query.useditemId),
+      },
+    });
+    console.log(updateUseditemInput);
+    Modal.success({
+      content: "수정이 완료되었습니다.",
+    });
+    router.push(`/markets/${router.query.useditemId}`);
   };
 
   return (

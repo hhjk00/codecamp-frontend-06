@@ -12,7 +12,7 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function UsedItemWriteUI(props) {
   const [mapLocation] = useRecoilState(mapLocationState);
-  // console.log(props.data?.fetchUseditem.tags);
+  // console.log(props.data?.fetchUseditem.useditemAddress?.addressDetail);
   return (
     <S.NewPage>
       <S.Wrapper>
@@ -81,7 +81,7 @@ export default function UsedItemWriteUI(props) {
               type="text"
               placeholder="#태그 #태그 #태그"
               onKeyUp={props.onKeyUpTag}
-              defaultValue={props.data?.fetchUseditem.tags}
+              defaultValue={props.data?.fetchUseditem.tags || ""}
             />
           </S.InputWrapper>
 
@@ -97,8 +97,8 @@ export default function UsedItemWriteUI(props) {
                 <S.Lat
                   placeholder="위도(LAT)"
                   value={
-                    props.data?.fetchUseditem.useditemAddress?.lat ||
                     mapLocation.La ||
+                    props.data?.fetchUseditem.useditemAddress?.lat ||
                     ""
                   }
                 />
@@ -106,8 +106,8 @@ export default function UsedItemWriteUI(props) {
                 <S.Lng
                   placeholder="경도(LNG)"
                   value={
-                    props.data?.fetchUseditem.useditemAddress?.lng ||
                     mapLocation.Ma ||
+                    props.data?.fetchUseditem.useditemAddress?.lng ||
                     ""
                   }
                 />
@@ -152,7 +152,9 @@ export default function UsedItemWriteUI(props) {
             <S.RadioLabel>사진 2</S.RadioLabel>
           </S.OptionWrapper>
           <S.ButtonWrapper>
-            <S.SubmitButton>등록하기</S.SubmitButton>
+            <S.SubmitButton>
+              {props.isEdit ? "수정하기" : "등록하기"}
+            </S.SubmitButton>
           </S.ButtonWrapper>
         </form>
       </S.Wrapper>

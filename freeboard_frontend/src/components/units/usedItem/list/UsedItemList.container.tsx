@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";
+import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import UsedItemListUI from "./UsedItemList.presenter";
 import { FETCH_USED_ITEMS } from "./UsedItemList.queries";
 
@@ -8,12 +9,13 @@ export default function UsedItemList() {
   const router = useRouter();
 
   const { data, fetchMore } = useQuery(FETCH_USED_ITEMS);
-
+  const { onClickMoveToPage } = useMoveToPage();
   const onClickMoveToDetail = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target instanceof Element)
       router.push(`/markets/${event.target.id}`);
   };
 
+  // 스크롤
   const onLoadMore = () => {
     if (!data) return;
 
@@ -40,6 +42,7 @@ export default function UsedItemList() {
       data={data}
       onClickMoveToDetail={onClickMoveToDetail}
       onLoadMore={onLoadMore}
+      onClickMoveToPage={onClickMoveToPage}
     />
   );
 }

@@ -4,11 +4,12 @@ import { Tooltip } from "antd";
 import { getDate } from "../../../../commons/libraries/utils";
 import KakaoMap02 from "../../../commons/maps/02";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function UsedItemDetailUI(props) {
+  // console.log(props.data?.fetchUseditem.seller._id);
+  // console.log(props.loggedIn._id);
   const router = useRouter();
-  console.log(props.userInfo);
-
   const settings = {
     customPaging: function (i) {
       return (
@@ -48,22 +49,22 @@ export default function UsedItemDetailUI(props) {
             </Tooltip>
           </S.InfoWrapper>
         </S.HeaderWrapper>
-
         <S.ContentsWrapper>
           <S.Remarks>{props.data?.fetchUseditem.remarks}</S.Remarks>
           <S.Title>{props.data?.fetchUseditem.name}</S.Title>
           <S.Price>{props.data?.fetchUseditem.price}</S.Price>
-
           <S.ImageWrapper>
             <S.StyledSlider {...settings}>
               {props.data?.fetchUseditem.images
                 ?.filter((el: string) => el)
                 .map((el: string) => (
-                  <img key={el} src={`https://storage.googleapis.com/${el}`} />
+                  <S.Image
+                    key={el}
+                    src={`https://storage.googleapis.com/${el}`}
+                  />
                 ))}
             </S.StyledSlider>
           </S.ImageWrapper>
-
           {typeof window !== "undefined" && (
             <S.Contents
               dangerouslySetInnerHTML={{
@@ -73,7 +74,8 @@ export default function UsedItemDetailUI(props) {
           )}
           <S.Tag>{props.data?.fetchUseditem.tags}</S.Tag>
         </S.ContentsWrapper>
-
+        <S.NonPick onClick={props.onClickPick} />
+        {props.data?.fetchUseditem.pickedCount}
         {props.data?.fetchUseditem.useditemAddress?.lat &&
         props.data?.fetchUseditem.useditemAddress?.lng ? (
           <S.MapWrapper>
@@ -82,12 +84,11 @@ export default function UsedItemDetailUI(props) {
         ) : (
           <div></div>
         )}
-
         <S.ButtonWrapper>
           <S.Button onClick={props.onClickMoveToPage("/markets")}>
             목록으로
           </S.Button>
-          {props.data?.fetchUseditem.seller.email === props.userInfo.email ? (
+          {props.data?.fetchUseditem.seller._id === props.loggedIn?._id ? (
             <S.Button
               onClick={props.onClickMoveToPage(
                 `/markets/${router.query.useditemId}/edit`
@@ -96,10 +97,10 @@ export default function UsedItemDetailUI(props) {
               수정하기
             </S.Button>
           ) : (
-            <S.Button>구매하기</S.Button>
+            <S.Button onClick={props.onClickBuying}>구매하기</S.Button>
           )}
 
-          <S.Button>삭제하기</S.Button>
+          <S.Button onClick={props.onClickDelete}>삭제하기</S.Button>
         </S.ButtonWrapper>
       </S.Wrapper>
     </S.DetailPage>
