@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -23,8 +19,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
+    // "__test__/34-03-jest-unit-test-snapshot/__snapshots__/index.test.tsx.snap"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
