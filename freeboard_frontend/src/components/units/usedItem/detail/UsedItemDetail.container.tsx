@@ -12,10 +12,6 @@ import {
   CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING,
 } from "./UsedItemDetail.queries";
 
-declare const window: typeof globalThis & {
-  IMP: any;
-};
-
 function UsedItemDetail(props) {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();

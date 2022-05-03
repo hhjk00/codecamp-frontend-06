@@ -6,12 +6,13 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { mapAddressState, mapLocationState } from "../../../../commons/store";
+import { withAuth } from "../../../commons/hocs/withAuth";
 import UsedItemWriteUI from "./UsedItemWrite.presenter";
 import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./UsedItemWrite.queries";
 import { IUpdateUseitemInput } from "./UsedItemWrite.types";
 import { schema } from "./UsedItemWrite.validation";
 
-export default function UsedItemWrite(props) {
+function UsedItemWrite(props) {
   const router = useRouter();
   const {
     register,
@@ -188,3 +189,5 @@ export default function UsedItemWrite(props) {
     />
   );
 }
+
+export default withAuth(UsedItemWrite);
