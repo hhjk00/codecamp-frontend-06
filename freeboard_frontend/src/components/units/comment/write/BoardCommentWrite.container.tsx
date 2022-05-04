@@ -112,7 +112,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
   >(UPDATE_BOARD_COMMENT);
 
   const onClickUpdate = async () => {
-    if (!contents) {
+    if (!contents && !rating) {
       Modal.warning({
         content: "수정된 내용이 없습니다.",
       });
@@ -126,7 +126,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
     }
 
     // 수정된 값이 없으면 그대로 입력하게 해줌
-    const updateBoardCommentInput: IUpdateBoardCommentInput = {};
+    const updateBoardCommentInput = {};
     if (contents) updateBoardCommentInput.contents = contents;
     if (rating) updateBoardCommentInput.rating = rating;
     /*

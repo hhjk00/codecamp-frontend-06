@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import PersonIcon from "@mui/icons-material/Person";
@@ -87,14 +86,12 @@ const Text = styled.div`
 `;
 
 export default function Home() {
-  const router = useRouter();
-
   const { onClickMoveToPage } = useMoveToPage();
 
   return (
     <Wrapper>
       <Head>
-        <title>ABC - Welcome</title>
+        <title>JOIN US!</title>
       </Head>
 
       <TitleWrapper>

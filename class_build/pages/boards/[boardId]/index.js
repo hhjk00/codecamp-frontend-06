@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { gql, graphql } from "graphql-request";
+import { gql, request } from "graphql-request";
 
 export default function BoardsDetailPage(props) {
   const router = useRouter();
