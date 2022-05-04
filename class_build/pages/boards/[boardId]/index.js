@@ -16,7 +16,6 @@ export default function BoardsDetailPage(props) {
         안녕하세요! 게시글 상세페이지입니다, 게시글 ID는 {router.query.boardId}
         입니다.
       </div>
-      ;
     </div>
   );
 }
@@ -36,7 +35,7 @@ export const getServerSideProps = async (context) => {
   // 데이터를 요청할 것
   // const {data} = useQuery(FETCH_BOARD); // 이건 안됨
   const result = await request(
-    "https://backend06.codebootcamp.co.kr/grqphql",
+    "https://backend06.codebootcamp.co.kr/graphql",
     FETCH_BOARD,
     {
       boardId: context.query.boardId, // request 라이브러리 쓸 때는 variables 안써도 되게끔 되어있는 것 같다.
