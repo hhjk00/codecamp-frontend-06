@@ -16,6 +16,8 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
   padding-bottom: 40px;
+  border-top: 1px solid #bdbdbd;
+  padding-top: 40px;
 `;
 
 export const WriterPasswordInput = styled.div`

@@ -12,16 +12,14 @@ export const Wrapper = styled.div`
   /* height: 1847px; */
   width: 1000px;
   border: 1px solid black;
-  margin: 100px;
   padding-top: 80px;
-  padding-bottom: 100px;
+  padding-bottom: 80px;
   padding-left: 102px;
   padding-right: 102px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: none;
-  box-shadow: 0px 0px 10px gray;
   font-family: "myFont";
 `;
 
@@ -128,7 +126,7 @@ export const ButtonWrapper = styled.div`
   flex-direction: row;
   width: 580px;
   justify-content: space-between;
-  padding-top: 50px;
+  padding-top: 80px;
 `;
 
 export const Button = styled.button`
