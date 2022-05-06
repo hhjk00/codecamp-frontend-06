@@ -26,13 +26,13 @@ export default function UsedItemListUI(props) {
               <S.ItemWrapper key={el._id}>
                 <S.Image
                   id={el._id}
-                  onClick={props.onClickMoveToDetail}
+                  onClick={props.onClickMoveToDetail(el)}
                   src={`https://storage.googleapis.com/${el.images[0]}`}
                 />
 
                 <S.ItemBody>
                   <S.ItemContents>
-                    <S.Name id={el._id} onClick={props.onClickMoveToDetail}>
+                    <S.Name id={el._id} onClick={props.onClickMoveToDetail(el)}>
                       {el.name}
                     </S.Name>
                     <S.Remarks>{el.remarks}</S.Remarks>

@@ -1,4 +1,4 @@
-import UsedItemQuestionListItem from "./QuestionList.presenterItm";
+import UsedItemQuestionListItem from "./QuestionList.presenterItem";
 
 export default function UsedItemQuestionListUI(props) {
   return (

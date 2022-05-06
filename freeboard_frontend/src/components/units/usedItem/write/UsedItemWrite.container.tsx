@@ -39,6 +39,7 @@ function UsedItemWrite(props) {
   const onChangeContents = (value: string) => {
     setValue("contents", value === "<p><br></p>" ? "" : value);
     trigger("contents");
+    console.log(value);
   };
 
   // useEffect로 data가 들어오면 contents 값에 data에서 불러온 contents 값 넣어주기
@@ -100,6 +101,7 @@ function UsedItemWrite(props) {
             },
           },
         });
+        console.log(result);
         Modal.success({
           content: "게시글이 등록되었습니다.",
         });

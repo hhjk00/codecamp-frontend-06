@@ -1,7 +1,6 @@
 import * as S from "./QuestionWrite.styles";
 
 export default function UsedItemQuestionWriteUI(props) {
-  console.log(props.contents.length);
   return (
     <S.CommentPage>
       <S.Wrapper>

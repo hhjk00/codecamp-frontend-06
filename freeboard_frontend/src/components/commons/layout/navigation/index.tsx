@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { Fragment, MouseEvent } from "react";
+import RecentItem from "../recentItem";
 
 const NAVIGATION_MENUS = [
   { name: "자유게시판", page: "/boards" },
@@ -60,6 +61,7 @@ export default function LayoutNavigation() {
           </Fragment>
         ))}
       </MenuWrapper>
+      <RecentItem />
     </Wrapper>
   );
 }

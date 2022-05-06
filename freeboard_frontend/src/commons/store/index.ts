@@ -51,3 +51,8 @@ export const restoreAccessTokenLoadable = selector({
     return newAccessToken;
   },
 });
+
+export const recentItemState = atom({
+  key: "recentItemState",
+  default: "",
+});

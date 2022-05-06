@@ -4,6 +4,7 @@ import LayoutNavigation from "./navigation";
 import { ReactNode } from "react";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
+import RecentItem from "./recentItem";
 
 const BodyWrapper = styled.div`
   /* display: flex;
@@ -12,26 +13,26 @@ const BodyWrapper = styled.div`
   /* border-bottom: 1px solid; */
 `;
 
-const HIDDEN_LAYOUT = [
-  "/",
-  "/login",
-  "/signUp",
-  // ...
-];
-
 interface ILayoutProps {
   children: ReactNode;
 }
 
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
-  console.log(router);
 
+  const RECENT_ITEM = ["/markets", `/markets/${router.query.useditemId}`];
+  const HIDDEN_LAYOUT = [
+    "/",
+    "/login",
+    "/signUp",
+    // ...
+  ];
   const isHiddenLayout = HIDDEN_LAYOUT.includes(router.asPath);
+  const recentItem = RECENT_ITEM.includes(router.asPath);
 
   return (
     <>
-      {!isHiddenLayout && (
+      {!isHiddenLayout ? (
         <div>
           <LayoutBanner />
           <LayoutHeader />
@@ -39,13 +40,13 @@ export default function Layout(props: ILayoutProps) {
           <BodyWrapper>{props.children}</BodyWrapper>
           {/* <LayoutFooter /> */}
         </div>
-      )}
-
-      {isHiddenLayout && (
+      ) : (
         <div>
           <BodyWrapper>{props.children}</BodyWrapper>
         </div>
       )}
+
+      {/* {recentItem && <RecentItem />} */}
     </>
   );
 }

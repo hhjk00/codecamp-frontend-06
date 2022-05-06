@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import UsedItemAnswerWriteUI from "./AnswerWrite.presenter";
 import {
@@ -10,8 +9,6 @@ import {
 } from "./AnswerWrite.queries";
 
 export default function UsedItemAnswerWrite(props) {
-  const router = useRouter();
-
   const [contents, setContents] = useState("");
 
   const onChangeContents = (event) => {
@@ -43,18 +40,19 @@ export default function UsedItemAnswerWrite(props) {
             createUseditemQuestionAnswerInput: {
               contents: contents,
             },
-            useditemQuestionId: String(),
+            useditemQuestionId: String(props.el?._id),
           },
           refetchQueries: [
             {
               query: FETCH_USED_ITEM_QUESTION_ANSWERS,
-              variables: { useditemQuestionId: String() },
+              variables: { useditemQuestionId: String(props.el?._id) },
             },
           ],
         });
         setContents("");
+        props.setAnswer?.(false);
         Modal.success({
-          content: "문의가 등록되었습니다.",
+          content: "답변이 등록되었습니다.",
         });
       } catch (error) {
         if (error instanceof Error)
@@ -90,23 +88,26 @@ export default function UsedItemAnswerWrite(props) {
     */
     try {
       // 아이디가 없으면 실행하지 않음
-      if (!props.el?._id) return;
+      if (!props.ele?._id) {
+        props.setIsEdit?.(false);
+        return;
+      }
 
       await updateUseditemQuestionAnswer({
         variables: {
           updateUseditemQuestionAnswerInput,
-          useditemQuestionAnswerId: props.el?._id,
+          useditemQuestionAnswerId: String(props.ele?._id),
         },
         refetchQueries: [
           {
             query: FETCH_USED_ITEM_QUESTION_ANSWERS,
-            variables: { useditemQuestionAnswerId: String() },
+            variables: { useditemQuestionId: String(props.el?._id) },
           },
         ],
       });
       props.setIsEdit?.(false);
       Modal.success({
-        content: "댓글이 수정되었습니다.",
+        content: "답변이 수정되었습니다.",
       });
     } catch (error) {
       if (error instanceof Error)
@@ -121,7 +122,7 @@ export default function UsedItemAnswerWrite(props) {
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
-      el={props.el}
+      ele={props.ele}
       contents={contents}
       onChangeContents={onChangeContents}
       onClickCancel={onClickCancel}

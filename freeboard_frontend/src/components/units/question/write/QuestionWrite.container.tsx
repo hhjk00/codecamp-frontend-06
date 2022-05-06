@@ -91,7 +91,7 @@ export default function UsedItemQuestionWrite(props) {
       await updateUseditemQuestion({
         variables: {
           updateUseditemQuestionInput,
-          useditemQuestionId: props.el?._id,
+          useditemQuestionId: String(props.el?._id),
         },
         refetchQueries: [
           {
@@ -102,7 +102,7 @@ export default function UsedItemQuestionWrite(props) {
       });
       props.setIsEdit?.(false);
       Modal.success({
-        content: "댓글이 수정되었습니다.",
+        content: "문의가 수정되었습니다.",
       });
     } catch (error) {
       if (error instanceof Error)

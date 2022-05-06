@@ -11,12 +11,11 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "myFont";
-  margin-bottom: 20px;
+  padding-left: 30px;
+  padding-top: 10px;
 `;
 
-export const CommentWrapper = styled.div`
-  border-bottom: 1px solid #bdbdbd;
-`;
+export const CommentWrapper = styled.div``;
 
 export const CommentTop = styled.div`
   display: flex;
